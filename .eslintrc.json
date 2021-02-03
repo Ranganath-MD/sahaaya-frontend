@@ -1,0 +1,55 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "settings" : {
+        "react" : {
+            "version": "detect"
+        }
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended", 
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        "arrow-parens": 1,
+        "arrow-spacing": 1,
+        "indent": [1, 2],
+        "jsx-quotes": 1,
+        // "max-len": [1, 100],
+        "no-alert": 1,
+        "no-console": 1,
+        "no-debugger": 1,
+        "no-duplicate-case": 1,
+        "no-extra-semi": 1,
+        "no-trailing-spaces": 1,
+        "no-unused-vars": 1,
+        "no-useless-constructor": 1,
+        "no-var": 1,
+        "prefer-destructuring": 1,
+        "quote-props": ["off", 1],
+        "quotes": 1,
+        "require-await": 1,
+        "semi": 1,
+        "semi-spacing": 1,
+        "space-before-function-paren": 1,
+        "strict": 1,
+        "no-duplicate-imports": 1,
+        "no-empty": 1,
+        "no-empty-function": 1,
+        "react/prop-types": "off",
+        "object-curly-spacing": ["warn", "always"],
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+    },
+    "env": {
+        "node": true,
+        "commonjs": true,
+        "es6": true
+    }
+}
