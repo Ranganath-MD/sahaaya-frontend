@@ -2,8 +2,11 @@ import React from "react";
 import { Provider } from "./context/index";
 import { Layout } from "./components";
 import { Router } from "@reach/router";
-import { Dummy } from "./pages/users/dummy";
-import { Home } from "./pages/users/home";
+import { NotFound } from "./pages/notFound";
+import { Home } from "./pages/home";
+import { BrowseFundriser } from "./pages/browseCampaigns";
+import { HowItWorks } from "./pages/howitWorks";
+import { StartFundRiser } from "./pages/startCampaign";
 
 const App: React.FC = () =>  {
 
@@ -12,7 +15,10 @@ const App: React.FC = () =>  {
       <Layout>
         <Router>
           <Home path="/" />
-          <Dummy path="dummy" />
+          <BrowseFundriser path="browse-campaign" />
+          <HowItWorks path="how-sahaaya-works" />
+          <StartFundRiser path="start-campaign" />
+          <NotFound default/>
         </Router>
       </Layout>
     </Provider>

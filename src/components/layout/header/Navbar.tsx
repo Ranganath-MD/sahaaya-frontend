@@ -1,8 +1,10 @@
 import React from "react";
-import { Toolbar, Typography, IconButton } from "@material-ui/core";
+import { Toolbar, IconButton } from "@material-ui/core";
 import { DevButton } from "../../button";
 import { VscBell } from "react-icons/vsc";
+import { FaSearchDollar } from "react-icons/fa";
 import { Link, LinkGetProps } from "@reach/router";
+import Logo from "../../../assets/logo.svg";
 
 export const NavBar: React.FC = () => {
 
@@ -11,21 +13,23 @@ export const NavBar: React.FC = () => {
   };
 
   const Links = [
-    { name: "Browse Fundrisers", path:"/fundrisers" },
-    { name: "How it Works", path:"/how-it-works" },
-    { name: "Start Fundriser", path:"/start" }
+    { name: "Browse Campaign", path:"browse-campaign" },
+    { name: "How it Works", path:"how-sahaaya-works" },
+    { name: "Start Campaign", path:"start-campaign" }
   ];
 
   return (
     <Toolbar>
-      <Typography variant="h6" color="textPrimary">
-        Fundo
-      </Typography>
+      <Link to="/">
+        <img src={Logo} width="35px" height="auto" />
+      </Link>
       <Toolbar>
         {
           Links.map((link, i) => {
             return (
-              <Link to={link.path} key={i} getProps={isActive}>{link.name}</Link>
+              <div key={i} className="nav-item">
+                <Link to={link.path} getProps={isActive}>{link.name}</Link>
+              </div>
             );
           })
         }
@@ -39,7 +43,7 @@ export const NavBar: React.FC = () => {
         <VscBell />
       </IconButton>
       <DevButton
-        bordered
+        primary
         isShadow={false}
       >Sign In</DevButton>
     </Toolbar>

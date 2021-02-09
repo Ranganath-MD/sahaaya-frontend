@@ -1,8 +1,71 @@
-$font-stack: Helvetica, sans-serif;
-$background: #f8fbf8;
+$font-stack: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$background: #ffffff;
+$primary-color: #2A415D;
+$secondary-color: #0db469;
+$dark-color: #282828;
 
 body{
   font-family: $font-stack;
   margin: 0 !important;
   background-color: $background;
+}
+
+.not-found{
+  max-width: 700px;
+  margin: auto;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    color: $dark-color;
+    font-size: 10em;
+    margin: 0;
+    text-shadow: 0px 10px 10px gray;
+  }
+  p {
+    color: $primary-color;
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+}
+
+@mixin network-status{
+  width: 100%;
+  left: 0px;
+  position: absolute;
+  bottom: 0px;
+  transition-property: all;
+  transition-duration: 600ms;
+  transition-timing-function: ease-in;
+  transform-origin: center;
+  p{
+      margin: 0px 10%
+  }
+}
+.network-inner-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+}
+.network-close-btn{
+  outline: none;
+  border: none;
+  background: transparent;
+  height: 30px;
+  
+}
+
+.online{
+  @include network-status();
+  background-color: #ff9800;
+  color: black;
+}
+.offline{
+  @include network-status();
+  background-color: rgb(141, 11, 11);
+  color: white;
 }

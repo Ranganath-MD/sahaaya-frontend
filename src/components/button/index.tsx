@@ -38,17 +38,16 @@ const Button = styled.button<IStyledButtonProps>`
   background: ${(props) =>
     props.disabled ? "#959595":
       props.background ? props.background :
-        props.primary ? "#633CAE" : "transparent" };
-  border: ${(props) => props.bordered ? "1px solid #f9613c" : "none" };
+        props.primary ? "#0db469" : "transparent" };
+  border: ${(props) => props.bordered ? "1px solid #0db469" : "none" };
   font-weight: 600;
-    ${(props) => props.isShadow ?
-    `box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 
+  box-shadow: ${(props) => props.isShadow ?
+    `0px 3px 1px -2px rgba(0,0,0,0.2), 
     0px 2px 2px 0px rgba(0,0,0,0.14), 
-    0px 1px 5px 0px rgba(0,0,0,0.12);` : null}
-  
+    0px 1px 5px 0px rgba(0,0,0,0.12);` : null};
   border-radius: 4px;
   &:hover{
-    border-color: #cbcbcb;
+    border-color: #0db469;
   }
 `;
 

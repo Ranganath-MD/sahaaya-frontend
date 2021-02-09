@@ -2,17 +2,18 @@ import React, { useContext } from "react";
 import { VscListSelection, VscBell } from "react-icons/vsc";
 import { LayoutContext } from "../../../context";
 import "../layout.scss";
-import { Toolbar, IconButton, Typography, Drawer } from "@material-ui/core";
+import { Toolbar, IconButton, Drawer } from "@material-ui/core";
 import { DevButton } from "../../button";
 import { Link, LinkGetProps } from "@reach/router";
+import Logo from "../../../assets/logo.svg";
 
 export const MobileNav: React.FC = () => {
   const context = useContext(LayoutContext);
 
   const Links = [
-    { name: "Browse Fundrisers", path:"/fundrisers" },
-    { name: "How it Works", path:"/how-it-works" },
-    { name: "Start Fundriser", path:"/start" }
+    { name: "Browse Campaign", path:"browse-campaign" },
+    { name: "How it Works", path:"how-sahaaya-works" },
+    { name: "Start Campaign", path:"start-campaign" }
   ];
 
   const isActive = ({ isCurrent }: LinkGetProps) => {
@@ -27,9 +28,9 @@ export const MobileNav: React.FC = () => {
         onClose={context.handleDrawer}
       >
         <div className="drawer">
-          <Typography variant="h4" className="text" color="textPrimary">
-            Fundo
-          </Typography>
+          <Link to="/">
+            <img src={Logo} width="30px" height="auto" />
+          </Link>
           <div className="drawer-items">
             {
               Links.map((link, i) => {
@@ -60,9 +61,9 @@ export const MobileNav: React.FC = () => {
         >
           <VscListSelection color="#3C61A7" />
         </IconButton>
-        <Typography variant="h6" color="textPrimary">
-          Fundo
-        </Typography>
+        <Link to="/">
+          <img src={Logo} width="30px" height="auto" />
+        </Link>
         <div style={{ flexGrow: 1 }} />
         <IconButton
           aria-label="account of current user"
@@ -72,7 +73,7 @@ export const MobileNav: React.FC = () => {
           <VscBell />
         </IconButton>
         <DevButton
-          bordered
+          primary
           isShadow={false}
         >Sign In</DevButton>
       </Toolbar>
