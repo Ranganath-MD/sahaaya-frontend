@@ -2,7 +2,6 @@ import React from "react";
 import { Toolbar, IconButton } from "@material-ui/core";
 import { DevButton } from "../../button";
 import { VscBell } from "react-icons/vsc";
-import { FaSearchDollar } from "react-icons/fa";
 import { Link, LinkGetProps } from "@reach/router";
 import Logo from "../../../assets/logo.svg";
 

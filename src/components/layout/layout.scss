@@ -1,6 +1,6 @@
 $background: #ffffff;
-$primary-color: #286cff;
 $secondary-color: #0db469;
+$primary-color: #2A415D;
 $inactive: #767676;
 $light-gray: ghostwhite;
 
@@ -64,5 +64,32 @@ $light-gray: ghostwhite;
 // footer 
 .footer-container{
   background-color: $light-gray;
-  height: 40vh;
+  color: $primary-color;
+  font-weight: 500;
+  padding: 10px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      width: 20px;
+      margin-right: 20px;
+      height: auto;
+      cursor: pointer;
+    }
+  }
+
+  @media only screen and ( max-width: 500px ) {
+    flex-direction: column-reverse;
+    span {
+      padding: 10px 0px 5px;
+    }
+    div{
+      justify-content: center;
+    }
+  }
 }

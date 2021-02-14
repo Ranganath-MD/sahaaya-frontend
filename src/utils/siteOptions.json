@@ -2,5 +2,57 @@
   "siteName": "Sahaaya",
   "home_description": "Crowd Funding Platform for Farmers, Talents, Movies and Startup",
   "heroText": "Let's support together to make the life better",
-  "hero_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+  "hero_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+  "categories": [
+    {
+      "key": "c1",
+      "title": "Farmers",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    },
+    {
+      "key": "c2",
+      "title": "Talents",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    },
+    {
+      "key": "c3",
+      "title": "Movie Makers",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    },
+    {
+      "key": "c4",
+      "title": "Start up",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    }
+  ],
+  "panelData": [
+    {
+      "id": "panel1",
+      "step": 1,
+      "panel": "panel1",
+      "title": "Registration",
+      "description": "Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget maximus est, id dignissim quam."
+    },
+    {
+      "id": "panel2",
+      "step": 2,
+      "panel": "panel2",
+      "title": "Create a Campaign",
+      "description": "Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget maximus est, id dignissim quam."
+    },
+    {
+      "id": "panel3",
+      "step": 3,
+      "panel": "panel3",
+      "title": "Submit for Approval",
+      "description": "Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam maximus est, id dignissim quam."
+    },
+    {
+      "id": "panel4",
+      "step": 4,
+      "panel": "panel4",
+      "title": "Raise Fund",
+      "description": "Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget maximus est, id dignissim quam."
+    }
+  ]
 }

@@ -45,7 +45,8 @@
         "no-empty-function": 1,
         "react/prop-types": "off",
         "object-curly-spacing": ["warn", "always"],
-        "@typescript-eslint/explicit-module-boundary-types": "off"
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-explicit-any": "off"
     },
     "env": {
         "node": true,
