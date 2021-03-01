@@ -2,6 +2,7 @@ $font-stack: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-se
 $background: #ffffff;
 $primary-color: #2A415D;
 $secondary-color: #0db469;
+$ternary-color: #ff9800;
 $dark-color: #282828;
 
 body{
@@ -61,7 +62,7 @@ body{
 
 .online{
   @include network-status();
-  background-color: #ff9800;
+  background-color: $ternary-color;
   color: black;
 }
 .offline{

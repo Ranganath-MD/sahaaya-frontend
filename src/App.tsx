@@ -7,9 +7,10 @@ import { Home } from "./pages/home";
 import { BrowseFundriser } from "./pages/browseCampaigns";
 import { HowItWorks } from "./pages/howitWorks";
 import { StartFundRiser } from "./pages/startCampaign";
+import { Login } from "./pages/userAuth/loginComponent";
+import { Register } from "./pages/userAuth/register";
 
-const App: React.FC = () =>  {
-
+const App: React.FC = () => {
   return (
     <Provider>
       <Layout>
@@ -18,7 +19,9 @@ const App: React.FC = () =>  {
           <BrowseFundriser path="browse-campaign" />
           <HowItWorks path="how-sahaaya-works" />
           <StartFundRiser path="start-campaign" />
-          <NotFound default/>
+          <Register path="register" />
+          <Login path="login" />
+          <NotFound default />
         </Router>
       </Layout>
     </Provider>

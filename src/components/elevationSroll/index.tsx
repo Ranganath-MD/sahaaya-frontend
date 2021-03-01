@@ -1,10 +1,6 @@
 import React from "react";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 
-interface Props {
-    window?: () => Window;
-    children: React.ReactElement;
-  }
 export const  ElevationScroll = (props: Props) => {
   const { children, window } = props;
 

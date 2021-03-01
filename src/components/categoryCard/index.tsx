@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-interface CardProps {
-  iconComponent: JSX.Element | null;
-  title: string;
-  description: string;
-}
-
 const Card = styled.div`
   padding: 20px;
   box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12) !important;

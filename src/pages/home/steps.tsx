@@ -1,12 +1,6 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 
-interface IStepProps {
-  renderImage: () => string | undefined;
-  step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-}
-
 export const Steps: React.FC<IStepProps> = ({ renderImage, step, setStep }) => {
   return (
     <Grid container>
