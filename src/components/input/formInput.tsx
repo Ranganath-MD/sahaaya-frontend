@@ -23,7 +23,7 @@ const Input = styled.input<InputProps>`
     border-radius: 5px;
     &:focus {
       outline: none;
-      box-shadow: 0px 0px 2px red;
+      box-shadow: 0px 0px 2px #ff9800;
     }
 `;
 

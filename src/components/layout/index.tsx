@@ -8,7 +8,7 @@ export const Layout: React.FC = ({ children }) => {
     <div>
       <Header />
       {/* <NetworkStatus /> */}
-      <div style={{ minHeight: "80vh" }}>
+      <div style={{ minHeight: "83vh" }}>
         {children}
       </div>
       <Footer />
