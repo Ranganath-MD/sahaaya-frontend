@@ -21,7 +21,7 @@ const App: React.FC = () => {
           <StartFundRiser path="start-campaign" />
           <Register path="register" />
           <Login path="login" />
-          <NotFound default />
+          <NotFound path="/:statuscode" default />
         </Router>
       </Layout>
     </Provider>
