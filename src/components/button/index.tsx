@@ -11,7 +11,7 @@ const Button = styled.button<IButtonProps>`
   min-width: ${(props) => props.fullWidth ? "100%" : "2rem"};
   color: ${(props) =>
     props.color ? props.color : props.primary ? "white" : "black"};
-  opacity: ${(props) => props.loading && ".6"};
+  opacity: ${(props) => props.isloading && ".6"};
   background: ${(props) =>
     props.disabled
       ? "#959595"
@@ -47,29 +47,27 @@ export const DevButton: React.FC<IButtonProps> = ({
   ...props
 }) => {
   return (
-    <div>
-      <Button
-        onClick={props.disabled ? undefined : props.onClick}
-        primary={props.primary}
-        disabled={props.disabled}
-        loading={props.loading}
-        background={props.background}
-        isShadow={props.isShadow}
-        color={props.color}
-        bordered={props.bordered}
-        fullWidth={props.fullWidth}
-        type={props.submit ? "submit" : "button"}
-        minHeight={props.minHeight}
-      >
-        {props.loading ? (
-          <ButtonSpinner>
-            <CircularProgress size={20} className="spinner" />
-            <span>{props.loadingText ? props.loadingText : "Loading..."}</span>
-          </ButtonSpinner>
-        ) : (
-          props.children
-        )}
-      </Button>
-    </div>
+    <Button
+      onClick={props.disabled ? undefined : props.onClick}
+      primary={props.primary}
+      disabled={props.disabled}
+      isloading={props.isloading}
+      background={props.background}
+      isShadow={props.isShadow}
+      color={props.color}
+      bordered={props.bordered}
+      fullWidth={props.fullWidth}
+      type={props.submit ? "submit" : "button"}
+      minHeight={props.minHeight}
+    >
+      {props.isloading ? (
+        <ButtonSpinner>
+          <CircularProgress size={20} className="spinner" />
+          <span>{props.loadingText ? props.loadingText : "Loading..."}</span>
+        </ButtonSpinner>
+      ) : (
+        props.children
+      )}
+    </Button>
   );
 };

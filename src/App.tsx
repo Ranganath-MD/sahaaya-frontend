@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "./context/index";
-import { Layout } from "./components";
+import { Layout, PrivateRoute } from "./components";
 import { Router } from "@reach/router";
 import { NotFound } from "./pages/notFound";
 import { Home } from "./pages/home";
@@ -9,8 +9,12 @@ import { HowItWorks } from "./pages/howitWorks";
 import { StartFundRiser } from "./pages/startCampaign";
 import { Login } from "./pages/userAuth/loginComponent";
 import { Register } from "./pages/userAuth/register";
+import { AdminDashboard } from "./pages/admin";
+import { CampaignerDashboard } from "./pages/campaigner";
+import { AdminPrivateRoute } from "./components/PrivateRoute/AdminPrivateRoute";
 
 const App: React.FC = () => {
+
   return (
     <Provider>
       <Layout>
@@ -21,6 +25,10 @@ const App: React.FC = () => {
           <StartFundRiser path="start-campaign" />
           <Register path="register" />
           <Login path="login" />
+          <AdminPrivateRoute path="admin" component={AdminDashboard}>
+            <AdminDashboard path="dashboard" />
+          </AdminPrivateRoute>
+          <PrivateRoute path="dashboard" component={CampaignerDashboard}/>
           <NotFound path="/:statuscode" default />
         </Router>
       </Layout>

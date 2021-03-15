@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Seo } from "../../components/layout/Seo";
 import { Grid, Button, Divider, Container } from "@material-ui/core";
 import { Link, RouteComponentProps } from "@reach/router";
-import { DevButton, FormInput } from "../../components";
+import { DevButton, FormInput, MessageBox } from "../../components";
 import { AuthContext } from "../../context";
 import "./index.scss";
 import { BiUserCircle } from "react-icons/bi";
@@ -24,6 +24,16 @@ export const Register: React.FC<RouteComponentProps> = () => {
     context.register(formData, reset);
   };
 
+  const renderMessageBox = () => {
+    return (
+      <MessageBox
+        open={context.showMessageBox}
+        message={context.message}
+        handleClose={() => context.setShowMessageBox(false)}
+      />
+    );
+  };
+
   return (
     <>
       <Seo title="Register and Start a campaign" />
@@ -37,7 +47,7 @@ export const Register: React.FC<RouteComponentProps> = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <div className="reg-form">
-              <h1>Register to Sahaaya</h1>
+              <h1>Welcome to Sahaaya</h1>
               <form noValidate onSubmit={handleSubmit(onSubmit)}>
                 <Controller
                   name="username"
@@ -164,6 +174,8 @@ export const Register: React.FC<RouteComponentProps> = () => {
                 <div className="reg-button">
                   <DevButton
                     primary
+                    isloading={context.isLoading ? true : false}
+                    loadingText={"Redirecting to Login"}
                     submit
                     fullWidth
                     minHeight="2.4rem"
@@ -187,6 +199,7 @@ export const Register: React.FC<RouteComponentProps> = () => {
             </div>
           </Grid>
         </Grid>
+        {context.showMessageBox && renderMessageBox()}
       </Container>
     </>
   );

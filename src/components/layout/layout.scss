@@ -60,7 +60,35 @@ $light-gray: ghostwhite;
     align-items: center;
   }
 }
-
+.menu_list_item{
+  min-width: 30px !important;
+}
+.user-name{
+  span {
+    font-weight: bold !important;
+  }
+  .user-role {
+    color: #767676;
+    font-weight: 400 !important;
+  }
+  .menu_item_text{
+    span {
+      font-size: 15px !important;
+    }
+  }
+}
+.MuiTypography-root {
+  margin: 0;
+  font-size: 15px !important;
+}
+.profile-menu{
+  cursor: pointer;
+  background-color: #2A415D !important;
+  color: white !important;
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 16px !important;
+}
 // footer 
 .footer-container{
   background-color: $light-gray;

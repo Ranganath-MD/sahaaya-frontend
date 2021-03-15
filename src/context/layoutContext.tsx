@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react";
 
 interface InitState {
   openDrawer?: boolean;
+  // eslint-disable-next-line no-unused-vars
   handleDrawer?: (e: React.KeyboardEvent | React.MouseEvent) => void;
 }
 

@@ -13,7 +13,7 @@
 }
 .background__rect{
    position: absolute;
-   width: 50vh;
+   width: 15vh;
    bottom: 15%;
    left: 10%;
    height: 100%;
@@ -72,5 +72,14 @@
    @media only screen and (max-width: 599px) {
       font-size: 2rem;
       text-align: center;
+   }
+}
+.logo {
+   display: grid;
+   place-items: center;
+   margin-top: 15%;
+   img {
+      width: 30px;
+      height: auto;
    }
 }

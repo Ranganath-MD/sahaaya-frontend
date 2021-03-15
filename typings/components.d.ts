@@ -5,11 +5,11 @@ interface IButtonProps {
   color?: string;
   primary?: boolean;
   background?: string;
-  loading?: boolean;
+  isloading?: boolean;
   disabled?: boolean;
   isShadow?: boolean;
   bordered?: boolean;
-  loadingText?: Text;
+  loadingText?: string;
   submit?: boolean;
   fullWidth?: boolean;
   minHeight?: string;
@@ -42,4 +42,9 @@ interface InputProps  {
   error?: boolean;
   onBlur?: ((_: React.FocusEvent<HTMLInputElement>) => void) | undefined;
   onChange?: ((_: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void) | undefined;
+}
+interface ISnackbarProps {
+  open: boolean;
+  handleClose: ((event: React.SyntheticEvent<any, Event>) => void) | undefined;
+  message: string;
 }

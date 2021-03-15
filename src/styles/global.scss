@@ -9,6 +9,8 @@ body{
   font-family: $font-stack;
   margin: 0 !important;
   background-color: $background;
+  overflow: visible !important;
+  padding: 0 !important;
 }
 
 .not-found{

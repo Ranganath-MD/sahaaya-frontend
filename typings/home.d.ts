@@ -1,5 +1,5 @@
 interface IFormInput {
-  username: string;
+  username?: string;
   email: string;
   password: string;
   confirmPassword?: string;

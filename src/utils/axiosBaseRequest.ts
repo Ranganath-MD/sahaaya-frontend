@@ -1,77 +1,16 @@
 /* eslint-disable @typescript-eslint/ban-types */
-// /* eslint-disable @typescript-eslint/ban-types */
-// import Axios, {  AxiosInstance } from "axios";
-
-// class AxiosBaseRequests {
-//     baseUrl: string | undefined;
-//     constructor () {
-//       const axios: AxiosInstance = Axios.create({
-//         // baseURL: "https://dev-sahaaya.herokuapp.com",
-//         baseURL: "http://localhost:8080",
-//         headers: {
-//           "Authorization": localStorage.getItem("token")
-//         }
-//       });
-//     }
-
-//     getBaseUrl = () => {
-//       return this.baseUrl;
-//     }
-
-//     request = async (
-//       { url, method, params, body, options }:
-//       { url: string, method: "delete" | "get" | "patch" | "post" | "put", params, body?: {}, options?: {}, headers?: {} },
-//     ) => {
-//       return await axios({
-//         method,
-//         url,
-//         params,
-//         baseURL: this.baseUrl,
-//         data: body,
-//         ...(options || {}),
-//       }).then((response) => {
-//         return response.data;
-//       }).catch((error) => {
-//         const res = error.response;
-//         if (!res) {
-//           console.error(res);
-//           throw new Error(error);
-//         }
-//         if (res.status >= 400) {
-//           console.log(res.status);
-//         }
-//       });
-//     }
-//     post = async (url: string, body?: {}, params: {} = {}, options?: {}) => {
-//       return await this.request({
-//         url,
-//         body,
-//         params,
-//         options,
-//         method: "post",
-//       });
-//     }
-// }
-// export const baseRequest = new AxiosBaseRequests();
 import { navigate } from "@reach/router";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
-interface IRequest {
-  method: String;
-  url: String,
-  body?: {},
-  params?: {},
-  options?: {},
-}
 class Service {
   service: any;
   constructor () {
     const service = axios.create({
-      // baseURL: "http://localhost:8080",
-      baseURL: "https://dev-sahaaya.herokuapp.com",
+      baseURL: "http://localhost:8080",
+      // baseURL: "https://dev-sahaaya.herokuapp.com",
       headers: {
-        "Authorization": localStorage.getItem("token")
-      }
+        Authorization: localStorage.getItem("token"),
+      },
     });
     service.interceptors.response.use(this.handleSuccess, this.handleError);
     this.service = service;
@@ -79,63 +18,59 @@ class Service {
 
   handleSuccess = (response: any) => {
     return response;
-  }
+  };
 
   handleError = (error: any) => {
     switch (error.response.status) {
+    case 400:
+      navigate("/400", { state: { status: "400", errMsg: "BAD REQUEST" } });
+      break;
     case 401:
-      navigate("/401",{ state: { status: "401", errMsg: "" } });
+      return error.response.data;
+    case 403:
+      navigate("/403", { state: { status: "404", errMsg: "FORBIDDEN" } });
       break;
     case 404:
-      navigate("/404",{ state: { status: "404", errMsg: "" } });
+      navigate("/404", {
+        state: {
+          status: "404",
+          errMsg: "The page you are looking for is not exists",
+        },
+      });
       break;
+    case 409:
+      return error.response.data;
     default:
-      this.redirectTo(document, "/500");
+      navigate("/500", {
+        state: { status: "500", errMsg: "Internal Server Error" },
+      });
       break;
     }
     return Promise.reject(error);
-  }
+  };
 
-  redirectTo = (document: any, path: any) => {
-    document.location = path;
-  }
-  async request ({ method, url, body, params, options } : IRequest) {
-    return await this.service({
-      method,
-      baseURL: this.service.baseURL,
-      url,
-      data: body,
-      headers: this.service.headers,
+  get (path: string, params?: {}) {
+    return this.service({
+      method: "GET",
+      url: path,
       params,
-      ...(options || {})
     });
   }
 
+  post (path: string, body: any) {
+    return this.service({
+      method: "POST",
+      url: path,
+      data: body,
+    });
+  }
 
-  get = async (path: string) => {
-    await this.request({
-      method: "GET",
+  delete (path: string) {
+    return this.service({
+      method: "DELETE",
       url: path
     });
   }
-
-  // patch(path, payload, callback) {
-  //   return this.service.request({
-  //     method: "PATCH",
-  //     url: path,
-  //     responseType: "json",
-  //     data: payload
-  //   }).then((response) => callback(response.status, response.data));
-  // }
-
-  // post(path, payload, callback) {
-  //   return this.service.request({
-  //     method: "POST",
-  //     url: path,
-  //     responseType: "json",
-  //     data: payload
-  //   }).then((response) => callback(response.status, response.data));
-  // }
 }
 
 export const apiService = new Service();
