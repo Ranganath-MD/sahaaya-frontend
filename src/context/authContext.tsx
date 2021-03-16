@@ -69,7 +69,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     if(data.type === "Admin") {
       navigate("/admin/dashboard");
     }else {
-      navigate("/dashbaord");
+      navigate("/dashboard");
     }
     return null;
   };

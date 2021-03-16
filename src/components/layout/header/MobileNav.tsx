@@ -6,15 +6,10 @@ import { Toolbar, IconButton, Drawer } from "@material-ui/core";
 import { DevButton } from "../../button";
 import { Link, LinkGetProps } from "@reach/router";
 import Logo from "../../../assets/logo.svg";
+import { RightMenu } from "./Menu";
 
-export const MobileNav: React.FC = () => {
+export const MobileNav: React.FC<IHeaderProps> = ({ links }) => {
   const context = useContext(LayoutContext);
-
-  const Links = [
-    { name: "Browse Campaign", path: "browse-campaign" },
-    { name: "How it Works", path: "how-sahaaya-works" },
-    { name: "Start Campaign", path: "start-campaign" },
-  ];
 
   const isActive = ({ isCurrent }: LinkGetProps) => {
     return isCurrent
@@ -34,7 +29,7 @@ export const MobileNav: React.FC = () => {
             <img src={Logo} width="30px" height="auto" />
           </Link>
           <div className="drawer-items">
-            {Links.map((link, i) => {
+            {links().map((link: any, i: number) => {
               return (
                 <Link
                   to={link.path}
@@ -67,14 +62,7 @@ export const MobileNav: React.FC = () => {
           <img src={Logo} width="30px" height="auto" />
         </Link>
         <div style={{ flexGrow: 1 }} />
-        <Link to="/login">
-          <DevButton isShadow={false}>Sign in</DevButton>
-        </Link>
-        <Link to="/register">
-          <DevButton primary isShadow={false}>
-            Sign Up
-          </DevButton>
-        </Link>
+        <RightMenu />
       </Toolbar>
     </>
   );

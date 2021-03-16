@@ -27,6 +27,10 @@ interface Props {
   window?: () => Window;
   children: React.ReactElement;
 }
+interface IHeaderProps {
+  links: any
+}
+
 interface InputProps  {
   name: string;
   type: string;
