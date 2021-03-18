@@ -87,7 +87,14 @@ $text-color: #2A415D;
       font-weight: bold;
       color: #2A415D;
       text-align: center;
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
+    }
+    @media only screen and (max-width: 495px) {
+      p{
+        font-size: 1.3em;
+        margin-bottom: 0;
+        line-height: 2rem;
+      }
     }
   }
 }
@@ -134,6 +141,12 @@ $text-color: #2A415D;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   justify-content: center;
+  p{
+    font-size: 14px;
+    color: #767676;
+    line-height: 1.4rem;
+    margin: 10px 0px 20px;
+  }
 }
 @media only screen and (max-width: 495px){
   .section-flex {
@@ -144,7 +157,7 @@ $text-color: #2A415D;
   }
   #section-two {
     h1{
-      font-size: 1.8em;
+      font-size: 1.3em;
     }
   }
 }
