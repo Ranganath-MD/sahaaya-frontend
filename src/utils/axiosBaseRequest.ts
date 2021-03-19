@@ -6,8 +6,8 @@ class Service {
   service: any;
   constructor () {
     const service = axios.create({
-      // baseURL: "http://localhost:8080",
-      baseURL: "https://dev-sahaaya.herokuapp.com",
+      baseURL: "http://localhost:8080",
+      // baseURL: "https://dev-sahaaya.herokuapp.com",
       headers: {
         Authorization: localStorage.getItem("token"),
       },
