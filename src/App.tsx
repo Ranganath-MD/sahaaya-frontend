@@ -9,7 +9,7 @@ import { HowItWorks } from "./pages/howitWorks";
 import { StartFundRiser } from "./pages/startCampaign";
 import { Login } from "./pages/userAuth/loginComponent";
 import { Register } from "./pages/userAuth/register";
-import { AdminDashboard } from "./pages/admin";
+import { AdminDashboard } from "./pages/admin/Dashboard";
 import { CampaignerDashboard } from "./pages/campaigner";
 import { AdminPrivateRoute } from "./components/PrivateRoute/AdminPrivateRoute";
 
