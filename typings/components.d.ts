@@ -30,7 +30,12 @@ interface Props {
 interface IHeaderProps {
   links: any
 }
-
+interface DashboardCard {
+  title: string;
+  description: string;
+  icon: string;
+  navigationPath: string;
+}
 interface InputProps  {
   name: string;
   type: string;

@@ -10,7 +10,7 @@ import { StartFundRiser } from "./pages/startCampaign";
 import { Login } from "./pages/userAuth/loginComponent";
 import { Register } from "./pages/userAuth/register";
 import { AdminDashboard } from "./pages/admin/Dashboard";
-import { CampaignerDashboard } from "./pages/campaigner";
+import { CampaignerDashboard } from "./pages/campaigner/dashboard";
 import { AdminPrivateRoute } from "./components/PrivateRoute/AdminPrivateRoute";
 
 const App: React.FC = () => {
