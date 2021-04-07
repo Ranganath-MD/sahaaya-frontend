@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { VscListSelection } from "react-icons/vsc";
-import { LayoutContext } from "../../../context";
+import { AuthContext, LayoutContext } from "../../../context";
 import "../layout.scss";
 import { Toolbar, IconButton, Drawer } from "@material-ui/core";
 import { Link, LinkGetProps } from "@reach/router";
@@ -9,6 +9,7 @@ import { RightMenu } from "./Menu";
 
 export const MobileNav: React.FC<IHeaderProps> = ({ links }) => {
   const context = useContext(LayoutContext);
+  const auth = useContext(AuthContext);
 
   const isActive = ({ isCurrent }: LinkGetProps) => {
     return isCurrent
@@ -24,9 +25,12 @@ export const MobileNav: React.FC<IHeaderProps> = ({ links }) => {
         onClose={context.handleDrawer}
       >
         <div className="drawer">
-          <Link to="/">
-            <img src={Logo} width="30px" height="auto" />
-          </Link>
+          {
+            auth.isAuthenticated ? <img src={Logo} width="30px" height="auto" /> :
+              <Link to={"/"}>
+                <img src={Logo} width="30px" height="auto" />
+              </Link>
+          }
           <div className="drawer-items">
             {links().map((link: any, i: number) => {
               return (

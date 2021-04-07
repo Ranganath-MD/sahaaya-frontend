@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Toolbar } from "@material-ui/core";
 import { Link, LinkGetProps } from "@reach/router";
 import Logo from "../../../assets/logo.svg";
 import { RightMenu } from "./Menu";
+import { AuthContext } from "../../../context";
 
 export const NavBar: React.FC<IHeaderProps> = ({ links }) => {
+  const auth = useContext(AuthContext);
   const isActive = ({ isCurrent }: LinkGetProps) => {
     return isCurrent
       ? { className: "active-link" }
@@ -13,9 +15,13 @@ export const NavBar: React.FC<IHeaderProps> = ({ links }) => {
 
   return (
     <Toolbar>
-      <Link to="/">
-        <img src={Logo} width="35px" height="auto" />
-      </Link>
+      {auth.isAuthenticated ? (
+        <img src={Logo} width="30px" height="auto" />
+      ) : (
+        <Link to={"/"}>
+          <img src={Logo} width="30px" height="auto" />
+        </Link>
+      )}
       <Toolbar>
         {links().map((link: any, i: number) => {
           return (
