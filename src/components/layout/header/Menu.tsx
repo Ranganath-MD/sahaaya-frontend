@@ -82,7 +82,7 @@ export const RightMenu: React.FC = () => {
             <DevButton isShadow={false}>Sign in</DevButton>
           </Link>
           <Link to="/register">
-            <DevButton primary isShadow={false}>
+            <DevButton isShadow={false} bordered>
               Sign Up
             </DevButton>
           </Link>

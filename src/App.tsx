@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "./context/index";
 import { Layout, PrivateRoute } from "./components";
 import { Router } from "@reach/router";
@@ -12,8 +12,16 @@ import { Register } from "./pages/userAuth/register";
 import { AdminDashboard } from "./pages/admin";
 import { CampaignerDashboard } from "./pages/campaigner";
 import { AdminPrivateRoute } from "./components/PrivateRoute/AdminPrivateRoute";
+import { socket } from "./utils/socketClient";
 
 const App: React.FC = () => {
+
+  useEffect(() => {
+    socket.on("init", () => {
+      console.log("connected");
+    });
+    socket.emit("init", { data: "data-============" });
+  }, []);
 
   return (
     <Provider>

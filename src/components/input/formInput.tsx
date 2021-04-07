@@ -20,7 +20,6 @@ const Input = styled.input<InputProps>`
     border: ${(props) => props.error ? "1px solid #b30c0c" : "1px solid #f1f1f1"};
     background: #fff;
     color: rgba(3,27,78,.7);
-    border-radius: 5px;
     &:focus {
       outline: none;
       box-shadow: 0px 0px 2px #ff9800;

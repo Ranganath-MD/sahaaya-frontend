@@ -4,7 +4,6 @@ import styled from "styled-components";
 const Card = styled.div`
   padding: 20px;
   box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12) !important;
-  border-radius: 12px !important;
   margin: 10px;
 `;
 const Title = styled.span`

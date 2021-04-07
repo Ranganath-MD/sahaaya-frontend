@@ -19,7 +19,7 @@ export const Login: React.FC<IProps> = (props) => {
   const { control, handleSubmit, errors, reset } = useForm();
 
   useEffect(() => {
-    if (props.location?.state.email !== undefined){
+    if (props.location?.state !== null && props.location?.state.email !== undefined){
       reset({ email: props.location?.state.email });
     }else {
       reset();

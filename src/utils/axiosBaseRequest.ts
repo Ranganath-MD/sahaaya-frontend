@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { navigate } from "@reach/router";
 import axios from "axios";
-
+import { config } from "../config";
 class Service {
   service: any;
   constructor () {
     const service = axios.create({
-      baseURL: "http://localhost:8080",
+      baseURL: process.env.NODE_ENV === "production"  ? config.prod : config.local,
       // baseURL: "https://dev-sahaaya.herokuapp.com",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -71,6 +71,7 @@ class Service {
       url: path
     });
   }
+
 }
 
 export const apiService = new Service();

@@ -3,7 +3,6 @@ import { VscListSelection } from "react-icons/vsc";
 import { LayoutContext } from "../../../context";
 import "../layout.scss";
 import { Toolbar, IconButton, Drawer } from "@material-ui/core";
-import { DevButton } from "../../button";
 import { Link, LinkGetProps } from "@reach/router";
 import Logo from "../../../assets/logo.svg";
 import { RightMenu } from "./Menu";
