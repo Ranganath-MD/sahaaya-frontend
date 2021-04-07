@@ -7,7 +7,7 @@ const CardWrapper = styled.div`
   align-items: center;
   padding: 20px;
   margin: 10px;
-  box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px !important;
+  box-shadow: rgb(0 0 0 / 12%) 1px 1px 5px !important;
   border-radius: 5px !important;
 `;
 const ImageWrapper = styled.div`
