@@ -3,7 +3,7 @@ import { RouteComponentProps } from "@reach/router";
 import React, { useContext } from "react";
 import "./index.scss";
 import { Seo } from "../../../components/layout/Seo";
-import { DashboardCard } from "./dashboardcard";
+import { DashboardCard } from "./dashboard";
 import { AuthContext } from "../../../context";
 
 export const CampaignerDashboard: React.FC<RouteComponentProps> = () => {

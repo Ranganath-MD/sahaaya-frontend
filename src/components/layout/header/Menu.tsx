@@ -52,7 +52,7 @@ export const RightMenu: React.FC = () => {
                     variant="body2"
                     color="textPrimary"
                   >
-                    {context.currentUser && context.currentUser.role}
+                    {context.currentUser?.type === "Admin" ? context.currentUser.role : context.currentUser?.email}
                   </Typography>
                 }
               />

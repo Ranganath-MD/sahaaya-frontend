@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { RouteComponentProps } from "@reach/router";
 import "./home.scss";
 import { Container } from "@material-ui/core";
@@ -6,9 +6,6 @@ import { CategoryCard, DevButton } from "../../components";
 import Hero from "../../assets/Taieri.svg";
 import site from "../../utils/siteOptions.json";
 import { Seo } from "../../components/layout/Seo";
-import { GrValidate } from "react-icons/gr";
-import { RiMovie2Line } from "react-icons/ri";
-import { GiHourglass, GiFarmTractor } from "react-icons/gi";
 import { Steps } from "./steps";
 import { useWindowsize } from "../../hooks";
 import { MobileSteps } from "./mobilesteps";
@@ -16,25 +13,12 @@ import Dummy1 from "../../assets/dummy/dummy1.png";
 import Dummy2 from "../../assets/dummy/dummy2.png";
 import Dummy3 from "../../assets/dummy/dummy3.png";
 import Dummy4 from "../../assets/dummy/dummy4.png";
+import { BaseContext } from "../../context";
 
 export const Home: React.FC<RouteComponentProps> = () => {
   const size = useWindowsize();
   const [ step, setStep ] = useState<number>(1);
-
-  const renderCategoryIcons = (key: string) => {
-    switch (key) {
-    case "c1":
-      return <GiFarmTractor size={30}/>;
-    case "c2":
-      return <GrValidate size={30}/>;
-    case "c3":
-      return <RiMovie2Line size={30}/>;
-    case "c4":
-      return <GiHourglass size={30}/>;
-    default:
-      return null;
-    }
-  };
+  const ctx = useContext(BaseContext);
 
   const renderImage = () => {
     switch (step) {
@@ -74,16 +58,14 @@ export const Home: React.FC<RouteComponentProps> = () => {
           <h1>Who uses Sahaaya</h1>
           <div className="section-flex">
             {
-              site.categories.map((c) => {
-                return (
-                  <CategoryCard
-                    key={c.key}
-                    iconComponent={renderCategoryIcons(c.key)}
-                    title={c.title}
-                    description={c.description}
-                  />
-                );
-              })
+              ctx.categories !== null && ctx.categories.map((c: any) =>  (
+                <CategoryCard
+                  key={c.key}
+                  iconComponent={ctx.renderCategoryIcons(c.key)}
+                  title={c.title}
+                  description={c.description}
+                />
+              ))
             }
           </div>
         </section>

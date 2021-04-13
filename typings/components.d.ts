@@ -19,9 +19,10 @@ interface IButtonSpinner {
   primary?: boolean;
 }
 interface CardProps {
-  iconComponent: JSX.Element | null;
+  iconComponent?: JSX.Element | null;
   title: string;
-  description: string;
+  description?: string;
+  onClick?: () => void;
 }
 interface Props {
   window?: () => Window;
@@ -34,7 +35,8 @@ interface DashboardCard {
   title: string;
   description: string;
   icon: string;
-  navigationPath: string;
+  navigationPath?: string;
+  handleClick?: () => void;
 }
 interface InputProps  {
   name: string;

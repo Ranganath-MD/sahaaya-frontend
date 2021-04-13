@@ -1,37 +1,47 @@
-import React from "react";
-import { RouteComponentProps } from "@reach/router";
+import React, { useContext } from "react";
+import { navigate, RouteComponentProps } from "@reach/router";
 import CampaignImage from "../../../assets/user/crowdfunding.svg";
 import DonationImage from "../../../assets/user/donate.svg";
 import { DevDashboardCard } from "../../../components";
 import { Grid } from "@material-ui/core";
+import { CampaignContext } from "../../../context";
 
 const fundCardData = [
   {
+    id: 1,
     title: "Start Campaign",
     description: "Start a campaign here",
     icon: CampaignImage,
-    path: "/start-campaign"
   },
   {
+    id: 2,
     title: "Donate",
     description: "Donate to the people who is in need",
     icon: DonationImage,
-    path: "/browse-campaign"
   }
 ];
 
 export const DashboardCard: React.FC<RouteComponentProps> = () => {
+  // const ctx = useContext(CampaignContext);
+
+  const onClickCard = (id: number) => {
+    if(id === 1) {
+      navigate("./create-campaign");
+    }else {
+      navigate("./browse-campaign");
+    }
+  };
 
   return (
     <Grid container className="dashboard-cards">
       {fundCardData.map((item: any) => {
         return (
-          <Grid sm={12} md={6} key={item.title} className="item">
+          <Grid item sm={12} md={6} key={item.id} className="item">
             <DevDashboardCard
               title={item.title}
               description={item.description}
               icon={item.icon}
-              navigationPath={item.path}
+              handleClick={() => onClickCard(item.id)}
             />
           </Grid>
         );

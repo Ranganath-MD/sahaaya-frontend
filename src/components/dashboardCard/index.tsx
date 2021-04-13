@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "@reach/router";
 
 const CardWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 20px;
   margin: 10px;
+  cursor: pointer;
   box-shadow: rgb(0 0 0 / 12%) 1px 1px 5px !important;
-  border-radius: 5px !important;
 `;
 const ImageWrapper = styled.div`
   padding: 10px;
@@ -37,19 +36,17 @@ export const DevDashboardCard: React.FC<DashboardCard> = ({
   title,
   icon,
   description,
-  navigationPath,
+  handleClick
 }) => {
   return (
-    <Link to={navigationPath} style={{ textDecoration: "none" }}>
-      <CardWrapper>
-        <ImageWrapper>
-          <img src={icon} alt={title} />
-        </ImageWrapper>
-        <TextWrapper>
-          <h1>{title}</h1>
-          <p>{description}</p>
-        </TextWrapper>
-      </CardWrapper>
-    </Link>
+    <CardWrapper onClick={handleClick}>
+      <ImageWrapper>
+        <img src={icon} alt={title} />
+      </ImageWrapper>
+      <TextWrapper>
+        <h1>{title}</h1>
+        <p>{description}</p>
+      </TextWrapper>
+    </CardWrapper>
   );
 };

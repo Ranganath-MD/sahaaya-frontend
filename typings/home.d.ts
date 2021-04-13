@@ -26,3 +26,11 @@ interface ISeoProps {
   title: string | undefined;
   description?: string;
 }
+
+interface ICategory {
+  id?: string;
+  key?: string;
+  title: string;
+  description?: string;
+  createdAt?: string;
+}

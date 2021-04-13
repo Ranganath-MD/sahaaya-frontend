@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 const Card = styled.div`
   padding: 20px;
-  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.12) !important;
   margin: 10px;
+  cursor: pointer;
 `;
 const Title = styled.span`
   margin: 0;
@@ -25,10 +26,10 @@ const Icon = styled.div`
 `;
 
 export const CategoryCard: React.FC<CardProps> = ({
-  iconComponent, title, description
+  iconComponent, title, description, onClick
 }) => {
   return (
-    <Card>
+    <Card onClick={onClick}>
       <Icon>{iconComponent}</Icon>
       <Title>{title}</Title>
       <Description>{description}</Description>

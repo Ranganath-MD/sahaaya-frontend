@@ -15,7 +15,6 @@ export const Header: React.FC = () => {
     let Links = [
       { name: "Browse Campaign", path: "browse-campaign" },
       { name: "How it Works", path: "how-sahaaya-works" },
-      { name: "Start Campaign", path: "start-campaign" },
     ];
     if (context.isAuthenticated && context.isAdmin()) {
       Links = [

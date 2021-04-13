@@ -6,19 +6,20 @@ import { NotFound } from "./pages/notFound";
 import { Home } from "./pages/home";
 import { BrowseFundriser } from "./pages/browseCampaigns";
 import { HowItWorks } from "./pages/howitWorks";
-import { StartFundRiser } from "./pages/startCampaign";
 import { Login } from "./pages/userAuth/loginComponent";
 import { Register } from "./pages/userAuth/register";
 import { AdminDashboard } from "./pages/admin/Dashboard";
 import { CampaignerDashboard } from "./pages/campaigner/dashboard";
 import { AdminPrivateRoute } from "./components/PrivateRoute/AdminPrivateRoute";
 import { socket } from "./utils/socketClient";
+import { CreateCampaign } from "./pages/campaigner/campaign";
+import { CreateCampaignForm } from "./pages/campaigner/campaign/campaignForm";
 
 const App: React.FC = () => {
 
   useEffect(() => {
     socket.on("init", () => {
-      console.log("connected");
+      // console.log("connected");
     });
     socket.emit("init", { data: "data-============" });
   }, []);
@@ -30,13 +31,14 @@ const App: React.FC = () => {
           <Home path="/" />
           <BrowseFundriser path="browse-campaign" />
           <HowItWorks path="how-sahaaya-works" />
-          <StartFundRiser path="start-campaign" />
           <Register path="register" />
           <Login path="login" />
           <AdminPrivateRoute path="admin" component={AdminDashboard}>
             <AdminDashboard path="dashboard" />
           </AdminPrivateRoute>
           <PrivateRoute path="dashboard" component={CampaignerDashboard}/>
+          <PrivateRoute path="create-campaign" component={CreateCampaign} />
+          <PrivateRoute path="campaign/:id" component={CreateCampaignForm}/>
           <NotFound path="/:statuscode" default />
         </Router>
       </Layout>
