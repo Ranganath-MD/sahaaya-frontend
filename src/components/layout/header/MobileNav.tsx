@@ -4,7 +4,7 @@ import { AuthContext, LayoutContext } from "../../../context";
 import "../layout.scss";
 import { Toolbar, IconButton, Drawer } from "@material-ui/core";
 import { Link, LinkGetProps } from "@reach/router";
-import Logo from "../../../assets/logo.svg";
+import Logo from "../../../assets/logo-sahaaya.svg";
 import { RightMenu } from "./Menu";
 
 export const MobileNav: React.FC<IHeaderProps> = ({ links }) => {

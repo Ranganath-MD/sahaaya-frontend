@@ -4,18 +4,19 @@ import { AuthProvider } from "./authContext";
 import { RouteComponentProps } from "@reach/router";
 import { CampaignProvider } from "./campaignContext";
 import { BaseProvider } from "./baseContext";
+import { LocationProvider } from "@reach/router";
 
 export const Provider: React.FC<RouteComponentProps> = ({ children }) => {
   return (
-    <LayoutProvider>
-      <BaseProvider>
-        <AuthProvider>
-          <CampaignProvider>
-            {children}
-          </CampaignProvider>
-        </AuthProvider>
-      </BaseProvider>
-    </LayoutProvider>
+    <LocationProvider>
+      <LayoutProvider>
+        <BaseProvider>
+          <AuthProvider>
+            <CampaignProvider>{children}</CampaignProvider>
+          </AuthProvider>
+        </BaseProvider>
+      </LayoutProvider>
+    </LocationProvider>
   );
 };
 

@@ -59,3 +59,23 @@ interface ISnackbarProps {
   handleClose: ((event: React.SyntheticEvent<any, Event>) => void) | undefined;
   message: string;
 }
+
+interface ITextFields {
+  width?: number | string;
+  maxLength?: number;
+  placeholder?: string;
+  defaultValue?: string;
+  value: string;
+  error?: boolean;
+  requiredMessage?: string;
+  label?: string;
+  rows?: number;
+  cols?: number;
+  className?: string;
+  required?: boolean;
+  autoFocus?: boolean;
+  onChange?: ((_: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void) | undefined;
+  onBlur?: React.FocusEventHandler<HTMLTextAreaElement | HTMLInputElement> | undefined;
+  onMouseOver?: React.MouseEventHandler<HTMLTextAreaElement | HTMLInputElement> | undefined;
+  onMouseLeave?: React.MouseEventHandler<HTMLTextAreaElement | HTMLInputElement> | undefined;
+}

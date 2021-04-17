@@ -6,3 +6,4 @@ export * from "./categoryCard";
 export * from "./input/formInput";
 export * from "./PrivateRoute/PrivateRoute";
 export * from "./dashboardCard";
+export * from "./editableTextField";

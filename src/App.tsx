@@ -18,10 +18,11 @@ import { CreateCampaignForm } from "./pages/campaigner/campaign/campaignForm";
 const App: React.FC = () => {
 
   useEffect(() => {
-    socket.on("init", () => {
-      // console.log("connected");
+    socket.on("authenticated", (data) => {
+      // eslint-disable-next-line no-console
+      console.log("connected with" , data);
     });
-    socket.emit("init", { data: "data-============" });
+    socket.emit("init", { data: "ping" });
   }, []);
 
   return (

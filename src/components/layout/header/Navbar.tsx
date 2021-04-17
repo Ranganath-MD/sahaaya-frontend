@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Toolbar } from "@material-ui/core";
 import { Link, LinkGetProps } from "@reach/router";
-import Logo from "../../../assets/logo.svg";
+import Logo from "../../../assets/logo-sahaaya.svg";
 import { RightMenu } from "./Menu";
 import { AuthContext } from "../../../context";
 

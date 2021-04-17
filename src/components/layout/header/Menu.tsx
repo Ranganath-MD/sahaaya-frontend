@@ -25,7 +25,7 @@ export const RightMenu: React.FC = () => {
             onClick={(event) => context.setAnchorEl(event.currentTarget)}
             className="profile-menu"
           >
-            {context.currentUser && context.currentUser.username.charAt(0)}
+            {context.currentUser && context.currentUser.username.charAt(0).toUpperCase()}
           </Avatar>
           <Popover
             anchorEl={context.anchorEl}

@@ -1,0 +1,22 @@
+.campaign-input {
+  padding: 10px;
+  nav {
+    margin: 15px 0px 20px;
+  }
+  @mixin textarea {
+    font-family: Inter, "Inter UI", Helvetica, Arial, sans-serif;
+    &::placeholder {
+      color: #b6b4b4;
+    }
+  }
+  .cmpName {
+    font-size: 2rem;
+    font-weight: 600;
+    @include textarea();
+  }
+  .cmp-description {
+    font-size: 18px;
+    @include textarea();
+  }
+  
+}
