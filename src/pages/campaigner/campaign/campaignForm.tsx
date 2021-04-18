@@ -1,18 +1,18 @@
-import {
-  Breadcrumbs,
-  Chip,
-  Container,
-  Grid
-} from "@material-ui/core";
+import { Breadcrumbs, Chip, Container, Grid } from "@material-ui/core";
 import { RouteComponentProps, useParams } from "@reach/router";
 import React, { useContext, useEffect } from "react";
-import { EditableInput } from "../../../components";
+import { EditableInput, ExpandablePanel } from "../../../components";
 import { Seo } from "../../../components/layout/Seo";
 import { CampaignContext } from "../../../context";
-import { RiUser4Line } from "react-icons/ri";
-import { BiSitemap } from "react-icons/bi";
+import { RiAttachmentLine, RiBankCardLine, RiContactsLine, RiUser4Line } from "react-icons/ri";
+import { BiDetail, BiSitemap } from "react-icons/bi";
 import "./campaign.scss";
-import VerticalTabs from "./campaignMenu";
+import { CampaignDetails } from "./campaignDetails";
+
+const iconStyle = {
+  width: "1.1em",
+  height: "1.1em"
+};
 
 export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
   const ctx = useContext(CampaignContext);
@@ -27,8 +27,8 @@ export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
       <Seo title={ctx.campaignName} />
       <Container>
         <Grid container>
-          <Grid item xs={12} sm={2} md={2} />
-          <Grid item xs={12} sm={12} md={8}>
+          <Grid item xs={12} sm={12} md={1} />
+          <Grid item xs={12} sm={12} md={9}>
             <div className="campaign-input">
               <Breadcrumbs>
                 <Chip size="small" icon={<RiUser4Line />} label="Campaign" />
@@ -58,10 +58,50 @@ export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
               />
             </div>
             <div>
-              <VerticalTabs />
+              <ExpandablePanel
+                headerText={"Campaign Details"}
+                headerIcon={
+                  <BiDetail
+                    color="#0052CC"
+                    style={iconStyle}
+                  />}
+                defaultExpanded
+              >
+                <CampaignDetails />
+              </ExpandablePanel>
+              <ExpandablePanel
+                headerText={"Beneficiary Details"}
+                headerIcon={
+                  <RiContactsLine
+                    color="#0052CC"
+                    style={iconStyle}
+                  />}
+              >
+                Beneficiary Details
+              </ExpandablePanel>
+              <ExpandablePanel
+                headerText={"Attachments"}
+                headerIcon={
+                  <RiAttachmentLine
+                    color="#0052CC"
+                    style={iconStyle}
+                  />}
+              >
+                Attachments
+              </ExpandablePanel>
+              <ExpandablePanel
+                headerText={"Bank Details"}
+                headerIcon={
+                  <RiBankCardLine
+                    color="#0052CC"
+                    style={iconStyle}
+                  />}
+              >
+                Campaign Details
+              </ExpandablePanel>
             </div>
           </Grid>
-          <Grid item xs={12} sm={2} md={2} />
+          <Grid item xs={12} sm={12} md={1} />
         </Grid>
       </Container>
     </>

@@ -1,0 +1,18 @@
+@mixin tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px 5px;
+  border-radius: 5px;
+  color: #42526E;
+  cursor: pointer;
+}
+.tab {
+  @include tabs();
+}
+
+.active-tab {
+  @include tabs();
+  background: #e0e0e0 !important;
+  color: #0052cc;
+}

@@ -15,7 +15,7 @@ export const  ElevationScroll = (props: Props) => {
     if(trigger && location.pathname === "/") {
       return 4;
     }else if(location.pathname !== "/") {
-      return 4;
+      return 2;
     }else {
       return 0;
     }

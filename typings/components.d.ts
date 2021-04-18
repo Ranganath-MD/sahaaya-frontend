@@ -79,3 +79,22 @@ interface ITextFields {
   onMouseOver?: React.MouseEventHandler<HTMLTextAreaElement | HTMLInputElement> | undefined;
   onMouseLeave?: React.MouseEventHandler<HTMLTextAreaElement | HTMLInputElement> | undefined;
 }
+
+interface ICustomAccordian {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onChange?: ((event: React.ChangeEvent<{}>, expanded: boolean) => void) | undefined;
+  expanded?: boolean;
+  headerText?: string;
+  secondaryText?: string;
+  actionMenu?: boolean;
+  isSave?: boolean;
+  isCancel?: boolean;
+  defaultExpanded?: boolean;
+  disabled?: boolean;
+  error?: boolean;
+  errorMsg?: string;
+  actionChildren?: React.ReactChild;
+  headerIcon?: React.ReactNode;
+  onSave?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onCancel?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+}
