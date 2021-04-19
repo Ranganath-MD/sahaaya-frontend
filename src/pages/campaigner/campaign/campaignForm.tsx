@@ -1,9 +1,8 @@
 import { Breadcrumbs, Chip, Container, Grid } from "@material-ui/core";
 import { RouteComponentProps, useParams } from "@reach/router";
 import React, { useContext, useEffect } from "react";
-import { EditableInput, ExpandablePanel } from "../../../components";
-import { Seo } from "../../../components/layout/Seo";
-import { CampaignContext } from "../../../context";
+import { EditableInput, ExpandablePanel, Seo } from "components";
+import { CampaignContext } from "context";
 import { RiAttachmentLine, RiBankCardLine, RiContactsLine, RiUser4Line } from "react-icons/ri";
 import { BiDetail, BiSitemap } from "react-icons/bi";
 import "./campaign.scss";

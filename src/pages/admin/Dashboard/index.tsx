@@ -1,6 +1,6 @@
 import { RouteComponentProps } from "@reach/router";
 import React from "react";
-import { Seo } from "../../../components/layout/Seo";
+import { Seo } from "components";
 // import { AuthContext } from "../../../context";
 // import { apiService } from "../../../utils/axiosBaseRequest";
 

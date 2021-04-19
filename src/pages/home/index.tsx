@@ -2,18 +2,17 @@ import React, { useState, useContext } from "react";
 import { RouteComponentProps } from "@reach/router";
 import "./home.scss";
 import { Container } from "@material-ui/core";
-import { CategoryCard, DevButton } from "../../components";
-import Hero from "../../assets/Taieri.svg";
-import site from "../../utils/siteOptions.json";
-import { Seo } from "../../components/layout/Seo";
+import { CategoryCard, DevButton, Seo } from "components";
+import Hero from "assets/Taieri.svg";
+import site from "utils/siteOptions.json";
 import { Steps } from "./steps";
-import { useWindowsize } from "../../hooks";
+import { useWindowsize } from "hooks";
 import { MobileSteps } from "./mobilesteps";
-import Dummy1 from "../../assets/dummy/dummy1.png";
-import Dummy2 from "../../assets/dummy/dummy2.png";
-import Dummy3 from "../../assets/dummy/dummy3.png";
-import Dummy4 from "../../assets/dummy/dummy4.png";
-import { BaseContext } from "../../context";
+import Dummy1 from "assets/dummy/dummy1.png";
+import Dummy2 from "assets/dummy/dummy2.png";
+import Dummy3 from "assets/dummy/dummy3.png";
+import Dummy4 from "assets/dummy/dummy4.png";
+import { BaseContext } from "context";
 
 export const Home: React.FC<RouteComponentProps> = () => {
   const size = useWindowsize();

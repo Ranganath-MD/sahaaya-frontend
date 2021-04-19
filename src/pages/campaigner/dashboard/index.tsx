@@ -2,9 +2,9 @@ import { Container } from "@material-ui/core";
 import { RouteComponentProps } from "@reach/router";
 import React, { useContext } from "react";
 import "./index.scss";
-import { Seo } from "../../../components/layout/Seo";
+import { Seo } from "components";
 import { DashboardCard } from "./dashboard";
-import { AuthContext } from "../../../context";
+import { AuthContext } from "context";
 
 export const CampaignerDashboard: React.FC<RouteComponentProps> = () => {
   const cxt = useContext(AuthContext);

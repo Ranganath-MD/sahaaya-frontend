@@ -1,13 +1,12 @@
 import React, { useContext, useEffect } from "react";
-import { Seo } from "../../components/layout/Seo";
+import { Seo, DevButton, FormInput, MessageBox } from "components";
 import { Grid, Container } from "@material-ui/core";
 import { Link, RouteComponentProps } from "@reach/router";
-import { DevButton, FormInput, MessageBox } from "../../components";
-import { AuthContext } from "../../context";
+import { AuthContext } from "context";
 import "./index.scss";
 import { useForm, Controller } from "react-hook-form";
 import { VscEyeClosed, VscEye, VscMail } from "react-icons/vsc";
-import Logo from "../../assets/logo.svg";
+import Logo from "assets/logo.svg";
 
 interface IProps extends RouteComponentProps<{ location: { state: { email: React.SetStateAction<string> | undefined } } }> {
  email?: string;

@@ -1,6 +1,7 @@
 import { navigate } from "@reach/router";
 import React, { createContext, useState } from "react";
 import { apiService } from "../utils/axiosBaseRequest";
+import { date } from "../utils/dateUtils";
 import { socket } from "../utils/socketClient";
 
 export const CampaignContext = createContext<any>({});
@@ -12,6 +13,8 @@ export const CampaignProvider: React.FC = ({ children  }) => {
   const [campaignName, setCampaignName] = useState<string>("New Campaign");
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("Description");
+  const [selectedFromDate, setSelectedFromDate] = useState(date.now.format());
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
 
   const createCampaign = async (payload:any) => {
     const result = await apiService.post("/campaign", payload);
@@ -44,6 +47,14 @@ export const CampaignProvider: React.FC = ({ children  }) => {
       setLoading(false);
     }
   };
+
+  const handleFromDateChange = (date: any) => {
+    setSelectedFromDate(date);
+  };
+  const handleEndDateChange = (date: any) => {
+    setSelectedEndDate(date);
+  };
+
 
   const updateCampaignDetails = (cmp: ICampaignPayload) => {
     socket.emit("update-campaign",  cmp);
@@ -82,7 +93,10 @@ export const CampaignProvider: React.FC = ({ children  }) => {
         getCampaignById,
         loading,handleOnBlur,
         handleDescriptionOnBlur,
-        description, setDescription
+        description, setDescription,
+        selectedFromDate, setSelectedFromDate,
+        selectedEndDate, setSelectedEndDate,
+        handleFromDateChange, handleEndDateChange
       }}
     >
       {children}

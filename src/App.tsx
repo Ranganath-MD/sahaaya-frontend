@@ -1,26 +1,25 @@
 import React, { useEffect } from "react";
-import { Provider } from "./context/index";
-import { Layout, PrivateRoute } from "./components";
+import { Provider } from "context";
+import { Layout, PrivateRoute, AdminPrivateRoute } from "components";
 import { Router } from "@reach/router";
-import { NotFound } from "./pages/notFound";
-import { Home } from "./pages/home";
-import { BrowseFundriser } from "./pages/browseCampaigns";
-import { HowItWorks } from "./pages/howitWorks";
-import { Login } from "./pages/userAuth/loginComponent";
-import { Register } from "./pages/userAuth/register";
-import { AdminDashboard } from "./pages/admin/Dashboard";
-import { CampaignerDashboard } from "./pages/campaigner/dashboard";
-import { AdminPrivateRoute } from "./components/PrivateRoute/AdminPrivateRoute";
-import { socket } from "./utils/socketClient";
-import { CreateCampaign } from "./pages/campaigner/campaign";
-import { CreateCampaignForm } from "./pages/campaigner/campaign/campaignForm";
+import {
+  NotFound,
+  Home,
+  BrowseFundriser,
+  HowItWorks,
+  AdminDashboard,
+  CampaignerDashboard,
+  CreateCampaign,
+  CreateCampaignForm,
+} from "pages";
+import { Login, Register } from "pages/userAuth";
+import { socket } from "utils";
 
 const App: React.FC = () => {
-
   useEffect(() => {
     socket.on("authenticated", (data) => {
       // eslint-disable-next-line no-console
-      console.log("connected with" , data);
+      console.log("connected with", data);
     });
     socket.emit("init", { data: "ping" });
   }, []);
@@ -37,9 +36,9 @@ const App: React.FC = () => {
           <AdminPrivateRoute path="admin" component={AdminDashboard}>
             <AdminDashboard path="dashboard" />
           </AdminPrivateRoute>
-          <PrivateRoute path="dashboard" component={CampaignerDashboard}/>
+          <PrivateRoute path="dashboard" component={CampaignerDashboard} />
           <PrivateRoute path="create-campaign" component={CreateCampaign} />
-          <PrivateRoute path="campaign/:id" component={CreateCampaignForm}/>
+          <PrivateRoute path="campaign/:id" component={CreateCampaignForm} />
           <NotFound path="/:statuscode" default />
         </Router>
       </Layout>

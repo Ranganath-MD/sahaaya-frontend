@@ -1,5 +1,5 @@
 import React from "react";
-import { Seo } from "../../components/layout/Seo";
+import { Seo } from "components";
 import { RouteComponentProps } from "@reach/router";
 
 export const BrowseFundriser: React.FC<RouteComponentProps> = () => {

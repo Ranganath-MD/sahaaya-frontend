@@ -2,8 +2,8 @@ import { Container } from "@material-ui/core";
 import { RouteComponentProps } from "@reach/router";
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { CategoryCard } from "../../../components";
-import { BaseContext, CampaignContext } from "../../../context";
+import { CategoryCard } from "components";
+import { BaseContext, CampaignContext } from "context";
 
 const Heading = styled.h1`
   text-align: center;

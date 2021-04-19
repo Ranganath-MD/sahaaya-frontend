@@ -1,10 +1,10 @@
 import React from "react";
 import { navigate, RouteComponentProps } from "@reach/router";
-import CampaignImage from "../../../assets/user/crowdfunding.svg";
-import DonationImage from "../../../assets/user/donate.svg";
-import { DevDashboardCard } from "../../../components";
+import CampaignImage from "assets/user/crowdfunding.svg";
+import DonationImage from "assets/user/donate.svg";
+import { DevDashboardCard } from "components";
 import { Grid } from "@material-ui/core";
-// import { CampaignContext } from "../../../context";
+// import { CampaignContext } from "context";
 
 const fundCardData = [
   {

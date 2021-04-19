@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { Seo } from "../../components/layout/Seo";
+import { Seo, DevButton, FormInput, MessageBox } from "components";
 import { Grid, Button, Divider, Container } from "@material-ui/core";
 import { Link, RouteComponentProps } from "@reach/router";
-import { DevButton, FormInput, MessageBox } from "../../components";
-import { AuthContext } from "../../context";
+import { AuthContext } from "context";
 import "./index.scss";
 import { BiUserCircle } from "react-icons/bi";
 import { useForm, Controller } from "react-hook-form";
