@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { apiService } from "../utils/axiosBaseRequest";
+import { apiService } from "utils";
 import { GrValidate } from "react-icons/gr";
 import { RiMovie2Line } from "react-icons/ri";
 import { GiHourglass, GiFarmTractor } from "react-icons/gi";

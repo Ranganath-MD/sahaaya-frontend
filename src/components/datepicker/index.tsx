@@ -1,53 +1,51 @@
 import React, { useMemo } from "react";
-import { DatePicker, DatePickerProps, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import DayjsUtils from "@date-io/dayjs";
-import { date } from "../../utils/dateUtils";
+import DatePicker, { ReactDatePickerProps } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./index.scss";
+import styled from "styled-components";
 
-export const DevDatePicker: React.FC<DatePickerProps> = (props) => {
-  return (
-    <MuiPickersUtilsProvider utils={DayjsUtils}>
-      <DatePicker
-        {...props}
-        value={props.value}
-        placeholder="DD/MM/YYYY"
-        format="DD/MM/YYYY"
-        maxDateMessage={"Date should not be after maximum date"}
-        minDateMessage={"Date should not be before maximum date"}
-      />
-    </MuiPickersUtilsProvider>
-  );
-};
+const Label = styled.div<{ required: boolean }>`
+  color: #697384;
+  font-size: 14px;
+  &::after {
+    content: ${(props) => props.required ? "'*'" : false};
+    color: #2a415d;
+  }
+`;
 
-export const FromDate: React.FC<DatePickerProps> = (props) => {
-  const fromDate = useMemo(
+const Message = styled.span`
+    height: 5px;
+    font-size: 10px;
+    color: #0052cc;
+    font-weight: 600;
+`;
+
+interface Props extends ReactDatePickerProps {
+  label?: string;
+  error?: boolean;
+  message?: string;
+}
+export const DevDatePicker: React.FC<Props> = (props) => {
+  const datepicker = useMemo(
     () => (
-      <DevDatePicker
-        {...props}
-        autoOk
-        value={props.value}
-        onChange={props.onChange}
-        minDate={date.now}
-        inputVariant={"outlined"}
-      />
+      <>
+        {props.label && <Label required={props.required as boolean}>{props.label}</Label>}
+        <DatePicker
+          dateFormat="dd/MM/yyyy"
+          selected={props.selected}
+          onChange={props.onChange}
+          className={props.error ? "error" : "normal"}
+          minDate={props.minDate}
+          maxDate={props.maxDate}
+          placeholderText={props.placeholderText}
+          withPortal
+          selectsRange={props.selectsRange}
+          // customInput={<DevInput value={props.value} handleChange={props.onChange}/>}
+        />
+        <Message>{props.message}</Message>
+      </>
     ),
-    [props.value]
+    [props]
   );
-  return <>{fromDate}</>;
-};
-
-export const EndDate: React.FC<DatePickerProps> = (props) => {
-  const endDate = useMemo(
-    () => (
-      <DevDatePicker
-        {...props}
-        autoOk
-        value={props.value}
-        onChange={props.onChange}
-        minDate={date.now}
-        inputVariant={"outlined"}
-      />
-    ),
-    [props.value]
-  );
-  return <>{endDate}</>;
+  return <>{datepicker}</>;
 };

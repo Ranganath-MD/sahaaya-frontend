@@ -10,3 +10,4 @@ export * from "./editableTextField";
 export * from "./tabs";
 export * from "./accordion";
 export * from "./datepicker";
+export * from "./maskedInput";

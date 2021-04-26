@@ -39,9 +39,9 @@ interface DashboardCard {
   handleClick?: () => void;
 }
 interface InputProps  {
-  name: string;
-  type: string;
-  placeholder: string;
+  name?: string;
+  type?: string;
+  placeholder?: string;
   required?: boolean;
   maxlength?: number;
   label?: string;
@@ -92,9 +92,11 @@ interface ICustomAccordian {
   defaultExpanded?: boolean;
   disabled?: boolean;
   error?: boolean;
+  showStatus?: boolean;
   errorMsg?: string;
   actionChildren?: React.ReactChild;
   headerIcon?: React.ReactNode;
+  disableSave?: boolean;
   onSave?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   onCancel?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }

@@ -1,0 +1,20 @@
+@mixin date-picker {
+  width: 90%;
+  outline: none;
+  padding: 10px;
+  margin: 10px 0 0;
+  background: #fff;
+  color: rgba(3,27,78,.7);
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 2px #ff9800;
+  }
+}
+.normal {
+  @include date-picker();
+  border: 1px solid #c4c4c4;
+}
+.error {
+  @include date-picker();
+  border: 1px solid #b30c0c;
+}

@@ -7,6 +7,7 @@ import { RiAttachmentLine, RiBankCardLine, RiContactsLine, RiUser4Line } from "r
 import { BiDetail, BiSitemap } from "react-icons/bi";
 import "./campaign.scss";
 import { CampaignDetails } from "./campaignDetails";
+import { useForm } from "react-hook-form";
 
 const iconStyle = {
   width: "1.1em",
@@ -16,7 +17,15 @@ const iconStyle = {
 export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
   const ctx = useContext(CampaignContext);
   const params = useParams();
+  const {
+    control,
+    handleSubmit,
+    errors,
+    getValues,
+    reset,
+  } = useForm();
 
+  const result = 
   useEffect(() => {
     ctx.getCampaignById(params.id);
   }, []);
@@ -57,17 +66,7 @@ export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
               />
             </div>
             <div>
-              <ExpandablePanel
-                headerText={"Campaign Details"}
-                headerIcon={
-                  <BiDetail
-                    color="#0052CC"
-                    style={iconStyle}
-                  />}
-                defaultExpanded
-              >
-                <CampaignDetails />
-              </ExpandablePanel>
+              <CampaignDetails />
               <ExpandablePanel
                 headerText={"Beneficiary Details"}
                 headerIcon={

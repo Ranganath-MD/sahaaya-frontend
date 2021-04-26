@@ -1,6 +1,6 @@
 import { navigate } from "@reach/router";
 import React, { createContext, useEffect, useState } from "react";
-import { apiService } from "../utils/axiosBaseRequest";
+import { apiService } from "utils";
 
 export const AuthContext = createContext<any>({});
 

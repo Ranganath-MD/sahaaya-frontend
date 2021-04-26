@@ -9,7 +9,8 @@ import {
   AccordionActions,
 } from "@material-ui/core";
 import styled from "styled-components";
-import { RiArrowDownSLine, RiCloseCircleFill } from "react-icons/ri";
+import { RiArrowDownSLine, RiCheckboxCircleFill, RiCloseCircleFill } from "react-icons/ri";
+import { DevButton } from "components/button";
 
 const HeaderText = styled.span`
   font-weight: 600;
@@ -20,10 +21,11 @@ const HeaderText = styled.span`
 export const ExpandlePanelActions: React.FC<Partial<ICustomAccordian>> = ({
   actionMenu = true,
   isSave = true,
-  isCancel = true,
+  isCancel,
   children,
   onCancel,
   onSave,
+  disableSave
 }) => {
   return (
     <>
@@ -33,14 +35,14 @@ export const ExpandlePanelActions: React.FC<Partial<ICustomAccordian>> = ({
           <AccordionActions>
             {children}
             {isCancel && (
-              <Button onClick={onCancel} size="small">
+              <DevButton onClick={onCancel} bordered>
                 Cancel
-              </Button>
+              </DevButton>
             )}
             {isSave && (
-              <Button onClick={onSave} size="small" color="primary">
+              <DevButton onClick={onSave} primary disabled={disableSave}>
                 Save
-              </Button>
+              </DevButton>
             )}
           </AccordionActions>
         </>
@@ -63,8 +65,10 @@ export const ExpandablePanel: React.FC<ICustomAccordian> = ({
   actionChildren,
   onSave,
   error,
+  disableSave,
   errorMsg,
   onCancel,
+  showStatus,
   headerIcon,
 }) => {
   return (
@@ -75,7 +79,7 @@ export const ExpandablePanel: React.FC<ICustomAccordian> = ({
       disabled={disabled}
     >
       <AccordionSummary expandIcon={<RiArrowDownSLine />}>
-        {error ? <RiCloseCircleFill color={"red"} /> : headerIcon}
+        {error ? <RiCloseCircleFill color={"red"} /> : showStatus ? <RiCheckboxCircleFill color={"#0db469"} /> : headerIcon}
         <HeaderText>{headerText}</HeaderText>
         {secondaryText ||
           (errorMsg && (
@@ -88,6 +92,7 @@ export const ExpandablePanel: React.FC<ICustomAccordian> = ({
         isSave={isSave}
         isCancel={isCancel}
         onSave={onSave}
+        disableSave={disableSave}
         onCancel={onCancel}
       >
         {actionChildren}

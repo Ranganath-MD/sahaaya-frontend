@@ -1,5 +1,5 @@
 interface ICampaignPayload {
   campaignId: string;
   campaignKey: string;
-  value: string | number;
+  value: string | number | boolean;
 }

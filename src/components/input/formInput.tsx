@@ -17,7 +17,7 @@ const Input = styled.input<InputProps>`
     outline: none;
     padding: 10px;
     margin: ${(props) => props.error ? "10px 0 0" : "10px 0"};
-    border: ${(props) => props.error ? "1px solid #b30c0c" : "1px solid #f1f1f1"};
+    border: ${(props) => props.error ? "1px solid #b30c0c" : "1px solid #c4c4c4"};
     background: #fff;
     color: rgba(3,27,78,.7);
     &:focus {
@@ -26,7 +26,7 @@ const Input = styled.input<InputProps>`
     }
 `;
 
-const Icon = styled.div<{ type: string }>`
+const Icon = styled.div<{ type?: string }>`
     cursor: ${(props) => props.type === "password" && "pointer"};
     position: absolute;
     top: 50%;

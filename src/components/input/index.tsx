@@ -3,13 +3,13 @@ import React from "react";
 
 
 interface IDevInput {
-  type: string
+  type?: string | undefined;
   icon?: React.ReactChild
-  value: string
+  value: string | undefined;
   // eslint-disable-next-line no-unused-vars
   handleChange: ((_: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void) | undefined
-  id: string
-  label: string
+  id?: string
+  label?: string
   onclickIcon?: () => void
   error?: boolean
   required?: boolean

@@ -4,7 +4,7 @@ import "./index.scss";
 
 const EditableTextField = styled.textarea<ITextFields>`
   padding: 10px 0px;
-  width: 95%;
+  width: 100%;
   resize: none;
   border-radius: 5px;
   border: ${(props) => (props.value === "" ? "2px solid #b30c0c" : "none")};
