@@ -2,12 +2,13 @@ import { Breadcrumbs, Chip, Container, Grid } from "@material-ui/core";
 import { RouteComponentProps, useParams } from "@reach/router";
 import React, { useContext, useEffect } from "react";
 import { EditableInput, ExpandablePanel, Seo } from "components";
-import { CampaignContext } from "context";
-import { RiAttachmentLine, RiBankCardLine, RiContactsLine, RiUser4Line } from "react-icons/ri";
-import { BiDetail, BiSitemap } from "react-icons/bi";
+import { BeneficiaryContext, CampaignContext } from "context";
+import { RiAttachmentLine, RiBankCardLine, RiUser4Line } from "react-icons/ri";
+import { BiSitemap } from "react-icons/bi";
 import "./campaign.scss";
 import { CampaignDetails } from "./campaignDetails";
-import { useForm } from "react-hook-form";
+import { BeneficiaryDetails } from "./beneficiaryDetails";
+import { apiService } from "utils";
 
 const iconStyle = {
   width: "1.1em",
@@ -16,18 +17,23 @@ const iconStyle = {
 
 export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
   const ctx = useContext(CampaignContext);
+  const ctx_b = useContext(BeneficiaryContext);
   const params = useParams();
-  const {
-    control,
-    handleSubmit,
-    errors,
-    getValues,
-    reset,
-  } = useForm();
 
-  const result = 
+  const getCampaign = async () => {
+    ctx.setLoading(true);
+    try {
+      const result = await apiService.get(`campaign/${params.id}`);
+      ctx_b.setBeneficiaryData(result.data?.beneficiary);
+      ctx.setCampaignData(result.data);
+      ctx.setLoading(false);
+    } catch (err) {
+      ctx.setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    ctx.getCampaignById(params.id);
+    getCampaign();
   }, []);
 
   return (
@@ -67,16 +73,7 @@ export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
             </div>
             <div>
               <CampaignDetails />
-              <ExpandablePanel
-                headerText={"Beneficiary Details"}
-                headerIcon={
-                  <RiContactsLine
-                    color="#0052CC"
-                    style={iconStyle}
-                  />}
-              >
-                Beneficiary Details
-              </ExpandablePanel>
+              <BeneficiaryDetails />
               <ExpandablePanel
                 headerText={"Attachments"}
                 headerIcon={

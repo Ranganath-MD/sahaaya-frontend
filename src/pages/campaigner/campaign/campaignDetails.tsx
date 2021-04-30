@@ -13,8 +13,9 @@ export const CampaignDetails: React.FC = () => {
   const [expand,setExpand] = useState(false);
 
   useEffect(() => {
-    if(ctx.activeSection === "step1") setExpand(false);
-  },[ctx]);
+    if(ctx.activeSection === "step1") setExpand(true);
+    else setExpand(false);
+  },[ctx.activeSection, ctx.campaign?.step1]);
 
   return (
     <>
@@ -31,10 +32,11 @@ export const CampaignDetails: React.FC = () => {
           <Grid item sm={6} md={4}>
             <DevDatePicker
               required
-              onChange={ctx.handleFromDateChange}
               selected={ctx.selectedFromDate}
+              onChange={ctx.handleFromDateChange}
               placeholderText="Select Start Date"
               minDate={new Date()}
+              withPortal
               label="Campaign Start Date"
             />
           </Grid>
@@ -46,6 +48,7 @@ export const CampaignDetails: React.FC = () => {
               minDate={ctx.selectedFromDate}
               placeholderText="Select End Date"
               label="Campaign End Date"
+              withPortal
               error={!!ctx.endDateError}
               message={
                 "Note: End date is 5 days greater than start date by default but You can change the date"

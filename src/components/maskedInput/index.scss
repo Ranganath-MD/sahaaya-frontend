@@ -1,12 +1,19 @@
-.number-input {
+@mixin number-input {
   outline: none;
+  width: 92%;
   padding: 10px;
-  margin: 0;
-  border: 1px solid #c4c4c4;
+  margin: 10px 0;
   background: #fff;
-  color: rgba(3,27,78,.7);
   &:focus {
     outline: none;
     box-shadow: 0px 0px 2px #ff9800;
   }
+}
+.error {
+  @include number-input();
+  border: 1px solid #b30c0c;
+}
+.normal {
+  @include number-input();
+  border: 1px solid #c4c4c4;
 }

@@ -7,10 +7,13 @@ const Wrapper = styled.div`
     width: 98%;
     position: relative;
 `;
-const Label = styled.label`
-    font-size: 12px;
-    font-wieght: 600;
-    padding: 5px 0;
+const Label = styled.div<{ required?: boolean }>`
+  color: #697384;
+  font-size: 12px;
+  &::after {
+    content: ${(props) => (props.required ? "'*'" : false)};
+    color: #b30c0c;
+  }
 `;
 const Input = styled.input<InputProps>`
     width: 95%;
@@ -18,8 +21,7 @@ const Input = styled.input<InputProps>`
     padding: 10px;
     margin: ${(props) => props.error ? "10px 0 0" : "10px 0"};
     border: ${(props) => props.error ? "1px solid #b30c0c" : "1px solid #c4c4c4"};
-    background: #fff;
-    color: rgba(3,27,78,.7);
+    background: ${(props) => props.readOnly ? "#f5f7fa" : "#fff"};
     &:focus {
       outline: none;
       box-shadow: 0px 0px 2px #ff9800;
@@ -42,7 +44,7 @@ const Message = styled.span`
 export const FormInput: React.FC<InputProps> = ({ ...props }) => {
   return (
     <Wrapper>
-      <Label>{props.label}</Label>
+      <Label required={props.required}>{props.label}</Label>
       <Input
         autoComplete="off"
         type={props.type}
@@ -54,6 +56,9 @@ export const FormInput: React.FC<InputProps> = ({ ...props }) => {
         onBlur={props.onBlur}
         placeholder={props.placeholder}
         required={props.required}
+        min={props.min}
+        readOnly={props.readOnly}
+        max={props.max}
         autoFocus={props.autoFocus}
         maxLength={props.maxlength ? props.maxlength : 128}
       />

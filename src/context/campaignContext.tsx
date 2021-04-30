@@ -1,11 +1,13 @@
 import { navigate } from "@reach/router";
 import { addDays, formatISO } from "date-fns";
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { apiService, socket } from "utils";
+import { BeneficiaryContext } from "./beneficiaryContext";
 
 export const CampaignContext = createContext<any>({});
 
 export const CampaignProvider: React.FC = ({ children }) => {
+  const ctx = useContext(BeneficiaryContext);
   const [campaign, setCampaign] = useState(null);
   const [campaignId, setCampaignId] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,6 +30,14 @@ export const CampaignProvider: React.FC = ({ children }) => {
     }
   };
 
+  const clear = () => {
+    setCampaign(null);
+    setSelectedFromDate(new Date());
+    setSelectedEndDate(addDays(selectedFromDate, 5));
+    setTargetAmount(0);
+    setActiveSection("step1");
+  };
+
   const isValidStep1 = () => {
     return (
       targetAmount === undefined || targetAmount === 0 || targetAmount === ""
@@ -35,30 +45,10 @@ export const CampaignProvider: React.FC = ({ children }) => {
   };
 
   const handleSaveStep1 = () => {
-    const fromdate: ICampaignPayload = {
-      campaignId,
-      campaignKey: "fromdate",
-      value: formatISO(selectedFromDate),
-    };
-    socket.emit("update-campaign", fromdate);
-    const enddate: ICampaignPayload = {
-      campaignId,
-      campaignKey: "enddate",
-      value: formatISO(selectedEndDate),
-    };
-    socket.emit("update-campaign", enddate);
-    const target: ICampaignPayload = {
-      campaignId,
-      campaignKey: "target",
-      value: targetAmount,
-    };
-    socket.emit("update-campaign", target);
-    const step1: ICampaignPayload = {
-      campaignId,
-      campaignKey: "step1",
-      value: true,
-    };
-    socket.emit("update-campaign", step1);
+    updateCampaignDetails(campaignId, "fromdate", formatISO(selectedFromDate));
+    updateCampaignDetails(campaignId, "enddate", formatISO(selectedEndDate));
+    updateCampaignDetails(campaignId, "target", targetAmount);
+    updateCampaignDetails(campaignId, "step1", true);
   };
   const handleCreateCampaign = (category: string) => {
     const payload = {
@@ -75,24 +65,17 @@ export const CampaignProvider: React.FC = ({ children }) => {
     if(step2) setActiveSection("step3");
     if(step3) setActiveSection("step4");
   };
-
-  const getCampaignById = async (id: string) => {
-    setLoading(true);
-    try {
-      const result = await apiService.get(`campaign/${id}`);
-      setCampaign(result.data);
-      setCategory(result.data.category);
-      setCampaignId(result.data._id);
-      setDescription(result.data.description);
-      setCampaignName(result.data.campaignName);
-      setSelectedFromDate(new Date(result.data.fromdate));
-      setSelectedEndDate(new Date(result.data.enddate));
-      setTargetAmount(result.data.target);
-      setSteps(result.data);
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-    }
+  const setCampaignData = (data: any) => {
+    setCampaign(data);
+    setCategory(data.category);
+    setCampaignId(data._id);
+    setDescription(data.description);
+    setCampaignName(data.campaignName);
+    setTargetAmount(data.target && data.target);
+    setSteps(data);
+    ctx.setFirstName(data.beneficiary?.firstName);
+    if(data.fromdate !== undefined) setSelectedFromDate(new Date(data.fromdate));
+    if(data.enddate !== undefined) setSelectedEndDate(new Date(data.enddate));
   };
 
   const handleFromDateChange = (value: any) => {
@@ -102,12 +85,22 @@ export const CampaignProvider: React.FC = ({ children }) => {
     setSelectedEndDate(value);
   };
 
-  const updateCampaignDetails = (cmp: ICampaignPayload) => {
+  const updateCampaignDetails = (campaignId: string, campaignKey: string, value: any ) => {
+    const cmp: ICampaignPayload = {
+      campaignId,
+      campaignKey,
+      value
+    };
     socket.emit("update-campaign", cmp);
     socket.on("campaign", (data) => {
       setCampaignName(data?.campaignName);
       setDescription(data?.description);
+      setSteps(data);
+      // if(data?.step4) setActiveSection("step2");
+
+      setCampaign(data);
     });
+
   };
 
   const handleTargetAmount = (value: number) => {
@@ -121,20 +114,10 @@ export const CampaignProvider: React.FC = ({ children }) => {
 
   const handleOnBlur = (value: string) => {
     if (!campaignId) return null;
-    const cmp: ICampaignPayload = {
-      campaignId,
-      campaignKey: "campaignName",
-      value,
-    };
-    updateCampaignDetails(cmp);
+    updateCampaignDetails(campaignId, "campaignName", value);
   };
   const handleDescriptionOnBlur = (value: string) => {
-    const cmp: ICampaignPayload = {
-      campaignId,
-      campaignKey: "description",
-      value,
-    };
-    updateCampaignDetails(cmp);
+    updateCampaignDetails(campaignId, "description", value);
   };
 
   return (
@@ -142,13 +125,15 @@ export const CampaignProvider: React.FC = ({ children }) => {
       value={{
         createCampaign,
         campaign,
+        campaignId,
         setCampaign,
         campaignName,
         setCampaignName,
+        setLoading,
         category,
         setCategory,
         handleCreateCampaign,
-        getCampaignById,
+        setCampaignData,
         loading,
         handleOnBlur,
         handleDescriptionOnBlur,
@@ -167,6 +152,7 @@ export const CampaignProvider: React.FC = ({ children }) => {
         targetAmountError,
         setTargetAmountError,
         handleTargetAmount,
+        clear,
         activeSection, setActiveSection
       }}
     >

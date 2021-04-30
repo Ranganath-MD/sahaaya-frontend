@@ -45,6 +45,9 @@ interface InputProps  {
   required?: boolean;
   maxlength?: number;
   label?: string;
+  readOnly?: boolean;
+  min?: number;
+  max?: number;
   icon?: any;
   width?: string;
   errorMsg?: string;

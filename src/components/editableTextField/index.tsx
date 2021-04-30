@@ -25,10 +25,10 @@ const FieldWrapper = styled.div`
 `;
 const Label = styled.span`
   color: #697384;
-  font-size: 14px;
+  font-size: 12px;
   &::after {
     content: ${(props) => props.itemProp && "'*'"};
-    color: #2a415d;
+    color: #b30c0c;
   }
 `;
 const Message = styled.span`

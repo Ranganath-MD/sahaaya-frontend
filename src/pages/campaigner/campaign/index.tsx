@@ -18,6 +18,7 @@ export const CreateCampaign: React.FC<RouteComponentProps> = () => {
   const campaign_ctx = useContext(CampaignContext);
 
   const handleClick = (c: string) => {
+    campaign_ctx.clear();
     campaign_ctx.handleCreateCampaign(c);
   };
 
