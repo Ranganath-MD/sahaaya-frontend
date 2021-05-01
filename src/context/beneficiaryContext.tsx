@@ -20,15 +20,19 @@ export const BeneficiaryProvider: React.FC = ({ children }) => {
   const [address, setAddress] = useState<string>("");
   const [addressError, setAddressError] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
   const [city, setCity] = useState<string>("");
   const [state, setState] = useState<string>("");
   const [phone, setPhone] = useState<number | null>(null);
   const [phoneError, setPhoneError] = useState<string>("");
   const [pin, setPin] = useState<number | null>(null);
+  const [pinError, setPinError] = useState<string>("");
+  const [adhaar, setAdhaar] = useState<number | null>(null);
+  const [adhaarError, setAdhaarError] = useState<string>("");
 
   const handleDateofBirth = (date: any) => {
     setDob(date);
-    if(date === null) setDobError("DOB is required");
+    if (date === null) setDobError("DOB is required");
     else {
       setDobError("");
       const dateObj = dob === null ? new Date() : dob;
@@ -36,7 +40,7 @@ export const BeneficiaryProvider: React.FC = ({ children }) => {
     }
   };
   const handleAddress = (e: any) => {
-    if(address === "") setAddressError("Address is required");
+    if (address === "") setAddressError("Address is required");
     else {
       setAddressError("");
       updateBeneficiary(ctx.campaignId, "address", e.target.value);
@@ -44,7 +48,7 @@ export const BeneficiaryProvider: React.FC = ({ children }) => {
   };
   const handlePhone = (value: any) => {
     setPhone(value);
-    if(value.length !== 10) setPhoneError("Phone number is required");
+    if (value.length !== 10) setPhoneError("Phone number is required");
     else {
       setPhoneError("");
       updateBeneficiary(ctx.campaignId, "phone", value);
@@ -55,36 +59,94 @@ export const BeneficiaryProvider: React.FC = ({ children }) => {
     setFirstName(data?.firstName);
     setLastName(data?.lastName);
     setAddress(data?.address);
-    if(data?.dob) setDob(new Date(data.dob));
+    setPhone(data?.phone);
+    setEmail(data?.email);
+    setPin(data?.pin);
+    setAdhaar(data?.adhaar);
+    if (data?.dob) setDob(new Date(data.dob));
   };
 
   const getPINValue = async (value: number) => {
     try {
-      const res = await axios.get(`https://api.postalpincode.in/pincode/${value}`);
-      if(res.data[0].PostOffice === null) {
+      const res = await axios.get(
+        `https://api.postalpincode.in/pincode/${value}`
+      );
+      if (res.data[0].PostOffice === null) {
+        setPinError("Invalid PIN Code");
         setCity("");
         setState("");
-      }else {
+      } else {
+        setPinError("");
         setCity(res.data[0].PostOffice[0].Block);
         setState(res.data[0].PostOffice[0].State);
+        updateBeneficiary(ctx.campaignId, "pin", value);
+        updateBeneficiary(
+          ctx.campaignId,
+          "city",
+          res.data[0].PostOffice[0].Block
+        );
+        updateBeneficiary(
+          ctx.campaignId,
+          "state",
+          res.data[0].PostOffice[0].State
+        );
       }
-    }catch(err) {
-      console.log(err);
+    } catch (err) {
+      if (err) setPinError("Invalid PIN Code");
     }
   };
 
   const handleFirstName = (e: any) => {
-    if(firstName === "") setFirstNameError("First Name is Required");
+    if (firstName === "") setFirstNameError("First Name is Required");
     else {
       setFirstNameError("");
       updateBeneficiary(ctx.campaignId, "firstName", e.target.value);
     }
   };
   const handleLastName = (e: any) => {
-    if(lastName === "") setLastNameError("Last Name is Required");
+    if (lastName === "") setLastNameError("Last Name is Required");
     else {
       setLastNameError("");
       updateBeneficiary(ctx.campaignId, "lastName", e.target.value);
+    }
+  };
+  const isValidStep2 = () => {
+    return (
+      firstNameError !== "" ||
+      lastNameError !== "" ||
+      dobError !== "" ||
+      addressError !== "" ||
+      emailError !== "" ||
+      pinError !== "" ||
+      adhaarError !== ""
+    );
+  };
+
+  const handleSaveStep2 = () => {
+    ctx.updateCampaignDetails(ctx.campaignId, "step2", true);
+    socket.on("campaign", (data) => {
+      ctx.setSteps(data);
+    });
+  };
+
+  const handleAdhaar = (value: any) => {
+    setAdhaar(value);
+    if (value.length !== 16)
+      setAdhaarError("Adhaar Number should be of 16 Characters");
+    else {
+      setAdhaarError("");
+      updateBeneficiary(ctx.campaignId, "adhaar", value);
+    }
+  };
+
+  const handleEmail = (e: any) => {
+    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (email === "") setEmailError("Email is required");
+    if (!regex.test(e.target.value)) {
+      setEmailError("Invalid Email address");
+    } else {
+      setEmailError("");
+      updateBeneficiary(ctx.campaignId, "email", e.target.value);
     }
   };
 
@@ -92,34 +154,54 @@ export const BeneficiaryProvider: React.FC = ({ children }) => {
     const cmp: ICampaignPayload = {
       campaignId: id,
       campaignKey: key,
-      value: value
+      value: value,
     };
     socket.emit("update-beneficiary", cmp);
-    socket.on("campaign", (data) => {
-      setFirstName(data?.beneficiary.firstName);
-    });
-
+    // socket.on("campaign", (data) => {
+    // });
   };
   return (
     <BeneficiaryContext.Provider
       value={{
-        dob, setDob,
+        dob,
+        setDob,
         handleDateofBirth,
-        firstName, setFirstName,
-        lastName, setLastName,
+        firstName,
+        setFirstName,
+        lastName,
+        setLastName,
         handleLastName,
-        address, setAddress,
-        email, setEmail,
-        phone, setPhone,
-        pin, setPin,
-        city, setCity,
-        state, setState,
-        getPINValue, handleFirstName,
+        address,
+        setAddress,
+        email,
+        setEmail,
+        phone,
+        setPhone,
+        pin,
+        setPin,
+        city,
+        setCity,
+        state,
+        setState,
+        getPINValue,
+        handleFirstName,
         setBeneficiaryData,
-        firstNameError, lastNameError,
-        dobError, handleAddress,
-        addressError, handlePhone,
-        phoneError
+        firstNameError,
+        lastNameError,
+        dobError,
+        handleAddress,
+        addressError,
+        handlePhone,
+        phoneError,
+        emailError,
+        handleEmail,
+        pinError,
+        adhaar,
+        setAdhaar,
+        adhaarError,
+        handleAdhaar,
+        isValidStep2,
+        handleSaveStep2
       }}
     >
       {children}

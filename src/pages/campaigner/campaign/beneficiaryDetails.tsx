@@ -5,6 +5,7 @@ import {
   ExpandablePanel,
   FormInput,
   MaskedInput,
+  Message,
   Phone,
 } from "components";
 import { BeneficiaryContext, CampaignContext } from "context";
@@ -24,15 +25,25 @@ export const BeneficiaryDetails: React.FC = () => {
     if (ctx.activeSection === "step2") setExpand(true);
     else setExpand(false);
   }, [ctx.activeSection]);
+
   return (
     <ExpandablePanel
       headerText={"Beneficiary Details"}
       expanded={expand}
+      disableSave={ctx_b.isValidStep2()}
+      onSave={ctx_b.handleSaveStep2}
       onChange={() => setExpand(!expand)}
       showStatus={ctx.campaign?.step2}
       headerIcon={<RiContactsLine color="#0052CC" style={iconStyle} />}
     >
       <Grid container spacing={5}>
+        <div className="message">
+          <Message>
+            Note: For movie makers, the beneficiary will be a Director/Producer,
+            for the Start-up, the owner of that company will be a beneficiary,
+            Otherwise individual will be the beneficiaries.
+          </Message>
+        </div>
         <Grid item xs={12} sm={6} md={4}>
           <FormInput
             name="firstname"
@@ -100,9 +111,7 @@ export const BeneficiaryDetails: React.FC = () => {
             value={ctx_b.phone}
             error={!!ctx_b.phoneError}
             errormsg={ctx_b.phoneError}
-            onValueChange={(amount: any) =>
-              ctx_b.handlePhone(amount.value)
-            }
+            onValueChange={(amount: any) => ctx_b.handlePhone(amount.value)}
             placeholder="+91 (###) ###-####"
           />
         </Grid>
@@ -113,9 +122,11 @@ export const BeneficiaryDetails: React.FC = () => {
             placeholder="Enter email"
             label="Email"
             required
+            error={!!ctx_b.emailError}
+            errorMsg={ctx_b.emailError}
             value={ctx_b.email}
             onChange={(e) => ctx_b.setEmail(e.target.value)}
-            // onBlur={}
+            onBlur={ctx_b.handleEmail}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
@@ -123,6 +134,8 @@ export const BeneficiaryDetails: React.FC = () => {
             format="### ###"
             label="PIN Code"
             required
+            error={!!ctx_b.pinError}
+            errormsg={ctx_b.pinError}
             value={ctx_b.pin}
             onValueChange={(amount: any) => {
               ctx_b.setPin(amount.value);
@@ -155,6 +168,12 @@ export const BeneficiaryDetails: React.FC = () => {
           <MaskedInput
             format="#### #### #### ####"
             label="Adhaar card Number"
+            value={ctx_b.adhaar}
+            error={!!ctx_b.adhaarError}
+            errormsg={ctx_b.adhaarError}
+            onValueChange={(amount: any) => {
+              ctx_b.handleAdhaar(amount.value);
+            }}
             placeholder="Enter Adhaar Number"
           />
         </Grid>

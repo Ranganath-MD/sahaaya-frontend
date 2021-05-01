@@ -93,12 +93,10 @@ export const CampaignProvider: React.FC = ({ children }) => {
     };
     socket.emit("update-campaign", cmp);
     socket.on("campaign", (data) => {
-      setCampaignName(data?.campaignName);
-      setDescription(data?.description);
+      setCampaign(data);
       setSteps(data);
       // if(data?.step4) setActiveSection("step2");
 
-      setCampaign(data);
     });
 
   };
@@ -153,6 +151,8 @@ export const CampaignProvider: React.FC = ({ children }) => {
         setTargetAmountError,
         handleTargetAmount,
         clear,
+        setSteps,
+        updateCampaignDetails,
         activeSection, setActiveSection
       }}
     >
