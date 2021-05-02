@@ -27,6 +27,7 @@ export const BeneficiaryProvider: React.FC = ({ children }) => {
   const [adhaar, setAdhaar] = useState<number | null>(null);
   const [adhaarError, setAdhaarError] = useState<string>("");
 
+  const [,] = useDebounce()
   const handleDateofBirth = (date: any) => {
     setDob(date);
     if (date === null) setDobError("DOB is required");
