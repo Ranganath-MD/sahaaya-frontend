@@ -5,6 +5,7 @@ import { RouteComponentProps, LocationProvider } from "@reach/router";
 import { CampaignProvider } from "./campaignContext";
 import { BaseProvider } from "./baseContext";
 import { BeneficiaryProvider } from "./beneficiaryContext";
+import { AttachmentProvider } from "./attachmentContext";
 
 export const Provider: React.FC<RouteComponentProps> = ({ children }) => {
   return (
@@ -13,7 +14,9 @@ export const Provider: React.FC<RouteComponentProps> = ({ children }) => {
         <BaseProvider>
           <AuthProvider>
             <CampaignProvider>
-              <BeneficiaryProvider>{children}</BeneficiaryProvider>
+              <BeneficiaryProvider>
+                <AttachmentProvider>{children}</AttachmentProvider>
+              </BeneficiaryProvider>
             </CampaignProvider>
           </AuthProvider>
         </BaseProvider>

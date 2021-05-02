@@ -1,11 +1,8 @@
 import axios from "axios";
 import { formatISO } from "date-fns";
 import React, { createContext, useContext, useState } from "react";
-import { apiService, socket } from "utils";
+import { socket } from "utils";
 import { CampaignContext } from "./campaignContext";
-// import { navigate } from "@reach/router";
-// import { addDays, formatISO } from "date-fns";
-// import { apiService, socket } from "utils";
 
 export const BeneficiaryContext = createContext<any>({});
 
@@ -151,6 +148,7 @@ export const BeneficiaryProvider: React.FC = ({ children }) => {
   };
 
   const updateBeneficiary = (id: string, key: string, value: any) => {
+    if (!id) return null;
     const cmp: ICampaignPayload = {
       campaignId: id,
       campaignKey: key,

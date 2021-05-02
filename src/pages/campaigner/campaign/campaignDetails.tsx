@@ -1,5 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { CurrencyInput, DevDatePicker, ExpandablePanel } from "components";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import {
+  CurrencyInput,
+  DevDatePicker,
+  ExpandablePanel,
+  Message,
+  RichText,
+} from "components";
 import { CampaignContext } from "context";
 import { BiDetail } from "react-icons/bi";
 import { FormHelperText, Grid } from "@material-ui/core";
@@ -10,13 +16,27 @@ const iconStyle = {
 };
 export const CampaignDetails: React.FC = () => {
   const ctx = useContext(CampaignContext);
-  const [expand,setExpand] = useState(false);
+  const [expand, setExpand] = useState(false);
 
   useEffect(() => {
-    if(ctx.activeSection === "step1") setExpand(true);
+    if (ctx.activeSection === "step1") setExpand(true);
     else setExpand(false);
-  },[ctx.activeSection, ctx.campaign?.step1]);
+  }, [ctx.activeSection, ctx.campaign?.step1]);
 
+  const renderRichText = useMemo(
+    () => (
+      <>
+        <RichText
+          label="Tell more about campaign"
+          required
+          content={ctx.desc}
+          onChange={(content: any) => ctx.handleRichText(content)}
+        />
+        <Message>Min of 500 characters</Message>
+      </>
+    ),
+    [ctx.desc]
+  );
   return (
     <>
       <ExpandablePanel
@@ -67,6 +87,9 @@ export const CampaignDetails: React.FC = () => {
             <FormHelperText error={!!ctx.targetAmountError}>
               {ctx.targetAmountError}
             </FormHelperText>
+          </Grid>
+          <Grid item sm={12} md={12}>
+            {renderRichText}
           </Grid>
         </Grid>
       </ExpandablePanel>

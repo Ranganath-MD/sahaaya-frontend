@@ -1,0 +1,18 @@
+@mixin number-input {
+  outline: none;
+  padding: 10px;
+  margin: 10px 0;
+  background: #fff;
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 2px #ff9800;
+  }
+}
+.error {
+  @include number-input();
+  border: 1px solid #b30c0c;
+}
+.wrapper {
+  @include number-input();
+  border: 1px solid #c4c4c4;
+}

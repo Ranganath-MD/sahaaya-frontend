@@ -3,12 +3,13 @@ import { RouteComponentProps, useParams } from "@reach/router";
 import React, { useContext, useEffect } from "react";
 import { EditableInput, ExpandablePanel, Seo } from "components";
 import { BeneficiaryContext, CampaignContext } from "context";
-import { RiAttachmentLine, RiBankCardLine, RiUser4Line } from "react-icons/ri";
+import { RiBankCardLine, RiUser4Line } from "react-icons/ri";
 import { BiSitemap } from "react-icons/bi";
 import "./campaign.scss";
 import { CampaignDetails } from "./campaignDetails";
 import { BeneficiaryDetails } from "./beneficiaryDetails";
 import { apiService } from "utils";
+import { Attchments } from "./attachments";
 
 const iconStyle = {
   width: "1.1em",
@@ -74,16 +75,7 @@ export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
             <div>
               <CampaignDetails />
               <BeneficiaryDetails />
-              <ExpandablePanel
-                headerText={"Attachments"}
-                headerIcon={
-                  <RiAttachmentLine
-                    color="#0052CC"
-                    style={iconStyle}
-                  />}
-              >
-                Attachments
-              </ExpandablePanel>
+              <Attchments />
               <ExpandablePanel
                 headerText={"Bank Details"}
                 headerIcon={

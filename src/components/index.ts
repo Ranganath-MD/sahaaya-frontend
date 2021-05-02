@@ -12,3 +12,4 @@ export * from "./accordion";
 export * from "./datepicker";
 export * from "./message";
 export * from "./maskedInput";
+export * from "./editor";

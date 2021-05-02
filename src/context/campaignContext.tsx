@@ -1,13 +1,11 @@
 import { navigate } from "@reach/router";
 import { addDays, formatISO } from "date-fns";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { apiService, socket } from "utils";
-import { BeneficiaryContext } from "./beneficiaryContext";
 
 export const CampaignContext = createContext<any>({});
 
 export const CampaignProvider: React.FC = ({ children }) => {
-  const ctx = useContext(BeneficiaryContext);
   const [campaign, setCampaign] = useState(null);
   const [campaignId, setCampaignId] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -21,6 +19,8 @@ export const CampaignProvider: React.FC = ({ children }) => {
   const [targetAmount, setTargetAmount] = useState<number | string>(0);
   const [targetAmountError, setTargetAmountError] = useState<string>("");
   const [activeSection, setActiveSection] = useState("step1");
+  const [desc, setDesc] = useState("");
+  const [textLegth, setTextLegth] = useState(0);
 
   const createCampaign = async (payload: any) => {
     const result = await apiService.post("/campaign", payload);
@@ -32,15 +32,18 @@ export const CampaignProvider: React.FC = ({ children }) => {
 
   const clear = () => {
     setCampaign(null);
+    setCampaignName("");
     setSelectedFromDate(new Date());
     setSelectedEndDate(addDays(selectedFromDate, 5));
     setTargetAmount(0);
+    setDesc("");
+    setTextLegth(0);
     setActiveSection("step1");
   };
 
   const isValidStep1 = () => {
     return (
-      targetAmount === undefined || targetAmount === 0 || targetAmount === ""
+      targetAmount === undefined || targetAmount === 0 || targetAmount === "" || textLegth <= 500
     );
   };
 
@@ -49,6 +52,7 @@ export const CampaignProvider: React.FC = ({ children }) => {
     updateCampaignDetails(campaignId, "enddate", formatISO(selectedEndDate));
     updateCampaignDetails(campaignId, "target", targetAmount);
     updateCampaignDetails(campaignId, "step1", true);
+    setActiveSection("step2");
   };
   const handleCreateCampaign = (category: string) => {
     const payload = {
@@ -60,7 +64,7 @@ export const CampaignProvider: React.FC = ({ children }) => {
   };
 
   const setSteps = (data: any) => {
-    const { step1, step2, step3, step4 } = data;
+    const { step1, step2, step3 } = data;
     if(step1) setActiveSection("step2");
     if(step2) setActiveSection("step3");
     if(step3) setActiveSection("step4");
@@ -72,8 +76,8 @@ export const CampaignProvider: React.FC = ({ children }) => {
     setDescription(data.description);
     setCampaignName(data.campaignName);
     setTargetAmount(data.target && data.target);
+    setDesc(data?.longDescription);
     setSteps(data);
-    ctx.setFirstName(data.beneficiary?.firstName);
     if(data.fromdate !== undefined) setSelectedFromDate(new Date(data.fromdate));
     if(data.enddate !== undefined) setSelectedEndDate(new Date(data.enddate));
   };
@@ -86,6 +90,7 @@ export const CampaignProvider: React.FC = ({ children }) => {
   };
 
   const updateCampaignDetails = (campaignId: string, campaignKey: string, value: any ) => {
+    if (!campaignId) return null;
     const cmp: ICampaignPayload = {
       campaignId,
       campaignKey,
@@ -94,11 +99,17 @@ export const CampaignProvider: React.FC = ({ children }) => {
     socket.emit("update-campaign", cmp);
     socket.on("campaign", (data) => {
       setCampaign(data);
-      setSteps(data);
+      // setSteps(data);
       // if(data?.step4) setActiveSection("step2");
 
     });
 
+  };
+
+  const handleRichText = (content: any) => {
+    setDesc(content.value);
+    setTextLegth(content.length);
+    updateCampaignDetails(campaignId, "longDescription", desc);
   };
 
   const handleTargetAmount = (value: number) => {
@@ -128,6 +139,7 @@ export const CampaignProvider: React.FC = ({ children }) => {
         campaignName,
         setCampaignName,
         setLoading,
+        textLegth,
         category,
         setCategory,
         handleCreateCampaign,
@@ -151,9 +163,11 @@ export const CampaignProvider: React.FC = ({ children }) => {
         setTargetAmountError,
         handleTargetAmount,
         clear,
+        desc,
         setSteps,
         updateCampaignDetails,
-        activeSection, setActiveSection
+        activeSection, setActiveSection,
+        handleRichText
       }}
     >
       {children}
