@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { RouteComponentProps } from "@reach/router";
+import { RouteComponentProps, Redirect } from "@reach/router";
 import "./home.scss";
 import { Container } from "@material-ui/core";
 import { CategoryCard, DevButton, Seo } from "components";
@@ -12,12 +12,13 @@ import Dummy1 from "assets/dummy/dummy1.png";
 import Dummy2 from "assets/dummy/dummy2.png";
 import Dummy3 from "assets/dummy/dummy3.png";
 import Dummy4 from "assets/dummy/dummy4.png";
-import { BaseContext } from "context";
+import { AuthContext, BaseContext } from "context";
 
 export const Home: React.FC<RouteComponentProps> = () => {
   const size = useWindowsize();
   const [ step, setStep ] = useState<number>(1);
   const ctx = useContext(BaseContext);
+  const auth = useContext(AuthContext);
 
   const renderImage = () => {
     switch (step) {
@@ -33,6 +34,9 @@ export const Home: React.FC<RouteComponentProps> = () => {
       break;
     }
   };
+
+  if(auth.isLoggedIn() && !auth.isAdmin()) return <Redirect to="dashboard" noThrow/>;
+  if(auth.isLoggedIn() && auth.isAdmin()) return <Redirect to="admin/dashboard" noThrow/>;
 
   return (
     <div>

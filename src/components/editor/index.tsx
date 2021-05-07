@@ -63,7 +63,7 @@ export const RichText: React.FC<Props> = (props: any) => {
       <Label required={props.required}>{props.label}</Label>
       <Editor
         editorState={editorState || props.value}
-        wrapperClassName="wrapper"
+        wrapperClassName="normal"
         // editorClassName="editor-content"
         toolbarClassName="toolbar"
         onEditorStateChange={setEditorState}

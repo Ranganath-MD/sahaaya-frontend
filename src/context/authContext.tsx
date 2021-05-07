@@ -67,9 +67,13 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const handleLogin = (data: any) => {
     if(data.type === "Admin") {
-      navigate("/admin/dashboard");
+      navigate("/admin/dashboard", {
+        replace: true
+      });
     }else {
-      navigate("/dashboard");
+      navigate("/dashboard", {
+        replace: true
+      });
     }
     return null;
   };

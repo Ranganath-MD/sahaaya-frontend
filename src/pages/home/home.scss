@@ -1,20 +1,20 @@
-$text-color: #2A415D;
+$text-color: #2a415d;
 
-.hero-section{
+.hero-section {
   background-color: ghostwhite;
   display: grid;
   grid-template-columns: 60% 40%;
 
-  .hero-text{
+  .hero-text {
     padding: 15% 10% 15% 5%;
 
-    h1{
+    h1 {
       font-size: 3.5rem;
       margin: 0;
       font-weight: bold;
       color: $text-color;
     }
-    p{
+    p {
       font-size: 14px;
       font-weight: 600;
       color: #767676;
@@ -22,16 +22,17 @@ $text-color: #2A415D;
       margin: 10px 0px 20px;
     }
   }
-  .hero-img{
-    img{
+  .hero-img {
+    img {
       width: 100%;
       height: 100%;
+      filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
     }
   }
 }
 #section-two {
   padding: 5% 0px;
-  h1{
+  h1 {
     font-size: 1.6rem;
     font-weight: bold;
     color: $text-color;
@@ -40,7 +41,7 @@ $text-color: #2A415D;
 }
 #section-three {
   min-height: 50vh;
-  .image-grid{
+  .image-grid {
     margin: auto;
   }
   img {
@@ -51,44 +52,39 @@ $text-color: #2A415D;
     display: flex;
     align-items: center;
     margin: 1.2rem 0;
-    padding: 8px 12px;
-    background: #e8f5e9;
+    padding: 15px 20px;
     margin-right: 20px;
     color: #2a415d;
     font-weight: bold;
     cursor: pointer;
-    border: 2px solid transparent;
-    &:hover {
-      box-shadow: 0px 6px 16px rgba(0,0,0,0.12) !important;
-    }
-    .icon {
-      padding: 8px 12px;
-      background: #0db469c2;
-      margin-right: 10px;
-      color: white;
-      font-weight: bold;
-    }
+
+    // .icon {
+    //   padding: 8px 12px;
+    //   margin-right: 10px;
+    //   font-weight: bold;
+    // }
   }
   .steps__primary {
     @include steps();
   }
   .steps__active {
     @include steps();
-    border: 2px solid #2a415d;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12) !important;
+    border-left: 5px solid #0db469c2;
   }
 
-  .wrapper{
+  .wrapper {
     max-width: 1000px;
     margin: auto;
     p {
       font-size: 1.6em;
       font-weight: bold;
-      color: #2A415D;
+      color: #2a415d;
       text-align: center;
       margin-bottom: 3rem;
     }
     @media only screen and (max-width: 495px) {
-      p{
+      p {
         font-size: 1.3em;
         margin-bottom: 0;
         line-height: 2rem;
@@ -107,10 +103,10 @@ $text-color: #2A415D;
   .MuiAccordionSummary-content {
     align-items: center;
   }
-  .panel_details{
+  .panel_details {
     display: flex;
     flex-direction: column-reverse;
-    span{
+    span {
       font-size: 14px;
       font-weight: 400;
       padding: 10px;
@@ -133,11 +129,11 @@ $text-color: #2A415D;
   border: 2px solid #2a415d;
   background: none !important;
 }
-.section-flex{
+.section-flex {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   justify-content: center;
-  p{
+  p {
     font-size: 14px;
     color: #767676;
     line-height: 1.4rem;
@@ -145,40 +141,40 @@ $text-color: #2A415D;
     font-weight: 500;
   }
 }
-@media only screen and (max-width: 495px){
+@media only screen and (max-width: 495px) {
   .section-flex {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    div{
+    div {
       font-size: 1em;
     }
   }
   #section-two {
-    h1{
+    h1 {
       font-size: 1.3em;
     }
   }
 }
-@media only screen and (min-width: 700px) and (max-width: 900px){
-  .hero-section{
+@media only screen and (min-width: 700px) and (max-width: 900px) {
+  .hero-section {
     grid-template-columns: 50% 50%;
-    .hero-text{
-      h1{
+    .hero-text {
+      h1 {
         font-size: 3rem;
       }
     }
   }
 }
 @media only screen and (max-width: 700px) {
-  .hero-section{
+  .hero-section {
     grid-template-columns: 100%;
     background-image: url("../../assets/Taieri.svg");
     background-repeat: no-repeat;
-    .hero-text{
-      h1{
+    .hero-text {
+      h1 {
         font-size: 2.5rem;
       }
     }
-    .hero-img{
+    .hero-img {
       display: none;
     }
   }

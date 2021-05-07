@@ -9,28 +9,28 @@ export const Steps: React.FC<IStepProps> = ({ renderImage, step, setStep }) => {
           className={step === 1 ? "steps__active" : "steps__primary" }
           onClick={() => setStep(1)}
         >
-          <div className="icon">1</div>
+          {/* <div className="icon">1</div> */}
           <div>Registration</div>
         </div>
         <div
           className={step === 2 ? "steps__active" : "steps__primary" }
           onClick={() => setStep(2)}
         >
-          <div className="icon">2</div>
+          {/* <div className="icon">2</div> */}
           <div>Create a Campaign</div>
         </div>
         <div
           className={step === 3 ? "steps__active" : "steps__primary" }
           onClick={() => setStep(3)}
         >
-          <div className="icon">3</div>
+          {/* <div className="icon">3</div> */}
           <div>Submit for Approval</div>
         </div>
         <div
           className={step === 4 ? "steps__active" : "steps__primary" }
           onClick={() => setStep(4)}
         >
-          <div className="icon">4</div>
+          {/* <div className="icon">4</div> */}
           <div>Raise Fund</div>
         </div>
       </Grid>
