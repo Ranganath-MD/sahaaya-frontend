@@ -23,12 +23,14 @@ export const CampaignProvider: React.FC = ({ children }) => {
   const [textLegth, setTextLegth] = useState<number>(0);
   const [previewOpen, setPreviewOpen] = useState<boolean>(false);
   const [openSuccess, setOpenSuccess] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const createCampaign = async (payload: any) => {
     const result = await apiService.post("/campaign", payload);
     if (result) {
       localStorage.setItem("campaignId", result.data._id);
       setCampaignId(result.data._id);
+      setIsLoading(false);
       navigate(`campaign/${result.data._id}`, { replace: true });
     }
   };
@@ -65,6 +67,7 @@ export const CampaignProvider: React.FC = ({ children }) => {
     setActiveSection("step2");
   };
   const handleCreateCampaign = (category: string) => {
+    setIsLoading(true);
     const payload = {
       campaignName,
       category,
@@ -181,7 +184,8 @@ export const CampaignProvider: React.FC = ({ children }) => {
         handleRichText,
         previewOpen, setPreviewOpen,
         changeStatus,
-        openSuccess, setOpenSuccess
+        openSuccess, setOpenSuccess,
+        isLoading
       }}
     >
       {children}
