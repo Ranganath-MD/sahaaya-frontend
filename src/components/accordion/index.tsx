@@ -8,7 +8,11 @@ import {
   AccordionActions,
 } from "@material-ui/core";
 import styled from "styled-components";
-import { RiArrowDownSLine, RiCheckboxCircleFill, RiCloseCircleFill } from "react-icons/ri";
+import {
+  RiArrowDownSLine,
+  RiCheckboxCircleFill,
+  RiCloseCircleFill,
+} from "react-icons/ri";
 import { DevButton } from "components/button";
 
 const HeaderText = styled.span`
@@ -24,7 +28,7 @@ export const ExpandlePanelActions: React.FC<Partial<ICustomAccordian>> = ({
   children,
   onCancel,
   onSave,
-  disableSave
+  disableSave,
 }) => {
   return (
     <>
@@ -78,14 +82,20 @@ export const ExpandablePanel: React.FC<ICustomAccordian> = ({
       disabled={disabled}
     >
       <AccordionSummary expandIcon={<RiArrowDownSLine />}>
-        {error ? <RiCloseCircleFill color={"red"} /> : showStatus ? <RiCheckboxCircleFill color={"#0db469"} /> : headerIcon}
+        {error ? (
+          <RiCloseCircleFill color={"red"} />
+        ) : showStatus ? (
+          <RiCheckboxCircleFill color={"#0db469"} />
+        ) : (
+          headerIcon
+        )}
         <HeaderText>{headerText}</HeaderText>
         {secondaryText ||
-          (errorMsg && (
-            <span>{errorMsg ? errorMsg : secondaryText}</span>
-          ))}
+          (errorMsg && <span>{errorMsg ? errorMsg : secondaryText}</span>)}
       </AccordionSummary>
-      <AccordionDetails>{children}</AccordionDetails>
+      <AccordionDetails style={{ display: "block" }}>
+        {children}
+      </AccordionDetails>
       <ExpandlePanelActions
         actionMenu={actionMenu}
         isSave={isSave}

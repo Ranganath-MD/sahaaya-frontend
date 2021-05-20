@@ -18,10 +18,11 @@ const Label = styled.div<{ required?: boolean }>`
   }
 `;
 interface Props {
-  onChange: (value: any) => any;
+  onChange?: (value: any) => any;
   label?: string;
   required?: boolean;
   content?: any;
+  readOnly?: boolean;
 }
 
 export const RichText: React.FC<Props> = (props: any) => {
@@ -49,6 +50,7 @@ export const RichText: React.FC<Props> = (props: any) => {
     const hasText = content.hasText();
     const currentPlainText = content.getPlainText();
     const lengthOfEditorContent = currentPlainText.length;
+    if (!props.onChange) return null;
     return props.onChange({
       value: draftToHtml(convertToRaw(content)),
       hasText,
@@ -64,6 +66,8 @@ export const RichText: React.FC<Props> = (props: any) => {
       <Editor
         editorState={editorState || props.value}
         wrapperClassName="normal"
+        readOnly={props.readOnly}
+        toolbarHidden={props.readOnly}
         // editorClassName="editor-content"
         toolbarClassName="toolbar"
         onEditorStateChange={setEditorState}

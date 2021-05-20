@@ -42,6 +42,24 @@ export const BeneficiaryProvider: React.FC = ({ children }) => {
       updateBeneficiary(ctx.campaignId, "address", e.target.value);
     }
   };
+  const clear = () => {
+    setFirstName("");
+    setFirstNameError("");
+    setLastName("");
+    setLastNameError("");
+    setDob(null);
+    setDobError("");
+    setAddress("");
+    setAddressError("");
+    setEmail("");
+    setEmailError("");
+    setPhone(null);
+    setPhoneError("");
+    setAdhaar(null);
+    setAdhaarError("");
+    setPin(null);
+    setPinError("");
+  };
   const handlePhone = (value: any) => {
     setPhone(value);
     if (value.length !== 10) setPhoneError("Phone number is required");
@@ -107,15 +125,35 @@ export const BeneficiaryProvider: React.FC = ({ children }) => {
     }
   };
   const isValidStep2 = () => {
-    return (
-      firstNameError !== "" ||
-      lastNameError !== "" ||
-      dobError !== "" ||
-      addressError !== "" ||
-      emailError !== "" ||
-      pinError !== "" ||
-      adhaarError !== ""
-    );
+    // if(firstName === "" || lastName === "" ||
+    //   dob === null||
+    //   address === "" ||
+    //   email === "" ||
+    //   pin === null ||
+    //   adhaar === null
+    // ;
+    if (
+      firstName !== "" &&
+      lastName !== "" &&
+      dob !== null &&
+      address !== "" &&
+      email !== "" &&
+      pin !== null &&
+      phone !== null &&
+      adhaar !== null &&
+      firstNameError === "" &&
+      lastNameError === "" &&
+      dobError === "" &&
+      addressError === "" &&
+      pinError === "" &&
+      phoneError === "" &&
+      emailError === "" &&
+      adhaarError === ""
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   };
 
   const handleSaveStep2 = () => {
@@ -198,7 +236,8 @@ export const BeneficiaryProvider: React.FC = ({ children }) => {
         adhaarError,
         handleAdhaar,
         isValidStep2,
-        handleSaveStep2
+        handleSaveStep2,
+        clear,
       }}
     >
       {children}

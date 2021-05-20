@@ -3,7 +3,7 @@ import { RouteComponentProps } from "@reach/router";
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { CategoryCard } from "components";
-import { BaseContext, CampaignContext } from "context";
+import { BankContext, BaseContext, BeneficiaryContext, CampaignContext } from "context";
 
 const Heading = styled.h1`
   text-align: center;
@@ -16,9 +16,13 @@ const SubHeading = styled.p`
 export const CreateCampaign: React.FC<RouteComponentProps> = () => {
   const ctx = useContext(BaseContext);
   const campaign_ctx = useContext(CampaignContext);
+  const beneficiary_ctx = useContext(BeneficiaryContext);
+  const bank_ctx = useContext(BankContext);
 
   const handleClick = (c: string) => {
     campaign_ctx.clear();
+    beneficiary_ctx.clear();
+    bank_ctx.clear();
     campaign_ctx.handleCreateCampaign(c);
   };
 

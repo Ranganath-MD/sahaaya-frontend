@@ -65,10 +65,25 @@ class Service {
     });
   }
 
-  delete (path: string) {
+  delete (path: string, body?: any) {
     return this.service({
       method: "DELETE",
-      url: path
+      url: path,
+      data: body
+    });
+  }
+
+  upload (path: string, body: any, handleProgress?: any, ) {
+    return this.service({
+      method: "POST",
+      url: path,
+      data: body,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (data: any) => {
+        handleProgress(data);
+      }
     });
   }
 

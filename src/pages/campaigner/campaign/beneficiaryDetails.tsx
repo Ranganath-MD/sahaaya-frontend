@@ -30,6 +30,7 @@ export const BeneficiaryDetails: React.FC = () => {
     <ExpandablePanel
       headerText={"Beneficiary Details"}
       expanded={expand}
+      disabled={ctx.campaign?.step1 ? false : true}
       disableSave={ctx_b.isValidStep2()}
       onSave={ctx_b.handleSaveStep2}
       onChange={() => setExpand(!expand)}

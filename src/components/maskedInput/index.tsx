@@ -39,11 +39,23 @@ export const MaskedInput: React.FC<Props> = ({ error = false, ...props }) => {
   );
 };
 
+export const ReadOnlyMaskInput = ({ ...props }) => {
+  return (
+    <p>
+      <NumberFormat
+        {...props}
+        allowNegative={false}
+      />
+    </p>
+  );
+};
+
 export const CurrencyInput = ({
   value,
   label,
   onValueChange,
   handleBlur,
+  displayType
 }: any) => {
   const input = useMemo(
     () => (
@@ -53,6 +65,7 @@ export const CurrencyInput = ({
         prefix={"₹"}
         thousandsGroupStyle="lakh"
         label={label}
+        displayType={displayType}
         allowEmptyFormatting
         inputMode="numeric"
         onBlur={handleBlur}

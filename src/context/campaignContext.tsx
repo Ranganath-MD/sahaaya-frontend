@@ -18,13 +18,16 @@ export const CampaignProvider: React.FC = ({ children }) => {
   );
   const [targetAmount, setTargetAmount] = useState<number | string>(0);
   const [targetAmountError, setTargetAmountError] = useState<string>("");
-  const [activeSection, setActiveSection] = useState("step1");
-  const [desc, setDesc] = useState("");
-  const [textLegth, setTextLegth] = useState(0);
+  const [activeSection, setActiveSection] = useState<string>("step1");
+  const [desc, setDesc] = useState<string>("");
+  const [textLegth, setTextLegth] = useState<number>(0);
+  const [previewOpen, setPreviewOpen] = useState<boolean>(false);
+  const [openSuccess, setOpenSuccess] = useState<boolean>(false);
 
   const createCampaign = async (payload: any) => {
     const result = await apiService.post("/campaign", payload);
     if (result) {
+      localStorage.setItem("campaignId", result.data._id);
       setCampaignId(result.data._id);
       navigate(`campaign/${result.data._id}`, { replace: true });
     }
@@ -32,19 +35,26 @@ export const CampaignProvider: React.FC = ({ children }) => {
 
   const clear = () => {
     setCampaign(null);
-    setCampaignName("");
+    setCampaignName("New Campaign");
     setSelectedFromDate(new Date());
     setSelectedEndDate(addDays(selectedFromDate, 5));
     setTargetAmount(0);
     setDesc("");
     setTextLegth(0);
     setActiveSection("step1");
+    setOpenSuccess(false);
+    setPreviewOpen(false);
   };
 
   const isValidStep1 = () => {
     return (
       targetAmount === undefined || targetAmount === 0 || targetAmount === "" || textLegth <= 500
     );
+  };
+
+  const changeStatus = () => {
+    setOpenSuccess(!openSuccess);
+    updateCampaignDetails(campaignId, "status", "IN_REVIEW");
   };
 
   const handleSaveStep1 = () => {
@@ -64,10 +74,11 @@ export const CampaignProvider: React.FC = ({ children }) => {
   };
 
   const setSteps = (data: any) => {
-    const { step1, step2, step3 } = data;
+    const { step1, step2, step3, step4 } = data;
     if(step1) setActiveSection("step2");
     if(step2) setActiveSection("step3");
     if(step3) setActiveSection("step4");
+    if(step4) setActiveSection("");
   };
   const setCampaignData = (data: any) => {
     setCampaign(data);
@@ -167,7 +178,10 @@ export const CampaignProvider: React.FC = ({ children }) => {
         setSteps,
         updateCampaignDetails,
         activeSection, setActiveSection,
-        handleRichText
+        handleRichText,
+        previewOpen, setPreviewOpen,
+        changeStatus,
+        openSuccess, setOpenSuccess
       }}
     >
       {children}

@@ -6,21 +6,24 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const Button = styled.button<IButtonProps>`
   outline: none;
   padding: 0.25rem 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: ${(props) => !props.disabled && "pointer"};
   min-height: ${(props) => props.minHeight ? props.minHeight : "2rem"};
   min-width: ${(props) => props.fullWidth ? "100%" : "2rem"};
   color: ${(props) =>
-    props.color ? props.color : props.primary ? "white" : "black"};
+    props.disabled ? "white" : props.color ? props.color : props.primary ? "white" : "black"};
   opacity: ${(props) => props.isloading && ".6"};
   background: ${(props) =>
     props.disabled
-      ? "#959595"
+      ? "rgba(0, 0, 0, 0.12)"
       : props.background
         ? props.background
         : props.primary
           ? "#0db469"
           : "transparent"};
-  border: ${(props) => (props.bordered ? "1px solid #0db469" : "none")};
+  border: ${(props) => (props.disabled ? "none" : props.bordered ? "1px solid #0db469" : "none")};
   font-weight: 600;
   box-shadow: ${(props) =>
     props.isShadow
