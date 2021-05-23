@@ -36,7 +36,6 @@ export const CampaignProvider: React.FC = ({ children }) => {
   };
 
   const clear = () => {
-    setCampaign(null);
     setCampaignName("New Campaign");
     setSelectedFromDate(new Date());
     setSelectedEndDate(addDays(selectedFromDate, 5));
@@ -46,11 +45,15 @@ export const CampaignProvider: React.FC = ({ children }) => {
     setActiveSection("step1");
     setOpenSuccess(false);
     setPreviewOpen(false);
+    setCampaign(null);
   };
 
   const isValidStep1 = () => {
     return (
-      targetAmount === undefined || targetAmount === 0 || targetAmount === "" || textLegth <= 500
+      targetAmount === undefined ||
+      targetAmount === 0 ||
+      targetAmount === "" ||
+      textLegth <= 500
     );
   };
 
@@ -69,7 +72,7 @@ export const CampaignProvider: React.FC = ({ children }) => {
   const handleCreateCampaign = (category: string) => {
     setIsLoading(true);
     const payload = {
-      campaignName,
+      campaignName: "New Campaign",
       category,
     };
     setCategory(category);
@@ -78,10 +81,10 @@ export const CampaignProvider: React.FC = ({ children }) => {
 
   const setSteps = (data: any) => {
     const { step1, step2, step3, step4 } = data;
-    if(step1) setActiveSection("step2");
-    if(step2) setActiveSection("step3");
-    if(step3) setActiveSection("step4");
-    if(step4) setActiveSection("");
+    if (step1) setActiveSection("step2");
+    if (step2) setActiveSection("step3");
+    if (step3) setActiveSection("step4");
+    if (step4) setActiveSection("");
   };
   const setCampaignData = (data: any) => {
     setCampaign(data);
@@ -92,8 +95,9 @@ export const CampaignProvider: React.FC = ({ children }) => {
     setTargetAmount(data.target && data.target);
     setDesc(data?.longDescription);
     setSteps(data);
-    if(data.fromdate !== undefined) setSelectedFromDate(new Date(data.fromdate));
-    if(data.enddate !== undefined) setSelectedEndDate(new Date(data.enddate));
+    if (data.fromdate !== undefined)
+      setSelectedFromDate(new Date(data.fromdate));
+    if (data.enddate !== undefined) setSelectedEndDate(new Date(data.enddate));
   };
 
   const handleFromDateChange = (value: any) => {
@@ -103,21 +107,23 @@ export const CampaignProvider: React.FC = ({ children }) => {
     setSelectedEndDate(value);
   };
 
-  const updateCampaignDetails = (campaignId: string, campaignKey: string, value: any ) => {
+  const updateCampaignDetails = (
+    campaignId: string,
+    campaignKey: string,
+    value: any
+  ) => {
     if (!campaignId) return null;
     const cmp: ICampaignPayload = {
       campaignId,
       campaignKey,
-      value
+      value,
     };
     socket.emit("update-campaign", cmp);
     socket.on("campaign", (data) => {
       setCampaign(data);
       // setSteps(data);
       // if(data?.step4) setActiveSection("step2");
-
     });
-
   };
 
   const handleRichText = (content: any) => {
@@ -180,12 +186,15 @@ export const CampaignProvider: React.FC = ({ children }) => {
         desc,
         setSteps,
         updateCampaignDetails,
-        activeSection, setActiveSection,
+        activeSection,
+        setActiveSection,
         handleRichText,
-        previewOpen, setPreviewOpen,
+        previewOpen,
+        setPreviewOpen,
         changeStatus,
-        openSuccess, setOpenSuccess,
-        isLoading
+        openSuccess,
+        setOpenSuccess,
+        isLoading,
       }}
     >
       {children}

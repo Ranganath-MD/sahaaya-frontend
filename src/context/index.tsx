@@ -7,6 +7,7 @@ import { BaseProvider } from "./baseContext";
 import { BeneficiaryProvider } from "./beneficiaryContext";
 import { AttachmentProvider } from "./attachmentContext";
 import { BankProvider } from "./bankContext";
+import { DashboardProvider } from "./dashboardContext";
 
 export const Provider: React.FC<RouteComponentProps> = ({ children }) => {
   return (
@@ -14,13 +15,15 @@ export const Provider: React.FC<RouteComponentProps> = ({ children }) => {
       <LayoutProvider>
         <BaseProvider>
           <AuthProvider>
-            <CampaignProvider>
-              <BeneficiaryProvider>
-                <AttachmentProvider>
-                  <BankProvider>{children}</BankProvider>
-                </AttachmentProvider>
-              </BeneficiaryProvider>
-            </CampaignProvider>
+            <DashboardProvider>
+              <CampaignProvider>
+                <BeneficiaryProvider>
+                  <AttachmentProvider>
+                    <BankProvider>{children}</BankProvider>
+                  </AttachmentProvider>
+                </BeneficiaryProvider>
+              </CampaignProvider>
+            </DashboardProvider>
           </AuthProvider>
         </BaseProvider>
       </LayoutProvider>
@@ -34,3 +37,4 @@ export * from "./campaignContext";
 export * from "./baseContext";
 export * from "./beneficiaryContext";
 export * from "./bankContext";
+export * from "./dashboardContext";

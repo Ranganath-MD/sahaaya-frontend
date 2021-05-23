@@ -14,6 +14,7 @@ import { AttachmentContext } from "context/attachmentContext";
 import { BankDetails } from "./bankDetails";
 import { PreviewCampaign } from "./previewModal";
 import { SuccessMessage } from "./successMessage";
+import { Spinner } from "components/progressbar/global";
 
 export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
   const ctx = useContext(CampaignContext);
@@ -45,15 +46,16 @@ export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
   return (
     <>
       <Seo title={ctx.campaignName} />
+      {ctx.loading && <Spinner />}
       <Container>
         <Grid container>
           <Grid item xs={12} sm={12} md={1} />
           <Grid item xs={12} sm={12} md={9}>
             <div className="campaign-input">
               <Breadcrumbs>
-                <Chip size="small" icon={<RiUser4Line />} label="Campaign" />
-                <Chip size="small" icon={<BiSitemap />} label="Category" />
-                <Chip size="small" label={ctx.category} />
+                <Chip size="small" icon={<RiUser4Line />} label="Campaign" className="chip"/>
+                <Chip size="small" icon={<BiSitemap />} label="Category" className="chip"/>
+                <Chip size="small" label={ctx.category} className="chip"/>
               </Breadcrumbs>
               <EditableInput
                 autoFocus

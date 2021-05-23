@@ -15,3 +15,4 @@ export * from "./maskedInput";
 export * from "./editor";
 export * from "./progressbar";
 export * from "./cloudinaryImage";
+export * from "./modals";

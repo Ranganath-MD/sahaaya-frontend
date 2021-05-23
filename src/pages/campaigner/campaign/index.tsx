@@ -3,7 +3,7 @@ import { RouteComponentProps } from "@reach/router";
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { CategoryCard } from "components";
-import { BaseContext, BeneficiaryContext, CampaignContext } from "context";
+import { BankContext, BaseContext, BeneficiaryContext, CampaignContext } from "context";
 import { Spinner } from "components/progressbar/global";
 
 const Heading = styled.h1`
@@ -18,12 +18,14 @@ export const CreateCampaign: React.FC<RouteComponentProps> = () => {
   const ctx = useContext(BaseContext);
   const campaign_ctx = useContext(CampaignContext);
   const beneficiary_ctx = useContext(BeneficiaryContext);
+  const bank = useContext(BankContext);
+
   const handleClick = (c: string) => {
     campaign_ctx.clear();
     beneficiary_ctx.clear();
+    bank.clear();
     campaign_ctx.handleCreateCampaign(c);
   };
-
   return (
     <Container>
       {campaign_ctx.isLoading && <Spinner />}

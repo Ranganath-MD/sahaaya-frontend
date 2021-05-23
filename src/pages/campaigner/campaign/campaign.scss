@@ -18,6 +18,9 @@
     font-size: 18px;
     @include textarea();
   }
+  .chip {
+    background-color: #0078802e;
+  }
 }
 .message {
   padding: 20px;
