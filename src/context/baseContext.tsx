@@ -1,9 +1,12 @@
 import React, { createContext, useState, useEffect } from "react";
 import { apiService } from "utils";
-import { GrValidate } from "react-icons/gr";
 import { RiMovie2Line } from "react-icons/ri";
+import { HiOutlineLightBulb } from "react-icons/hi";
 import { GiHourglass, GiFarmTractor } from "react-icons/gi";
-
+import farmer from "../assets/ill/farmer.svg";
+import talents from "../assets/ill/talents.svg";
+import movies from "../assets/ill/movies.svg";
+import startup from "../assets/ill/startup.svg";
 export const BaseContext = createContext<any>({});
 
 export const BaseProvider: React.FC = ({ children }) => {
@@ -25,11 +28,25 @@ export const BaseProvider: React.FC = ({ children }) => {
     case "c1":
       return <GiFarmTractor size={30}/>;
     case "c2":
-      return <GrValidate size={30}/>;
+      return <HiOutlineLightBulb size={30}/>;
     case "c3":
       return <RiMovie2Line size={30}/>;
     case "c4":
       return <GiHourglass size={30}/>;
+    default:
+      return null;
+    }
+  };
+  const renderBackground = (key: string) => {
+    switch (key) {
+    case "c1":
+      return farmer;
+    case "c2":
+      return talents;
+    case "c3":
+      return movies;
+    case "c4":
+      return startup;
     default:
       return null;
     }
@@ -42,7 +59,8 @@ export const BaseProvider: React.FC = ({ children }) => {
     <BaseContext.Provider value={{
       categories, setCategories,
       loading,
-      renderCategoryIcons
+      renderCategoryIcons,
+      renderBackground
     }}>
       {children}
     </BaseContext.Provider>

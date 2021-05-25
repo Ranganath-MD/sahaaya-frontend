@@ -4,6 +4,7 @@ import "./home.scss";
 import { Container } from "@material-ui/core";
 import { CategoryCard, DevButton, Seo } from "components";
 import Hero from "assets/Taieri.svg";
+import Illustration from "assets/ill/ill2.svg";
 import site from "utils/siteOptions.json";
 import { Steps } from "./steps";
 import { useWindowsize } from "hooks";
@@ -67,6 +68,7 @@ export const Home: React.FC<RouteComponentProps> = () => {
                   iconComponent={ctx.renderCategoryIcons(c.key)}
                   title={c.title}
                   description={c.description}
+                  // backgroundSrc={ctx.renderBackground(c.key)}
                 />
               ))
             }
@@ -91,7 +93,13 @@ export const Home: React.FC<RouteComponentProps> = () => {
           </div>
         </section>
         <section id="section-four">
-          <span></span>
+          <div>
+            <p>Start your Campaign, Raise the fund</p>
+            <DevButton color="#2a415d" background="yellow" isShadow>Register Now</DevButton>
+          </div>
+          <div className="hero-img">
+            <img src={Illustration} width="100%"/>
+          </div>
         </section>
       </Container>
     </div>

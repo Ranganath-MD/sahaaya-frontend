@@ -80,3 +80,16 @@
   align-items: center;
   margin: 5px 0px;
 }
+.MuiDialog-scrollPaper::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+.MuiDialog-scrollPaper::-webkit-scrollbar-track {
+  background: orange;        /* color of the tracking area */
+}
+
+.MuiDialog-scrollPaper::-webkit-scrollbar-thumb {
+  background-color: blue;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid orange;  /* creates padding around scroll thumb */
+}

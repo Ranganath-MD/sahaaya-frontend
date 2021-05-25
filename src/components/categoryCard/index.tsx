@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import React from "react";
 import styled from "styled-components";
 
@@ -26,10 +27,10 @@ const Icon = styled.div`
 `;
 
 export const CategoryCard: React.FC<CardProps> = ({
-  iconComponent, title, description, onClick
+  iconComponent, title, description, onClick, backgroundSrc
 }) => {
   return (
-    <Card onClick={onClick}>
+    <Card onClick={onClick} style={{ backgroundImage: `url(${backgroundSrc})` }}>
       <Icon>{iconComponent}</Icon>
       <Title>{title}</Title>
       <Description>{description}</Description>

@@ -8,6 +8,7 @@ export const DashboardProvider: React.FC = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const [loadingDelete, setLoadingDelete] = useState<boolean>(false);
+  const [loadingPreview, setPreviewLoading] = useState<boolean>(false);
   const [campaignId, setCampaignId] = useState<string>("");
 
   const getUserCampaigns = async () => {
@@ -43,7 +44,8 @@ export const DashboardProvider: React.FC = ({ children }) => {
         setOpenDelete,
         loadingDelete,
         deleteCampaign,
-        campaignId, setCampaignId
+        campaignId, setCampaignId,
+        loadingPreview, setPreviewLoading
       }}
     >
       {children}

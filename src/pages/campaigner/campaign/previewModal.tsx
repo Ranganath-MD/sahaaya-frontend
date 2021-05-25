@@ -1,16 +1,17 @@
 import React, { useContext } from "react";
 import {
   Dialog,
-  DialogActions,
   DialogContent,
   DialogTitle,
-  Container
+  Container,
+  IconButton
 } from "@material-ui/core";
-import { ReadOnlyMaskInput, DevButton, CloudinaryImage, RichText } from "components";
+import { ReadOnlyMaskInput, CloudinaryImage, RichText } from "components";
 import { CampaignContext } from "context";
 import styled from "styled-components";
 import "./campaign.scss";
 import { format } from "date-fns";
+import { RiCloseLine } from "react-icons/ri";
 
 const Label = styled.span`
   color: #697384;
@@ -23,6 +24,11 @@ const HeaderText = styled.p`
   box-shadow: 1px 1px 5px #0000001f;
   padding: 10px;
 `;
+const CloseButton = styled.div`
+  position: absolute;
+  top: 50px;
+  right: 70px;
+`;
 
 export const PreviewCampaign: React.FC = () => {
   const ctx = useContext(CampaignContext);
@@ -30,6 +36,11 @@ export const PreviewCampaign: React.FC = () => {
   return (
     <Dialog open={ctx.previewOpen} fullScreen>
       <Container>
+        <CloseButton>
+          <IconButton onClick={() => ctx.setPreviewOpen(!ctx.previewOpen)}>
+            <RiCloseLine />
+          </IconButton>
+        </CloseButton>
         <DialogTitle disableTypography>
           <h2 className="heading">Preview</h2>
         </DialogTitle>
@@ -188,14 +199,14 @@ export const PreviewCampaign: React.FC = () => {
             />
           </div>
         </DialogContent>
-        <DialogActions>
+        {/* <DialogActions>
           <DevButton
             primary
             onClick={() => ctx.setPreviewOpen(!ctx.previewOpen)}
           >
             OK
           </DevButton>
-        </DialogActions>
+        </DialogActions> */}
       </Container>
     </Dialog>
   );

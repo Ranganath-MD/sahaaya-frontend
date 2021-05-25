@@ -23,6 +23,7 @@ interface CardProps {
   title: string;
   description?: string;
   onClick?: () => void;
+  backgroundSrc?: string;
 }
 interface Props {
   window?: () => Window;

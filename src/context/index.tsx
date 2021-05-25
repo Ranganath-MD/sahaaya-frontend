@@ -38,3 +38,4 @@ export * from "./baseContext";
 export * from "./beneficiaryContext";
 export * from "./bankContext";
 export * from "./dashboardContext";
+export * from "./attachmentContext";

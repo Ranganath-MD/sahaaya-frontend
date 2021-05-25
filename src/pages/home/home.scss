@@ -179,3 +179,39 @@ $text-color: #2a415d;
     }
   }
 }
+#section-four {
+  // background-color: #2a415d;
+  background: #0F2027;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 3vw 10vw;
+  margin: 5rem 0;
+  color: #fff;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  font-size: 4vw;
+  font-weight: bold;
+  justify-content: space-around;
+  align-items: center;
+  button {
+    margin: 20px 0px;
+  }
+  .hero-img {
+    img {
+      width: 70%;
+      float: right;
+      filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    margin: 2rem 0;
+    p {
+      margin-top: 20px;
+    }
+    button {
+      margin: 20px 0px;
+    }
+  }
+}
