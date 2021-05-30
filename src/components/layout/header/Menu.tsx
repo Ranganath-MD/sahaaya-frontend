@@ -10,11 +10,12 @@ import {
 } from "@material-ui/core";
 import { DevButton } from "../../button";
 import { Link } from "@reach/router";
-import { AuthContext } from "../../../context";
+import { AuthContext, ProfileContext } from "../../../context";
 import { VscAccount } from "react-icons/vsc";
 
 export const RightMenu: React.FC = () => {
   const context = useContext(AuthContext);
+  const profile = useContext(ProfileContext);
 
   return (
     <>
@@ -24,8 +25,9 @@ export const RightMenu: React.FC = () => {
             alt="user profile"
             onClick={(event) => context.setAnchorEl(event.currentTarget)}
             className="profile-menu"
+            src={profile.user?.avatar ? profile.user?.avatar.url : ""}
           >
-            {context.currentUser && context.currentUser.username.charAt(0).toUpperCase()}
+            {profile.user && profile.user?.username?.charAt(0).toUpperCase()}
           </Avatar>
           <Popover
             anchorEl={context.anchorEl}
@@ -44,7 +46,7 @@ export const RightMenu: React.FC = () => {
             <ListItem alignItems="flex-start">
               <ListItemText
                 className="user-name"
-                primary={context.currentUser && context.currentUser.username}
+                primary={profile.user?.username}
                 secondary={
                   <Typography
                     component="span"
@@ -57,7 +59,7 @@ export const RightMenu: React.FC = () => {
                 }
               />
             </ListItem>
-            <MenuItem onClick={() => context.setAnchorEl(null)}>
+            <MenuItem onClick={context.openProfile}>
               <ListItemIcon className="menu_list_item">
                 <VscAccount />
               </ListItemIcon>

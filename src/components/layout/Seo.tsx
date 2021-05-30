@@ -8,9 +8,9 @@ export const Seo: React.FC<ISeoProps> = ({ title, description }) => {
       <title>{title}</title>
       <meta
         name={description}
-        content="Web site created using create-react-app"
+        content="Sahaaya is a crowdfunding application for farmers, talents, movie makers and startup"
       />
-      <link rel="canonical" href="http://mysite.com/example" />
+      <link rel="canonical" href="https://sahaaya-staging.web.app" />
     </Helmet>
   );
 };

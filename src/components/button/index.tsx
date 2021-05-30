@@ -61,6 +61,7 @@ export const DevButton: React.FC<IButtonProps> = ({
       fullWidth={props.fullWidth}
       type={props.submit ? "submit" : "button"}
       minHeight={props.minHeight}
+      className={props.className}
     >
       {props.isloading ? (
         <ButtonSpinner>

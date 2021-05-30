@@ -7,12 +7,16 @@ const EditableTextField = styled.textarea<ITextFields>`
   width: 100%;
   resize: none;
   border-radius: 5px;
-  border: ${(props) => (props.value === "" ? "2px solid #b30c0c" : "none")};
+  font-family: Inter, "Inter UI", Helvetica, Arial, sans-serif;
+  border: ${(props) => (props.error ? "2px solid #b30c0c" : "none")};
   margin: 5px 0;
   &:focus {
     border: 2px solid #0052cc;
     outline: none;
     background-color: transparent;
+  }
+  &::placeholder {
+    color: #b6b4b4;
   }
   &:hover {
     outline: none;
@@ -37,7 +41,7 @@ const Message = styled.span`
   color: #b30c0c;
 `;
 
-export const EditableInput: React.FC<ITextFields> = ({
+export const EditableTextArea: React.FC<ITextFields> = ({
   width,
   placeholder,
   defaultValue,
@@ -50,7 +54,8 @@ export const EditableInput: React.FC<ITextFields> = ({
   label,
   requiredMessage,
   rows, cols,
-  className
+  className,
+  error
 }) => {
   const textareaRef = useRef<any>(null);
 
@@ -82,9 +87,10 @@ export const EditableInput: React.FC<ITextFields> = ({
         onChange={onChange}
         ref={textareaRef}
         onBlur={onBlur}
+        error={error}
       />
       <div>
-        {value === "" && <Message>{requiredMessage ? requiredMessage : "This field is required"}</Message>}
+        {error  && <Message>{requiredMessage ? requiredMessage : "This field is required"}</Message>}
       </div>
     </FieldWrapper>
   );

@@ -11,6 +11,7 @@ import {
   CampaignerDashboard,
   CreateCampaign,
   CreateCampaignForm,
+  UserProfile
 } from "pages";
 import { Login, Register } from "pages/userAuth";
 import { socket } from "utils";
@@ -39,6 +40,7 @@ const App: React.FC = () => {
           <PrivateRoute path="dashboard" component={CampaignerDashboard} />
           <PrivateRoute path="create-campaign" component={CreateCampaign} />
           <PrivateRoute path="campaign/:id" component={CreateCampaignForm} />
+          <PrivateRoute path="profile" component={UserProfile} />
           <NotFound path="/:statuscode" default />
         </Router>
       </Layout>

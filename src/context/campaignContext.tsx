@@ -37,6 +37,7 @@ export const CampaignProvider: React.FC = ({ children }) => {
 
   const clear = () => {
     setCampaignName("New Campaign");
+    setDescription("Description");
     setSelectedFromDate(new Date());
     setSelectedEndDate(addDays(selectedFromDate, 5));
     setTargetAmount(0);

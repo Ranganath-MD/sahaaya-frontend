@@ -21,7 +21,7 @@ class Service {
   };
 
   handleAuthorization = (data: any) => {
-    if (data.status === 401) {
+    if (data.status === 403) {
       localStorage.clear();
       apiService.service.defaults.headers["Authorization"] = null;
       navigate("/");
@@ -34,10 +34,9 @@ class Service {
       navigate("/400", { state: { status: "400", errMsg: "BAD REQUEST" } });
       break;
     case 401:
-      this.handleAuthorization(error.response);
-      return;
+      return error.response.data;
     case 403:
-      navigate("/403", { state: { status: "404", errMsg: "FORBIDDEN" } });
+      this.handleAuthorization(error.response);
       break;
     case 404:
       navigate("/404", {

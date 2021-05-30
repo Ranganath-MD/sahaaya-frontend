@@ -8,23 +8,26 @@ import { BeneficiaryProvider } from "./beneficiaryContext";
 import { AttachmentProvider } from "./attachmentContext";
 import { BankProvider } from "./bankContext";
 import { DashboardProvider } from "./dashboardContext";
+import { ProfileProvider } from "./profileContext";
 
 export const Provider: React.FC<RouteComponentProps> = ({ children }) => {
   return (
     <LocationProvider>
       <LayoutProvider>
         <BaseProvider>
-          <AuthProvider>
-            <DashboardProvider>
-              <CampaignProvider>
-                <BeneficiaryProvider>
-                  <AttachmentProvider>
-                    <BankProvider>{children}</BankProvider>
-                  </AttachmentProvider>
-                </BeneficiaryProvider>
-              </CampaignProvider>
-            </DashboardProvider>
-          </AuthProvider>
+          <ProfileProvider>
+            <AuthProvider>
+              <DashboardProvider>
+                <CampaignProvider>
+                  <BeneficiaryProvider>
+                    <AttachmentProvider>
+                      <BankProvider>{children}</BankProvider>
+                    </AttachmentProvider>
+                  </BeneficiaryProvider>
+                </CampaignProvider>
+              </DashboardProvider>
+            </AuthProvider>
+          </ProfileProvider>
         </BaseProvider>
       </LayoutProvider>
     </LocationProvider>
@@ -39,3 +42,4 @@ export * from "./beneficiaryContext";
 export * from "./bankContext";
 export * from "./dashboardContext";
 export * from "./attachmentContext";
+export * from "./profileContext";

@@ -1,6 +1,7 @@
 import { navigate } from "@reach/router";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { apiService } from "utils";
+import { ProfileContext } from "./profileContext";
 
 export const AuthContext = createContext<any>({});
 
@@ -13,12 +14,15 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [message, setMessage] = useState<string>("");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [currentUser, setCurrentUser] = useState<any>(null);
+  const profile = useContext(ProfileContext);
 
   const getProfile = async () => {
     const user = await apiService.get("/users/profile");
     setCurrentUser(user.data);
+    profile.setData(user.data);
   };
   useEffect(() => {
+    console.log("adjij&&&&&&&&&&", isAuthenticated)
     if(isAuthenticated){
       getProfile();
     }
@@ -43,6 +47,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     } catch(e){
       setIsLoading(false);
     }
+  };
+  const openProfile = () => {
+    setAnchorEl(null);
+    navigate("/profile");
   };
 
   const setToken = (user: any) => {
@@ -97,6 +105,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         setToken(result.data);
         handleLogin(result.data);
         handleIsAuthenticated(true);
+        getProfile();
         setCurrentUser(result.data);
         reset();
       }
@@ -106,6 +115,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   const logout = async () => {
+    setIsLoading(true);
     try{
       const result = await apiService.delete("/users/logout");
       if (result.status !== undefined && result.status === 401) {
@@ -139,7 +149,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         getProfile,
         anchorEl, setAnchorEl,
         currentUser,
-        logout
+        logout, openProfile
       }}
     >
       {children}

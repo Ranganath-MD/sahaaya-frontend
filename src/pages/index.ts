@@ -6,3 +6,4 @@ export * from "./campaigner/dashboard";
 export * from "./home";
 export * from "./howitWorks";
 export * from "./notFound";
+export * from "./campaigner/profile";

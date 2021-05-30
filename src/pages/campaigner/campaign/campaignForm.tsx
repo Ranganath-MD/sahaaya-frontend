@@ -1,7 +1,7 @@
 import { Breadcrumbs, Chip, Container, Grid } from "@material-ui/core";
 import { RouteComponentProps, useParams } from "@reach/router";
 import React, { useContext, useEffect, useMemo } from "react";
-import { DevButton, EditableInput, Seo } from "components";
+import { DevButton, EditableTextArea, Seo } from "components";
 import { BankContext, BeneficiaryContext, CampaignContext, AttachmentContext } from "context";
 import { RiUser4Line } from "react-icons/ri";
 import { BiSitemap } from "react-icons/bi";
@@ -57,24 +57,26 @@ export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
                 <Chip size="small" icon={<BiSitemap />} label="Category" className="chip"/>
                 <Chip size="small" label={ctx.category} className="chip"/>
               </Breadcrumbs>
-              <EditableInput
+              <EditableTextArea
                 autoFocus
                 required
                 maxLength={128}
                 label="Campaign Name"
                 placeholder="Enter Campaign Name"
                 value={ctx.campaignName}
+                error={ctx.campaignName === ""}
                 className="cmpName"
                 onChange={(e) => ctx.setCampaignName(e.target.value)}
                 onBlur={(e) => ctx.handleOnBlur(e.target.value)}
               />
-              <EditableInput
+              <EditableTextArea
                 required
                 maxLength={200}
                 label="Few words"
                 placeholder="Enter Description"
                 value={ctx.description}
                 className="cmp-description"
+                error={ctx.description === ""}
                 onChange={(e) => ctx.setDescription(e.target.value)}
                 onBlur={(e) => ctx.handleDescriptionOnBlur(e.target.value)}
               />

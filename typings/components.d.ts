@@ -13,6 +13,7 @@ interface IButtonProps {
   submit?: boolean;
   fullWidth?: boolean;
   minHeight?: string;
+  className?: string;
 }
 
 interface IButtonSpinner {
@@ -72,6 +73,8 @@ interface ITextFields {
   value: string;
   error?: boolean;
   requiredMessage?: string;
+  textSize?: string;
+  bold?: boolean;
   label?: string;
   rows?: number;
   cols?: number;
