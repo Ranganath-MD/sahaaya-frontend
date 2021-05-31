@@ -1,5 +1,9 @@
 .avatar_container {
   position: relative;
+  // border: 3px solid #da774a;
+  border: 3px solid #2a415d;
+  border-radius: 50%;
+  padding: 2px;
 }
 
 .input_uplaod {
@@ -22,16 +26,5 @@
           background: #f1f1f1;
           border-color: #d6d6d6;
       }
-      // &:after {
-      //     content: "\f030";
-      //     font-family: 'FontAwesome';
-      //     color: #337AB7;
-      //     position: absolute;
-      //     left: 0;
-      //     right: 0;
-      //     text-align: center;
-      //     line-height: 34px;
-      //     margin: auto;
-      // }
   }
 }

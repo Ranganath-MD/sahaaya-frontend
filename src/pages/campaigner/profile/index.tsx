@@ -15,6 +15,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { Container, Grid, IconButton } from "@material-ui/core";
 import styled from "styled-components";
 import "./index.scss";
+import { MdEdit } from "react-icons/md";
 
 const Label = styled.span`
   color: #697384;
@@ -34,6 +35,21 @@ export const UserProfile: React.FC<RouteComponentProps> = () => {
             : "Profile"
         }
       />
+      <div className="edit-btn">
+        <DevButton
+          background="#2A415D"
+          color="#fff"
+          onClick={() => setEditMode(!editMode)}
+        >
+          {editMode ? (
+            "Done"
+          ) : (
+            <>
+              <MdEdit className="edit-icon" /> Edit Profile
+            </>
+          )}
+        </DevButton>
+      </div>
       <Grid container spacing={5}>
         <Grid item xs={12} md={4}>
           <div className="avatar">
@@ -53,33 +69,37 @@ export const UserProfile: React.FC<RouteComponentProps> = () => {
               onBlur={profile.handleUsername}
             />
             <p className="email">{ctx.currentUser?.email}</p>
-            <div className="counts">
-              <div>
-                #Campaigns:{" "}
+          </div>
+          <div className="counts">
+            <div>
+              <h1>
                 {ctx.currentUser?.campaigns
                   ? ctx.currentUser?.campaigns.length
                   : 0}
-              </div>
-              <div>#Funds: {"0"}</div>
+              </h1>
+              <p>Campaigns</p>
+            </div>
+            <div>
+              <h1>
+                {ctx.currentUser?.donation
+                  ? ctx.currentUser?.donation.length
+                  : 0}
+              </h1>
+              <p>Donation</p>
             </div>
           </div>
         </Grid>
         <Grid item xs={12} md={8}>
           <div className="details">
-            <div className="edit">
-              <h1>About Me</h1>
-              <div>
-                <IconButton onClick={() => setEditMode(!editMode)}>
-                  <AiOutlineEdit />
-                </IconButton>
-              </div>
-            </div>
+            <p className="card_header_text">Summary</p>
+            <div className="hr"></div>
             <div>
               {!editMode ? (
                 <p>{profile.user?.about ? profile.user?.about : "--"}</p>
               ) : (
                 <EditableTextArea
                   value={profile.user?.about}
+                  autoFocus
                   placeholder="Tell something about yourself"
                   className="about"
                   onChange={(e) =>
@@ -91,6 +111,17 @@ export const UserProfile: React.FC<RouteComponentProps> = () => {
                 />
               )}
             </div>
+          </div>
+          <div className="details">
+            <div className="edit">
+              <h1>About Me</h1>
+              <div>
+                <IconButton onClick={() => setEditMode(!editMode)}>
+                  <AiOutlineEdit />
+                </IconButton>
+              </div>
+            </div>
+
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 {!editMode ? (
