@@ -41,7 +41,7 @@ const ButtonSpinner = styled.div<IButtonSpinner>`
   justify-content: center;
   align-items: center;
   .spinner {
-    color: ${(props) => (props.primary ? "#fff" : "black")};
+    color: ${(props) => props.spinnerColor ? props.spinnerColor : "white"};
     margin-right: 0.5rem;
   }
 `;
@@ -64,8 +64,8 @@ export const DevButton: React.FC<IButtonProps> = ({
       className={props.className}
     >
       {props.isloading ? (
-        <ButtonSpinner>
-          <CircularProgress size={20} className="spinner" />
+        <ButtonSpinner spinnerColor={props.spinnerColor}>
+          <CircularProgress size={15} className="spinner"/>
           <span>{props.loadingText ? props.loadingText : "Loading..."}</span>
         </ButtonSpinner>
       ) : (

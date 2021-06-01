@@ -14,10 +14,12 @@ interface IButtonProps {
   fullWidth?: boolean;
   minHeight?: string;
   className?: string;
+  spinnerColor?: string;
 }
 
 interface IButtonSpinner {
   primary?: boolean;
+  spinnerColor?: string;
 }
 interface CardProps {
   iconComponent?: JSX.Element | null;

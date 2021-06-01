@@ -92,7 +92,6 @@ export const UserProfile: React.FC<RouteComponentProps> = () => {
         <Grid item xs={12} md={8}>
           <div className="details">
             <p className="card_header_text">Summary</p>
-            <div className="hr"></div>
             <div>
               {!editMode ? (
                 <p>{profile.user?.about ? profile.user?.about : "--"}</p>
@@ -113,14 +112,7 @@ export const UserProfile: React.FC<RouteComponentProps> = () => {
             </div>
           </div>
           <div className="details">
-            <div className="edit">
-              <h1>About Me</h1>
-              <div>
-                <IconButton onClick={() => setEditMode(!editMode)}>
-                  <AiOutlineEdit />
-                </IconButton>
-              </div>
-            </div>
+            <p className="card_header_text">Personal Information</p>
 
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
@@ -230,16 +222,6 @@ export const UserProfile: React.FC<RouteComponentProps> = () => {
                 )}
               </Grid>
             </Grid>
-            {editMode && (
-              <DevButton
-                background="#2A415D"
-                color="white"
-                onClick={() => setEditMode(!editMode)}
-                className="done-button"
-              >
-                Done
-              </DevButton>
-            )}
           </div>
         </Grid>
       </Grid>

@@ -1,15 +1,31 @@
-import { Container, IconButton } from "@material-ui/core";
+import {
+  CircularProgress,
+  Container,
+  IconButton,
+  Menu,
+  MenuItem,
+  Popover,
+} from "@material-ui/core";
 import { navigate, RouteComponentProps } from "@reach/router";
 import React, { useContext, useEffect } from "react";
 import "./index.scss";
 import { DevButton, Seo, DeleteModal } from "components";
 import { DashboardCard } from "./dashboard";
-import { AuthContext, DashBoardContext,BankContext, BeneficiaryContext, CampaignContext, AttachmentContext } from "context";
+import {
+  AuthContext,
+  DashBoardContext,
+  BankContext,
+  BeneficiaryContext,
+  CampaignContext,
+  AttachmentContext,
+} from "context";
 import { Spinner } from "components/progressbar/global";
 import { formatDistance } from "date-fns";
-import { RiDeleteBin5Line } from "react-icons/ri";
+import { RiDeleteBin5Line, RiDeleteBin6Line } from "react-icons/ri";
+import { BiDotsVerticalRounded } from "react-icons/bi";
 import { apiService } from "utils";
 import { PreviewCampaign } from "../campaign/previewModal";
+import { VscDebugStepOver, VscPreview } from "react-icons/vsc";
 
 const Campaign = ({ item }: any) => {
   const ctx = useContext(DashBoardContext);
@@ -17,11 +33,22 @@ const Campaign = ({ item }: any) => {
   const ctx_b = useContext(BeneficiaryContext);
   const context_d = useContext(AttachmentContext);
   const bank = useContext(BankContext);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const handleContinue = () => {
+    handleClose();
     navigate(`campaign/${item._id}`, { replace: true });
   };
   const handleDelete = (id: string) => {
     ctx.setCampaignId(id);
+    handleClose();
     ctx.setOpenDelete(!ctx.openDelete);
   };
   const handlePreviewModal = async (id: string) => {
@@ -32,6 +59,7 @@ const Campaign = ({ item }: any) => {
       ctx_c.setCampaignData(result.data);
       context_d.setDocs(result.data);
       bank.setBankDetails(result.data?.bank);
+      handleClose();
       ctx_c.setPreviewOpen(true);
       ctx.setPreviewLoading(false);
     } catch (err) {
@@ -44,16 +72,56 @@ const Campaign = ({ item }: any) => {
         item.status === "IN_DRAFT" ? "wrapper_draft" : "wrapper_review"
       }
     >
-      {item.status === "IN_DRAFT" && (
-        <IconButton
-          className="deleteButton"
-          onClick={() => handleDelete(item._id)}
+      <div className="header-title">
+        <p className="title">{item.campaignName}</p>
+        <BiDotsVerticalRounded
+          size={16}
+          className="dots"
+          onClick={handleClick}
+        />
+        <Popover
+          anchorEl={anchorEl}
+          keepMounted
+          onClose={handleClose}
+          open={Boolean(anchorEl)}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          className="popover"
         >
-          <RiDeleteBin5Line color="red" />
-        </IconButton>
-      )}
+          {item.status === "IN_DRAFT" ? (
+            <>
+              <MenuItem onClick={handleContinue}>
+                <VscDebugStepOver className="menu-icon" />{" "}
+                <span className="card-menuitem">Continue</span>
+              </MenuItem>
 
-      <p className="title">{item.campaignName}</p>
+              <MenuItem onClick={() => handleDelete(item._id)}>
+                <RiDeleteBin6Line className="menu-icon" />{" "}
+                <span className="card-menuitem">Delete</span>
+              </MenuItem>
+            </>
+          ) : item.status === "IN_REVIEW" ? (
+            <MenuItem
+              onClick={() => {
+                handlePreviewModal(item._id);
+              }}
+            >
+              {ctx.loadingPreview ? (
+                <CircularProgress size={15} className="spinner"/>
+              ) : (
+                <VscPreview className="menu-icon" />
+              )}{" "}
+              <span className="card-menuitem">Preview</span>
+            </MenuItem>
+          ) : null}
+        </Popover>
+      </div>
       <div className="created">
         Created{" "}
         {formatDistance(new Date(item.createdDate), new Date(), {
@@ -68,25 +136,6 @@ const Campaign = ({ item }: any) => {
         {item.status}
       </span>
       <p className="desc">{item.description}</p>
-      <div>
-        {item.status === "IN_DRAFT" ? (
-          <DevButton
-            background="#2A415D"
-            color="white"
-            onClick={handleContinue}
-          >
-            Continue
-          </DevButton>
-        ) : (
-          <DevButton
-            primary
-            onClick={() => handlePreviewModal(item._id)}
-            isloading={ctx.loadingPreview}
-          >
-            Preview
-          </DevButton>
-        )}
-      </div>
     </div>
   );
 };
@@ -123,12 +172,11 @@ export const CampaignerDashboard: React.FC<RouteComponentProps> = () => {
               </div>
             )}
           </div>
-          <p>Campaigns</p>
           <div className="list">
             {data.campaigns && data.campaigns.length !== 0
               ? data.campaigns.map((item: any) => {
-                return <Campaign item={item} key={item._id} />;
-              })
+                  return <Campaign item={item} key={item._id} />;
+                })
               : null}
           </div>
           {data.campaigns.length === 0 && <DashboardCard />}
