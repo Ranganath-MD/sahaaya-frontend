@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from "react";
 import { socket } from "utils";
 import { CampaignContext } from "./campaignContext";
 
-export const BeneficiaryContext = createContext<any>({});
+export const BeneficiaryContext: React.Context<any> = createContext<any>({});
 
 export const BeneficiaryProvider: React.FC = ({ children }) => {
   const ctx = useContext(CampaignContext);

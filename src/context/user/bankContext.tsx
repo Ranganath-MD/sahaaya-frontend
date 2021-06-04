@@ -6,7 +6,7 @@ import { CampaignContext } from "./campaignContext";
 
 // import { apiService } from "utils";
 
-export const BankContext = createContext<any>({});
+export const BankContext: React.Context<any> = createContext<any>({});
 
 export const BankProvider: React.FC = ({ children }) => {
   const ctx = useContext(CampaignContext);

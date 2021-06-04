@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import { apiService, socket } from "utils";
 import { CampaignContext } from "./campaignContext";
 
-export const AttachmentContext = createContext<any>({});
+export const AttachmentContext: React.Context<any> = createContext<any>({});
 
 export const AttachmentProvider: React.FC = ({ children }) => {
   const ctx = useContext(CampaignContext);

@@ -11,7 +11,8 @@ import {
   CampaignerDashboard,
   CreateCampaign,
   CreateCampaignForm,
-  UserProfile
+  UserProfile,
+  AdminProfile
 } from "pages";
 import { Login, Register } from "pages/userAuth";
 import { socket } from "utils";
@@ -34,9 +35,8 @@ const App: React.FC = () => {
           <HowItWorks path="how-sahaaya-works" />
           <Register path="register" />
           <Login path="login" />
-          <AdminPrivateRoute path="admin" component={AdminDashboard}>
-            <AdminDashboard path="dashboard" />
-          </AdminPrivateRoute>
+          <AdminPrivateRoute path="admin/dashboard" component={AdminDashboard} />
+          <AdminPrivateRoute path="profile" component={AdminProfile}/>
           <PrivateRoute path="dashboard" component={CampaignerDashboard} />
           <PrivateRoute path="create-campaign" component={CreateCampaign} />
           <PrivateRoute path="campaign/:id" component={CreateCampaignForm} />

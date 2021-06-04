@@ -2,32 +2,45 @@ import React from "react";
 import { LayoutProvider } from "./layoutContext";
 import { AuthProvider } from "./authContext";
 import { RouteComponentProps, LocationProvider } from "@reach/router";
-import { CampaignProvider } from "./campaignContext";
+import { CampaignProvider } from "./user/campaignContext";
 import { BaseProvider } from "./baseContext";
-import { BeneficiaryProvider } from "./beneficiaryContext";
-import { AttachmentProvider } from "./attachmentContext";
-import { BankProvider } from "./bankContext";
-import { DashboardProvider } from "./dashboardContext";
-import { ProfileProvider } from "./profileContext";
+import { BeneficiaryProvider } from "./user/beneficiaryContext";
+import { AttachmentProvider } from "./user/attachmentContext";
+import { BankProvider } from "./user/bankContext";
+import { DashboardProvider } from "./user/dashboardContext";
+import { ProfileProvider } from "./user/profileContext";
+import { AdminDashboardProvider } from "./Admin/adminDashBoard";
+
+export const UserProvider: React.FC<RouteComponentProps> = ({ children }) => {
+  return (
+    <DashboardProvider>
+      <CampaignProvider>
+        <BeneficiaryProvider>
+          <AttachmentProvider>
+            <BankProvider>{children}</BankProvider>
+          </AttachmentProvider>
+        </BeneficiaryProvider>
+      </CampaignProvider>
+    </DashboardProvider>
+  );
+};
+
+export const AdminProvider: React.FC<RouteComponentProps> = ({ children }) => {
+  return <AdminDashboardProvider>{children}</AdminDashboardProvider>;
+};
 
 export const Provider: React.FC<RouteComponentProps> = ({ children }) => {
   return (
     <LocationProvider>
       <LayoutProvider>
         <BaseProvider>
-          <ProfileProvider>
-            <AuthProvider>
-              <DashboardProvider>
-                <CampaignProvider>
-                  <BeneficiaryProvider>
-                    <AttachmentProvider>
-                      <BankProvider>{children}</BankProvider>
-                    </AttachmentProvider>
-                  </BeneficiaryProvider>
-                </CampaignProvider>
-              </DashboardProvider>
-            </AuthProvider>
-          </ProfileProvider>
+          <AuthProvider>
+            <ProfileProvider>
+              <AdminProvider>
+                <UserProvider>{children}</UserProvider>
+              </AdminProvider>
+            </ProfileProvider>
+          </AuthProvider>
         </BaseProvider>
       </LayoutProvider>
     </LocationProvider>
@@ -36,10 +49,11 @@ export const Provider: React.FC<RouteComponentProps> = ({ children }) => {
 
 export * from "./layoutContext";
 export * from "./authContext";
-export * from "./campaignContext";
 export * from "./baseContext";
-export * from "./beneficiaryContext";
-export * from "./bankContext";
-export * from "./dashboardContext";
-export * from "./attachmentContext";
-export * from "./profileContext";
+export * from "./user/attachmentContext";
+export * from "./user/campaignContext";
+export * from "./user/beneficiaryContext";
+export * from "./user/bankContext";
+export * from "./user/dashboardContext";
+export * from "./user/profileContext";
+export * from "./Admin/adminDashBoard";

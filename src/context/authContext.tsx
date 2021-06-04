@@ -1,9 +1,9 @@
 import { navigate } from "@reach/router";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { apiService } from "utils";
-import { ProfileContext } from "./profileContext";
+import { ProfileContext } from "./user/profileContext";
 
-export const AuthContext = createContext<any>({});
+export const AuthContext: React.Context<any> = createContext<any>({});
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem("token"));
@@ -22,7 +22,6 @@ export const AuthProvider: React.FC = ({ children }) => {
     profile.setData(user.data);
   };
   useEffect(() => {
-    console.log("adjij&&&&&&&&&&", isAuthenticated)
     if(isAuthenticated){
       getProfile();
     }

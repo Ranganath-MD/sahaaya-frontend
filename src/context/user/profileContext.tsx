@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 import { apiService, socket } from "utils";
 
-export const ProfileContext = createContext<any>({});
+export const ProfileContext: React.Context<any> = createContext<any>({});
 
 export const ProfileProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState({

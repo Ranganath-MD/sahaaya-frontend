@@ -1,4 +1,4 @@
-export * from "./admin/Dashboard";
+export * from "./admin";
 export * from "./browseCampaigns";
 export * from "./campaigner/campaign";
 export * from "./campaigner/campaign/campaignForm";

@@ -1,7 +1,7 @@
 import { ExpandablePanel, CloudinaryImage } from "components";
 import { Uplaod } from "components/dropzone";
 import { CampaignContext } from "context";
-import { AttachmentContext } from "context/attachmentContext";
+import { AttachmentContext } from "context/user/attachmentContext";
 import React, { useState, useEffect, useContext, useMemo } from "react";
 import { RiAttachmentLine, RiCloseCircleFill } from "react-icons/ri";
 import "./campaign.scss";

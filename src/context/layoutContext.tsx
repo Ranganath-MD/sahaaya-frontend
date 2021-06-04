@@ -6,7 +6,7 @@ interface InitState {
   handleDrawer?: (e: React.KeyboardEvent | React.MouseEvent) => void;
 }
 
-export const LayoutContext = createContext<InitState>({});
+export const LayoutContext: React.Context<any> = createContext<InitState>({});
 
 export const LayoutProvider: React.FC = ({ children }) => {
   const [ openDrawer, setOpenDrawer ] = useState(false);

@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 import { apiService } from "utils";
 
-export const DashBoardContext = createContext<any>({});
+export const DashBoardContext: React.Context<any> = createContext<any>({});
 
 export const DashboardProvider: React.FC = ({ children }) => {
   const [campaigns, setCampaigns] = useState([]);

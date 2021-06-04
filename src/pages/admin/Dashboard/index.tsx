@@ -1,11 +1,11 @@
 import { RouteComponentProps } from "@reach/router";
-import React from "react";
-import { Seo } from "components";
-// import { AuthContext } from "../../../context";
+import React, { useContext } from "react";
+import { NavigationSidebar, Seo } from "components";
+import { AdminDashboardContext } from "context";
 // import { apiService } from "../../../utils/axiosBaseRequest";
 
 export const AdminDashboard: React.FC<RouteComponentProps> = () => {
-  // const context = useContext(AuthContext);
+  const ctx = useContext(AdminDashboardContext);
 
   // const getCategories = async () => {
 
@@ -17,8 +17,14 @@ export const AdminDashboard: React.FC<RouteComponentProps> = () => {
 
   return (
     <>
-      <Seo title="Admin Dashboard"/>
+      <Seo title="Admin Dashboard" />
       <h1>Admin Dashboard</h1>
+
+      <NavigationSidebar
+        variant="permanent"
+        open={ctx.openSideBar}
+        onClose={() => ctx.setOpenSideBar(!ctx.openSideBar)}
+      />
     </>
   );
 };

@@ -7,7 +7,8 @@ import farmer from "../assets/ill/farmer.svg";
 import talents from "../assets/ill/talents.svg";
 import movies from "../assets/ill/movies.svg";
 import startup from "../assets/ill/startup.svg";
-export const BaseContext = createContext<any>({});
+
+export const BaseContext: React.Context<any> = createContext<any>({});
 
 export const BaseProvider: React.FC = ({ children }) => {
   const [ categories, setCategories ] = useState<ICategory | null>(null);
