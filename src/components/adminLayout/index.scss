@@ -1,0 +1,124 @@
+.sidebar_container {
+  min-height: 90vh;
+  box-shadow: 1px 1px 5px #0000001f;
+  // border-right: 2px solid #0000ff82;
+  color: #767676;
+  position: relative;
+
+  nav {
+    height: 75vh;
+    overflow: scroll;
+    // scrollbar-color: blue orange;
+    // scrollbar-width: 8px;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    
+    // &::-webkit-scrollbar-track {
+    //   background: transparent;
+    // }
+    
+    // &::-webkit-scrollbar-thumb {
+    //   background-color: #CCCCFF;
+    // }
+  }
+}
+
+.right_arrow {
+  position: absolute;
+  right: -12px;
+  top: 20px;
+  z-index: 1;
+  svg {
+    width: 22px;
+    height: 22px;
+    background-color: #0000ff;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+.sidebar_header {
+  width: 100%;
+  background-color: #CCCCFF;
+  color: black;
+  .avatar {
+    width: 5px;
+    height: 5px;
+  }
+}
+.sub_item {
+  margin-left: 20px !important;
+}
+.list_item_selected {
+  border-right: 4px solid #2a415d !important;
+  .list_item_text {
+    color: #0052cc;
+    font-weight: 600;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .left_icon {
+    margin: 0px 10px;
+    svg {
+      width: 20px;
+      height: 20px;
+
+      path {
+        stroke: #0052cc;
+        fill: lightblue;
+      }
+    }
+  }
+
+}
+.list_item {
+  .list_item_text {
+    color: #42526e;
+    font-weight: 600;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .left_icon {
+    margin: 0px 10px;
+    svg {
+      width: 20px;
+      height: 20px;
+
+      path {
+        stroke: #42526e;
+      }
+    }
+  }
+
+  &:hover {
+    color: #0052cc;
+    .left_icon {
+      svg {
+        path {
+          stroke: #0052cc;
+          fill: lightblue;
+        }
+      }
+    }
+    .list_item_text {
+      color: #0052cc;
+    }
+  }
+  
+}
+.list_item_text {
+  overflow: hidden;
+}
+.profile_menu {
+  cursor: pointer;
+  background-color: #2A415D !important;
+  color: white !important;
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 16px !important;
+  border: 3px solid #2a415d;
+}

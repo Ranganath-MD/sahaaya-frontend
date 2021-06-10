@@ -34,13 +34,13 @@ export const Provider: React.FC<RouteComponentProps> = ({ children }) => {
     <LocationProvider>
       <LayoutProvider>
         <BaseProvider>
-          <AuthProvider>
-            <ProfileProvider>
+          <ProfileProvider>
+            <AuthProvider>
               <AdminProvider>
                 <UserProvider>{children}</UserProvider>
               </AdminProvider>
-            </ProfileProvider>
-          </AuthProvider>
+            </AuthProvider>
+          </ProfileProvider>
         </BaseProvider>
       </LayoutProvider>
     </LocationProvider>

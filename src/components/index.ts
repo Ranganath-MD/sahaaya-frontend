@@ -18,4 +18,4 @@ export * from "./progressbar";
 export * from "./cloudinaryImage";
 export * from "./modals";
 export * from "./avatar";
-export * from "./sidebar";
+export * from "./adminLayout";

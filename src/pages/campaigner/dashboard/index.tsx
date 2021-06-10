@@ -1,8 +1,6 @@
 import {
   CircularProgress,
   Container,
-  IconButton,
-  Menu,
   MenuItem,
   Popover,
 } from "@material-ui/core";
@@ -21,7 +19,7 @@ import {
 } from "context";
 import { Spinner } from "components/progressbar/global";
 import { formatDistance } from "date-fns";
-import { RiDeleteBin5Line, RiDeleteBin6Line } from "react-icons/ri";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { apiService } from "utils";
 import { PreviewCampaign } from "../campaign/previewModal";
@@ -175,8 +173,8 @@ export const CampaignerDashboard: React.FC<RouteComponentProps> = () => {
           <div className="list">
             {data.campaigns && data.campaigns.length !== 0
               ? data.campaigns.map((item: any) => {
-                  return <Campaign item={item} key={item._id} />;
-                })
+                return <Campaign item={item} key={item._id} />;
+              })
               : null}
           </div>
           {data.campaigns.length === 0 && <DashboardCard />}

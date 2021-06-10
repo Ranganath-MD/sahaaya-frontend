@@ -11,8 +11,7 @@ import {
   ReadOnlyMaskInput,
 } from "components";
 import { AuthContext, ProfileContext } from "context";
-import { AiOutlineEdit } from "react-icons/ai";
-import { Container, Grid, IconButton } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 import styled from "styled-components";
 import "./index.scss";
 import { MdEdit } from "react-icons/md";

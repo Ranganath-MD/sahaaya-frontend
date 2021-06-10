@@ -1,30 +1,24 @@
-import { RouteComponentProps } from "@reach/router";
+import { RouteComponentProps, useLocation } from "@reach/router";
 import React, { useContext } from "react";
-import { NavigationSidebar, Seo } from "components";
-import { AdminDashboardContext } from "context";
-// import { apiService } from "../../../utils/axiosBaseRequest";
+import { AdminLayout, Seo } from "components";
+import { AdminDashboardContext, ProfileContext } from "context";
 
 export const AdminDashboard: React.FC<RouteComponentProps> = () => {
   const ctx = useContext(AdminDashboardContext);
-
-  // const getCategories = async () => {
-
-  // };
-
-  // useEffect(() => {
-  //   getCategories();
-  // }, []);
+  const profile = useContext(ProfileContext);
+  const location = useLocation();
 
   return (
     <>
       <Seo title="Admin Dashboard" />
-      <h1>Admin Dashboard</h1>
-
-      <NavigationSidebar
-        variant="permanent"
-        open={ctx.openSideBar}
-        onClose={() => ctx.setOpenSideBar(!ctx.openSideBar)}
-      />
+      <AdminLayout
+        width={"250px"}
+        footerText={profile?.user.username}
+        footerSecondaryText={profile?.user.email}
+        pathName={location && location.pathname}
+      >
+        <h1>Admin Dashboard</h1>
+      </AdminLayout>
     </>
   );
 };

@@ -8,6 +8,7 @@ export const ProfileProvider: React.FC = ({ children }) => {
     id: "",
     username: "",
     phone: null,
+    email: "",
     about: "",
     work: "",
     city: "",
@@ -23,6 +24,7 @@ export const ProfileProvider: React.FC = ({ children }) => {
   const setData = (data: any) => {
     setUser({
       id: data?._id,
+      email: data?.email,
       username: data?.username,
       phone: data?.phone,
       about: data?.about,
