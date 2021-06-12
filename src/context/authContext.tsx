@@ -1,6 +1,6 @@
 import { navigate } from "@reach/router";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { apiService } from "utils";
+import { apiService, configureSocket, socket } from "utils";
 import { ProfileContext } from "./user/profileContext";
 
 export const AuthContext: React.Context<any> = createContext<any>({});
@@ -105,6 +105,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         handleLogin(result.data);
         handleIsAuthenticated(true);
         getProfile();
+        configureSocket();
         setCurrentUser(result.data);
         reset();
       }
@@ -121,6 +122,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         setShowMessageBox(true);
         setMessage(result.message);
         setIsLoading(false);
+        socket.off();
       }
       if (result) {
         setIsLoading(false);
