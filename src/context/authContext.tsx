@@ -1,6 +1,6 @@
 import { navigate } from "@reach/router";
 import React, { createContext, useEffect, useState } from "react";
-import { apiService } from "utils";
+import { apiService, configureSocket, socket } from "utils";
 
 export const AuthContext = createContext<any>({});
 
@@ -97,6 +97,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         setToken(result.data);
         handleLogin(result.data);
         handleIsAuthenticated(true);
+        configureSocket();
         setCurrentUser(result.data);
         reset();
       }
@@ -112,6 +113,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         setShowMessageBox(true);
         setMessage(result.message);
         setIsLoading(false);
+        socket.off();
       }
       if (result) {
         setIsLoading(false);

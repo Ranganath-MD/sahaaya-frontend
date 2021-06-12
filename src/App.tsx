@@ -13,17 +13,8 @@ import {
   CreateCampaignForm,
 } from "pages";
 import { Login, Register } from "pages/userAuth";
-import { socket } from "utils";
 
 const App: React.FC = () => {
-  useEffect(() => {
-    socket.on("authenticated", (data) => {
-      // eslint-disable-next-line no-console
-      console.log("connected with", data);
-    });
-    socket.emit("init", { data: "ping" });
-  }, []);
-
   return (
     <Provider>
       <Layout>
