@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Provider } from "context";
 import { Layout, PrivateRoute, AdminPrivateRoute } from "components";
 import { Router } from "@reach/router";
@@ -33,7 +33,7 @@ const App: React.FC = () => {
           <PrivateRoute path="dashboard" component={CampaignerDashboard} />
           <PrivateRoute path="create-campaign" component={CreateCampaign} />
           <PrivateRoute path="campaign/:id" component={CreateCampaignForm} />
-          <PrivateRoute path="profile" component={UserProfile} />
+          <PrivateRoute path="/user/profile" component={UserProfile} />
           <NotFound path="/:statuscode" default />
         </Router>
       </Layout>

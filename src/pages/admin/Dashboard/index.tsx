@@ -13,8 +13,8 @@ export const AdminDashboard: React.FC<RouteComponentProps> = () => {
       <Seo title="Admin Dashboard" />
       <AdminLayout
         width={"250px"}
-        footerText={profile?.user.username}
-        footerSecondaryText={profile?.user.email}
+        headerText={profile?.user.username}
+        headerSecondaryText={profile?.user.email}
         pathName={location && location.pathname}
       >
         <h1>Admin Dashboard</h1>

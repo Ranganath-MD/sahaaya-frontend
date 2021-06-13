@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from "react";
+import { useWindowsize } from "hooks";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { RiArrowRightCircleLine, RiArrowLeftCircleFill } from "react-icons/ri";
 import styled from "styled-components";
 import { SideBar } from "./sidebar";
@@ -9,44 +10,66 @@ interface IGrid {
 }
 const Grid = styled.div<IGrid>`
   display: grid;
-  grid-template-columns: ${(props) => (props.open ? props.width ? `${props.width} 1fr` : "200px 1fr" : "75px 1fr")};
+  grid-template-columns: ${(props) =>
+    props.open
+      ? props.width
+        ? `${props.width} 1fr`
+        : "200px 1fr"
+      : "75px 1fr"};
   grid-gap: 20px;
 `;
 
 interface ILayoutProps {
   children?: React.ReactNode;
-  footerText?: string;
-  footerSecondaryText?: string;
+  headerText?: string;
+  headerSecondaryText?: string;
   width?: string;
   pathName?: string;
 }
 
 export const AdminLayout: React.FC<ILayoutProps> = ({ ...props }) => {
   const [openSidebar, setOpenSidebar] = useState(true);
-  const handleOpenSidebar = () => {
-    setOpenSidebar(!openSidebar);
-  };
+  const size = useWindowsize();
+  const handleOpenSidebar = useCallback((input: boolean) => {
+    setOpenSidebar(input);
+  }, []);
+
+  useEffect(() => {
+    if (size.width < 700) {
+      setOpenSidebar(false);
+    } else {
+      setOpenSidebar(true);
+    }
+  }, [size]);
 
   const sidebar = useMemo(
     () => (
       <SideBar
         openSidebar={openSidebar}
-        footerText={props.footerText}
-        footerSecondaryText={props.footerSecondaryText}
+        headerText={props.headerText}
+        headerSecondaryText={props.headerSecondaryText}
         pathName={props.pathName}
       />
     ),
-    [openSidebar, props]
+    [props]
   );
 
   return (
     <Grid open={openSidebar} width={props.width as string}>
       <div className="sidebar_container">
         <div className="right_arrow">
-          {openSidebar ? (
-            <RiArrowLeftCircleFill onClick={handleOpenSidebar} />
-          ) : (
-            <RiArrowRightCircleLine onClick={handleOpenSidebar} />
+          {size.width > 700 && (
+            <div>
+              {openSidebar ? (
+                <RiArrowLeftCircleFill
+                  onClick={() => handleOpenSidebar(false)}
+                />
+              ) : (
+                <RiArrowRightCircleLine
+                  onClick={() => handleOpenSidebar(true)}
+                />
+              )}
+            </div>
           )}
         </div>
         {sidebar}

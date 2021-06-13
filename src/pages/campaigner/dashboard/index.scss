@@ -64,6 +64,8 @@
   font-size: 1.2rem;
   font-weight: bold;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .desc {
     font-size: 12px;

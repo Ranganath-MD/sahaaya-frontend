@@ -12,8 +12,8 @@ export const ChangePassword: React.FC<RouteComponentProps> = () => {
       <Seo title={`${profile?.user.username} - Profile`}  />
       <AdminLayout
         width={"250px"}
-        footerText={profile?.user.username}
-        footerSecondaryText={profile?.user.email}
+        headerText={profile?.user.username}
+        headerSecondaryText={profile?.user.email}
         pathName={location && location.pathname}
       >
         <h1>Change password</h1>

@@ -12,25 +12,26 @@ import { sidebaritems, ItemProps } from "./items";
 
 interface ISidebar {
   openSidebar: boolean;
-  footerText?: string;
-  footerSecondaryText?: string;
+  headerText?: string;
+  headerSecondaryText?: string;
   pathName?: string;
 }
 
 export const SideBar: React.FC<ISidebar> = ({
   openSidebar,
-  footerText,
-  footerSecondaryText,
+  headerText,
+  headerSecondaryText,
   pathName,
 }) => {
+
   return (
     <>
       <div className="sidebar_header">
         <Tooltip
           title={
             <div>
-              <p style={{ margin: "5px 0" }}>{footerText}</p>
-              <span>{footerSecondaryText}</span>
+              <p style={{ margin: "5px 0" }}>{headerText}</p>
+              <span>{headerSecondaryText}</span>
             </div>
           }
           arrow
@@ -43,8 +44,8 @@ export const SideBar: React.FC<ISidebar> = ({
             {openSidebar && (
               <ListItemText
                 className="list_item_text"
-                primary={footerText}
-                secondary={footerSecondaryText}
+                primary={headerText}
+                secondary={headerSecondaryText}
               />
             )}
           </ListItem>

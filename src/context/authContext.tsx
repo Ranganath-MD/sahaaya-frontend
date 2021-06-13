@@ -49,7 +49,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
   const openProfile = () => {
     setAnchorEl(null);
-    navigate("/profile");
+    navigate("/user/profile");
   };
 
   const setToken = (user: any) => {
