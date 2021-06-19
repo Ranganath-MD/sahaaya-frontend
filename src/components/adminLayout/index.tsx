@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@material-ui/core";
 import { useWindowsize } from "hooks";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { RiArrowRightCircleLine, RiArrowLeftCircleFill } from "react-icons/ri";
@@ -16,7 +17,6 @@ const Grid = styled.div<IGrid>`
         ? `${props.width} 1fr`
         : "200px 1fr"
       : "75px 1fr"};
-  grid-gap: 20px;
 `;
 
 interface ILayoutProps {
@@ -74,7 +74,23 @@ export const AdminLayout: React.FC<ILayoutProps> = ({ ...props }) => {
         </div>
         {sidebar}
       </div>
-      <div>{props.children}</div>
+      <div>
+        <div className="breadcrumb">
+          <Breadcrumbs>
+            <p>Admin</p>
+            {props.pathName &&
+              props.pathName
+                .split("/")
+                .slice(1)
+                .map((x: string) => {
+                  return <p key={x} className="breadcrumb-text">{x}</p>;
+                })}
+          </Breadcrumbs>
+        </div>
+        <div className="children">
+          {props.children}
+        </div>
+      </div>
     </Grid>
   );
 };

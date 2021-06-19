@@ -17,7 +17,17 @@ export const AdminDashboard: React.FC<RouteComponentProps> = () => {
         headerSecondaryText={profile?.user.email}
         pathName={location && location.pathname}
       >
-        <h1>Admin Dashboard</h1>
+        <div>
+          <div>
+            <h3>#Campaigns</h3>
+          </div>
+          <div>
+            <h3>#Campaigners</h3>
+          </div>
+          <div>
+            <h3>#Campaigns</h3>
+          </div>
+        </div>
       </AdminLayout>
     </>
   );

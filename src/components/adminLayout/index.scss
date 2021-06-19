@@ -24,7 +24,9 @@
     // }
   }
 }
-
+.children {
+  padding: 20px;
+}
 .right_arrow {
   position: absolute;
   right: -12px;
@@ -105,3 +107,11 @@
   font-size: 16px !important;
   border: 3px solid #2a415d;
 }
+
+.breadcrumb {
+  margin: 10px 20px;
+  .breadcrumb-text {
+    text-transform: capitalize;
+  }
+}
+
