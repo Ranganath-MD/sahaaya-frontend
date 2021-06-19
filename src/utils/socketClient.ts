@@ -1,6 +1,5 @@
 import { io } from "socket.io-client";
 import { config } from "../config";
-import { apiService } from "./axiosBaseRequest";
 
 export const configureSocket = () => {
   const connection = io(
@@ -8,11 +7,10 @@ export const configureSocket = () => {
     {
       withCredentials: true,
       reconnection: true,
-      transports: ["websocket"],
-      query: { token: apiService.service.defaults.headers["Authorization"] },
+      transports: ["websocket"]
     }
   );
-
+  connection.connect();
   return connection;
 };
 

@@ -13,7 +13,10 @@ import {
   CreateCampaignForm,
   UserProfile,
   AdminProfile,
-  ChangePassword
+  ChangePassword,
+  Analytics,
+  CampaignRequests,
+  Settings
 } from "pages";
 import { Login, Register } from "pages/userAuth";
 
@@ -30,6 +33,9 @@ const App: React.FC = () => {
           <AdminPrivateRoute path="admin/dashboard" component={AdminDashboard} />
           <AdminPrivateRoute path="profile" component={AdminProfile}/>
           <AdminPrivateRoute path="profile/change-password" component={ChangePassword}/>
+          <AdminPrivateRoute path="analytics" component={Analytics}/>
+          <AdminPrivateRoute path="campaign-requests" component={CampaignRequests}/>
+          <AdminPrivateRoute path="settings" component={Settings}/>
           <PrivateRoute path="dashboard" component={CampaignerDashboard} />
           <PrivateRoute path="create-campaign" component={CreateCampaign} />
           <PrivateRoute path="campaign/:id" component={CreateCampaignForm} />

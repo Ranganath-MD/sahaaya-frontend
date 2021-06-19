@@ -1,5 +1,4 @@
-import { IoSpeedometerOutline } from "react-icons/io5";
-import { GrUserAdmin } from "react-icons/gr";
+import { FcSelfServiceKiosk, FcManager, FcLineChart, FcOrgUnit, FcKey, FcSettings } from "react-icons/fc";
 
 export interface ItemProps {
   name: string;
@@ -15,32 +14,40 @@ export interface ISideBarItemProps extends ItemProps {
 export const sidebaritems: ISideBarItemProps[] = [
   {
     name: "Dashboard",
-    leftIcon: IoSpeedometerOutline,
+    leftIcon: FcSelfServiceKiosk,
     route: "/admin/dashboard",
     level: 1
   },
-  // {
-  //   name: "Users",
-  //   leftIcon: FiUsers,
-  //   route: "/profile",
-  // },
-  // {
-  //   name: "Analytics",
-  //   leftIcon: GrAnalytics,
-  //   route: ""
-  // },
+  {
+    name: "Requests",
+    leftIcon: FcOrgUnit,
+    route: "/campaign-requests",
+    level: 1
+  },
+  {
+    name: "Analytics",
+    leftIcon: FcLineChart,
+    route: "/analytics",
+    level: 1
+  },
   {
     name: "Profile",
-    leftIcon: GrUserAdmin,
+    leftIcon: FcManager,
     route: "/profile",
     level: 1,
     collapsibleItem: [
       {
         name: "Change Password",
-        leftIcon: IoSpeedometerOutline,
+        leftIcon: FcKey,
         route: "/profile/change-password",
         level: 2
       },
     ]
+  },
+  {
+    name: "Settings",
+    leftIcon: FcSettings,
+    route: "/settings",
+    level: 1
   }
 ];

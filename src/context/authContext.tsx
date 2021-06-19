@@ -105,7 +105,6 @@ export const AuthProvider: React.FC = ({ children }) => {
         handleLogin(result.data);
         handleIsAuthenticated(true);
         getProfile();
-        configureSocket();
         setCurrentUser(result.data);
         reset();
       }

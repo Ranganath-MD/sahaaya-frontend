@@ -65,11 +65,6 @@
     svg {
       width: 20px;
       height: 20px;
-
-      path {
-        stroke: #0052cc;
-        fill: lightblue;
-      }
     }
   }
 
@@ -87,23 +82,11 @@
     svg {
       width: 20px;
       height: 20px;
-
-      path {
-        stroke: #42526e;
-      }
     }
   }
 
   &:hover {
     color: #0052cc;
-    .left_icon {
-      svg {
-        path {
-          stroke: #0052cc;
-          fill: lightblue;
-        }
-      }
-    }
     .list_item_text {
       color: #0052cc;
     }
