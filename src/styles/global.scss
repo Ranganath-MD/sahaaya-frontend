@@ -1,4 +1,4 @@
-$font-stack: Inter, "Inter UI", Helvetica, Arial, sans-serif;
+$font-stack: 'Arvo', serif;
 $background: #ffffff;
 $primary-color: #2A415D;
 $secondary-color: #0db469;
@@ -11,6 +11,12 @@ body{
   background-color: $background;
   overflow: visible !important;
   padding: 0 !important;
+}
+.MuiTypography-body1 { 
+  font-family: $font-stack !important;
+}
+#custom-button { 
+  font-family: $font-stack !important;
 }
 .MuiDialog-paperFullScreen::-webkit-scrollbar {
   width: 10px;               /* width of the entire scrollbar */

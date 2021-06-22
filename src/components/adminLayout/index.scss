@@ -25,7 +25,7 @@
   }
 }
 .children {
-  padding: 20px;
+  padding: 0 20px;
 }
 .right_arrow {
   position: absolute;
@@ -57,7 +57,7 @@
   border-right: 4px solid #2a415d !important;
   .list_item_text {
     color: #0052cc;
-    font-weight: 600;
+    // font-weight: 600;
     margin: 0;
     overflow: hidden;
   }
@@ -74,7 +74,7 @@
 .list_item {
   .list_item_text {
     color: #42526e;
-    font-weight: 600;
+    // font-weight: 600;
     margin: 0;
     overflow: hidden;
   }
@@ -109,7 +109,7 @@
 }
 
 .breadcrumb {
-  margin: 10px 20px;
+  margin: 10px 30px;
   .breadcrumb-text {
     text-transform: capitalize;
   }

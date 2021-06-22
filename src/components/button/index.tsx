@@ -50,6 +50,7 @@ export const DevButton: React.FC<IButtonProps> = ({
 }) => {
   return (
     <Button
+      id="custom-button"
       onClick={props.disabled ? undefined : props.onClick}
       primary={props.primary}
       disabled={props.disabled}
