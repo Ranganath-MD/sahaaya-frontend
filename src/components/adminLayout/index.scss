@@ -107,7 +107,13 @@
   font-size: 16px !important;
   border: 3px solid #2a415d;
 }
+.sec_container {
+  overflow-x: scroll;
 
+  &::-webkit-scrollbar {
+    display: none
+  }
+}
 .breadcrumb {
   margin: 10px 30px;
   .breadcrumb-text {

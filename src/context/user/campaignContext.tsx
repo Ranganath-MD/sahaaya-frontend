@@ -1,5 +1,5 @@
 import { navigate } from "@reach/router";
-import { addDays, formatISO } from "date-fns";
+import { addDays, formatISO, format } from "date-fns";
 import React, { createContext, useState } from "react";
 import { apiService, socket } from "utils";
 
@@ -61,6 +61,7 @@ export const CampaignProvider: React.FC = ({ children }) => {
   const changeStatus = () => {
     setOpenSuccess(!openSuccess);
     updateCampaignDetails(campaignId, "status", "IN_REVIEW");
+    updateCampaignDetails(campaignId, "submittedDate", format(new Date(), "dd/MM/yyyy"));
   };
 
   const handleSaveStep1 = () => {

@@ -39,9 +39,9 @@ export const MaskedInput: React.FC<Props> = ({ error = false, ...props }) => {
   );
 };
 
-export const ReadOnlyMaskInput = ({ ...props }) => {
+export const ReadOnlyMaskInput = ({ wrapperStyle, ...props }: any) => {
   return (
-    <p>
+    <p style={wrapperStyle}>
       <NumberFormat
         {...props}
         allowNegative={false}

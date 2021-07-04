@@ -19,4 +19,5 @@ export * from "./cloudinaryImage";
 export * from "./modals";
 export * from "./avatar";
 export * from "./adminLayout";
+export * from "./tables";
 export * from "./expandableCard";

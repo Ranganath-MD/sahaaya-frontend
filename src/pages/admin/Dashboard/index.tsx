@@ -1,5 +1,5 @@
 import { RouteComponentProps, useLocation } from "@reach/router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AdminLayout, Seo, DevCard, DevCardHeader } from "components";
 import { AdminDashboardContext, ProfileContext } from "context";
 import styled from "styled-components";
@@ -43,6 +43,10 @@ export const AdminDashboard: React.FC<RouteComponentProps> = () => {
     },
   ];
 
+  useEffect(() => {
+    ctx.fetchCampaignsUnderReview();
+  }, []);
+
   return (
     <>
       <Seo title="Admin Dashboard" />
@@ -70,13 +74,13 @@ export const AdminDashboard: React.FC<RouteComponentProps> = () => {
           </DataCard>
         </div>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={8} md={8}>
+          <Grid item xs={12} sm={12} md={8}>
             <DevCard>
               <DevCardHeader headerText="All Campaigns" menuItems={menuItems} />
               {expanded && <CampaignList />}
             </DevCard>
           </Grid>
-          <Grid item xs={12} sm={4} md={4}>
+          <Grid item xs={12} sm={12} md={4}>
             <DevCard>
               <DevCardHeader headerText="Categories" showMenu={false}/>
               <Categories />

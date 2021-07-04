@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { BiDotsHorizontal } from "react-icons/bi";
 import styled from "styled-components";
 import {
-  CircularProgress,
-  Container,
   MenuItem,
   Popover,
 } from "@material-ui/core";

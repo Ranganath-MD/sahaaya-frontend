@@ -1,6 +1,6 @@
 import { navigate } from "@reach/router";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { apiService, configureSocket, socket } from "utils";
+import { apiService, socket } from "utils";
 import { ProfileContext } from "./user/profileContext";
 
 export const AuthContext: React.Context<any> = createContext<any>({});

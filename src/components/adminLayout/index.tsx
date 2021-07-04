@@ -74,7 +74,7 @@ export const AdminLayout: React.FC<ILayoutProps> = ({ ...props }) => {
         </div>
         {sidebar}
       </div>
-      <div>
+      <div className="sec_container">
         <div className="breadcrumb">
           <Breadcrumbs>
             <p>Admin</p>
