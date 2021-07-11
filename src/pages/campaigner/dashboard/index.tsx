@@ -72,11 +72,15 @@ const Campaign = ({ item }: any) => {
     >
       <div className="header-title">
         <p className="title">{item.campaignName}</p>
-        <BiDotsVerticalRounded
-          size={16}
-          className="dots"
-          onClick={handleClick}
-        />
+        {
+          item.status === "IN_DRAFT" && item.status === "IN_REVIEW" && (
+            <BiDotsVerticalRounded
+              size={16}
+              className="dots"
+              onClick={handleClick}
+            />
+          )
+        }
         <Popover
           anchorEl={anchorEl}
           keepMounted

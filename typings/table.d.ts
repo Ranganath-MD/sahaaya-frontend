@@ -25,6 +25,7 @@ interface IDevTableProps extends DevTable {
     headerText?: string;
     handleRefresh?: () => void;
     showLoading?: boolean;
+    noRefresh?: boolean;
   };
   paginationProps?: {
     rowsPerPageOptions: any;

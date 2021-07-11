@@ -18,6 +18,8 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
   const [openRejectDialog, setOpenRejectDialog] = useState<boolean>(false);
   const [isStatusChanging, setStatusChanging] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [dashboardData, setDashboardData] = React.useState<null | HTMLElement>(null);
+
   const profile = useContext(ProfileContext);
   const statusChangedBy = {
     name: profile.user.username,
@@ -32,6 +34,17 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const fetchDashboardData = async () => {
+    setLoading(true);
+    try {
+      const result = await apiService.get("/admin/dashboard");
+      setDashboardData(result.data);
+      setLoading(false);
+    }catch {
+      setLoading(false);
+    }
+  };
+
   const fetchCampaignsUnderReview = async () => {
     setLoading(true);
     try {
@@ -129,6 +142,8 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
         handleReject,
         campaignId,
         setCampaignId,
+        fetchDashboardData,
+        dashboardData
       }}
     >
       {children}

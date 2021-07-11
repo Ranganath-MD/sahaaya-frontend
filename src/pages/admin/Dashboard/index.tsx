@@ -1,11 +1,12 @@
 import { RouteComponentProps, useLocation } from "@reach/router";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { AdminLayout, Seo, DevCard, DevCardHeader } from "components";
 import { AdminDashboardContext, ProfileContext } from "context";
 import styled from "styled-components";
 import "./dashboard.scss";
 import { FcMindMap, FcDonate, FcPortraitMode } from "react-icons/fc";
 import { CampaignList } from "./allCampaigns";
+import { Campaigners } from "./campaigners";
 import { Grid } from "@material-ui/core";
 import { Categories } from "./categories";
 
@@ -34,17 +35,9 @@ export const AdminDashboard: React.FC<RouteComponentProps> = () => {
   const ctx = useContext(AdminDashboardContext);
   const profile = useContext(ProfileContext);
   const location = useLocation();
-  const [expanded, setExpanded] = useState<boolean>(true);
-
-  const menuItems = [
-    {
-      name: expanded ? "Minimize" : "Expand",
-      onClick: () => setExpanded(!expanded),
-    },
-  ];
 
   useEffect(() => {
-    ctx.fetchCampaignsUnderReview();
+    ctx.fetchDashboardData();
   }, []);
 
   return (
@@ -60,7 +53,7 @@ export const AdminDashboard: React.FC<RouteComponentProps> = () => {
           <DataCard borderColor="#3f51b5">
             <FcMindMap className="icon" />
             <p>Total Campaigns</p>
-            <h1>0</h1>
+            <h1>{ctx.dashboardData?.total_campaigns}</h1>
           </DataCard>
           <DataCard borderColor="#ff9800">
             <FcDonate className="icon" />
@@ -70,20 +63,23 @@ export const AdminDashboard: React.FC<RouteComponentProps> = () => {
           <DataCard borderColor="#0db469c2">
             <FcPortraitMode className="icon" />
             <p>Total Fundrisers</p>
-            <h1>0</h1>
+            <h1>{ctx.dashboardData?.total_campaigners}</h1>
           </DataCard>
         </div>
+        <div className="campaign-list">
+          <CampaignList />
+        </div>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} md={8}>
-            <DevCard>
-              <DevCardHeader headerText="All Campaigns" menuItems={menuItems} />
-              {expanded && <CampaignList />}
-            </DevCard>
-          </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <DevCard>
               <DevCardHeader headerText="Categories" showMenu={false}/>
               <Categories />
+            </DevCard>
+          </Grid>
+          <Grid item xs={12} sm={12} md={6}>
+            <DevCard>
+              <DevCardHeader headerText="Fundrisers" showMenu={false}/>
+              <Campaigners />
             </DevCard>
           </Grid>
         </Grid>

@@ -1,6 +1,5 @@
 import React from "react";
-import { TableCell } from "@material-ui/core";
-import { ReadOnlyMaskInput } from "components";
+import { ReadOnlyMaskInput, DevTableCell } from "components";
 
 interface ICampaignItem {
   item: any;
@@ -9,9 +8,9 @@ export const CampaignItem: React.FC<ICampaignItem> = ({ item }) => {
 
   return (
     <>
-      <TableCell>{item.campaignName}</TableCell>
-      <TableCell>{item.category}</TableCell>
-      <TableCell>
+      <DevTableCell>{item.campaignName}</DevTableCell>
+      <DevTableCell>{item.category}</DevTableCell>
+      <DevTableCell>
         <ReadOnlyMaskInput
           displayType={"text"}
           value={item.target}
@@ -20,10 +19,10 @@ export const CampaignItem: React.FC<ICampaignItem> = ({ item }) => {
           wrapperStyle={{ padding: 0, margin: 0 }}
           thousandsGroupStyle="lakh"
         />
-      </TableCell>
-      <TableCell>{item.campaigner?.username}</TableCell>
-      <TableCell>{item.submittedDate ? item.submittedDate : "-"}</TableCell>
-      <TableCell>{item.description}</TableCell>
+      </DevTableCell>
+      <DevTableCell>{item.campaigner?.username}</DevTableCell>
+      <DevTableCell>{item.submittedDate ? item.submittedDate : "-"}</DevTableCell>
+      <DevTableCell>{item.description}</DevTableCell>
     </>
   );
 };

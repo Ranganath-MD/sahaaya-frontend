@@ -17,3 +17,4 @@ export * from "./tablehead";
 export * from "./tableRow";
 export * from "./tabletoolbar";
 export * from "./noRows";
+export * from "./tableCell";

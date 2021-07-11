@@ -29,6 +29,7 @@ export const BasicTable: React.FC<IDevTableProps> = ({
         headerText={props.toolbarProps?.headerText}
         handleRefresh={props.toolbarProps?.handleRefresh}
         showLoading={props.toolbarProps?.showLoading}
+        noRefresh={props.toolbarProps?.noRefresh}
       />
       <TableContainer className={classes.container}>
         <Table

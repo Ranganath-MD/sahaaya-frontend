@@ -35,6 +35,7 @@ interface IToolbarProps {
   denseTableItem?: boolean;
   handleRefresh?: () => void;
   showLoading?: boolean;
+  noRefresh?: boolean;
 }
 export const TableToolbar: React.FC<IToolbarProps> = (props) => {
   const ctx = useContext(TableContext);
@@ -46,9 +47,7 @@ export const TableToolbar: React.FC<IToolbarProps> = (props) => {
     <ToolbarWrapper>
       <HeaderText>{props.headerText}</HeaderText>
       <div>
-        {
-          props.showLoading && <CircularProgress size={20}/>
-        }
+        {props.showLoading && <CircularProgress size={20} />}
         <ToolBarButton onClick={handleClick}>
           {ctx.dense ? (
             <BsArrowsExpand color="blue" />
@@ -57,9 +56,11 @@ export const TableToolbar: React.FC<IToolbarProps> = (props) => {
           )}{" "}
           Dense
         </ToolBarButton>
-        <ToolBarButton onClick={props.handleRefresh}>
-          <GrRefresh color="blue"/>{" "} Refresh
-        </ToolBarButton>
+        {props.noRefresh ? null : (
+          <ToolBarButton onClick={props.handleRefresh}>
+            <GrRefresh color="blue" /> Refresh
+          </ToolBarButton>
+        )}
       </div>
     </ToolbarWrapper>
   );
