@@ -46,7 +46,7 @@ export const CampaignRequests: React.FC<RouteComponentProps> = () => {
 
   return (
     <>
-      <Seo title={`${profile?.user.username} - Profile`} />
+      <Seo title="Campaign requests" />
       <AdminLayout
         width={"250px"}
         headerText={profile?.user.username}

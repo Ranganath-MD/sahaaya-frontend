@@ -17,3 +17,27 @@
 .campaign-list {
   margin-bottom: 2em;
 }
+@mixin status {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 5px;
+  border-radius: 5px;
+}
+.status_rejected {
+  @include status();
+  background-color: #ce11260d;
+}
+.status_approved {
+  @include status();
+  background-color: #c5ffc3;
+}
+.in_review {
+  @include status();
+  background-color: #e4e8ff;
+}
+.search-paper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

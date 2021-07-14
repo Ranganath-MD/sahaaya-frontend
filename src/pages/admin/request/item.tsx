@@ -3,9 +3,9 @@ import { ReadOnlyMaskInput, DevTableCell } from "components";
 
 interface ICampaignItem {
   item: any;
+  showStatus?: boolean;
 }
-export const CampaignItem: React.FC<ICampaignItem> = ({ item }) => {
-
+export const CampaignItem: React.FC<ICampaignItem> = ({ item, showStatus }) => {
   return (
     <>
       <DevTableCell>{item.campaignName}</DevTableCell>
@@ -21,8 +21,26 @@ export const CampaignItem: React.FC<ICampaignItem> = ({ item }) => {
         />
       </DevTableCell>
       <DevTableCell>{item.campaigner?.username}</DevTableCell>
-      <DevTableCell>{item.submittedDate ? item.submittedDate : "-"}</DevTableCell>
-      <DevTableCell>{item.description}</DevTableCell>
+      <DevTableCell>
+        {item.submittedDate ? item.submittedDate : "-"}
+      </DevTableCell>
+      {showStatus ? (
+        <DevTableCell>
+          <span
+            className={
+              item?.status === "IN_REVIEW"
+                ? "in_review"
+                : item?.status === "APPROVED"
+                  ? "status_approved"
+                  : "status_rejected"
+            }
+          >
+            {item?.status}
+          </span>
+        </DevTableCell>
+      ) : (
+        <DevTableCell>{item.description}</DevTableCell>
+      )}
     </>
   );
 };

@@ -1,11 +1,16 @@
-import React, { useState, useContext, useEffect } from "react";
-import { RouteComponentProps } from "@reach/router";
+import React, { useState, useContext } from "react";
 import { AdminDashboardContext } from "context";
 import { CampaignItem } from "../request/item";
 import { Column } from "../../../../typings/table";
-import { TableFromComponent, DevTableBody, DevTableRow, DevTableHead } from "components";
+import {
+  TableFromComponent,
+  DevTableBody,
+  DevTableRow,
+  DevTableHead,
+} from "components";
+import { Paper } from "@material-ui/core";
 import { NoRowOverlay } from "components/tables/noRows";
-import { TablePagination } from "@material-ui/core";
+import { CgSearch } from "react-icons/cg";
 import styled from "styled-components";
 
 const columns: Column[] = [
@@ -14,8 +19,16 @@ const columns: Column[] = [
   { id: 3, label: "Target Amount" },
   { id: 4, label: "Campaigner" },
   { id: 5, label: "Submitted Date" },
-  { id: 6, label: "Description" },
+  { id: 6, label: "Status" },
 ];
+
+const Input = styled.input`
+  width: 80%;
+  padding: 1.2em 0;
+  outline: none;
+  border: none;
+  font-size: 1em;
+`;
 
 export const CampaignList: React.FC = () => {
   const ctx = useContext(AdminDashboardContext);
@@ -30,26 +43,30 @@ export const CampaignList: React.FC = () => {
 
   return (
     <>
+      <Paper className="search-paper">
+        <Input type="text" placeholder="Search Campaign by Name" value={ctx.searchText} onChange={ctx.handleSearch}/>
+        <CgSearch size={25} />
+      </Paper>
       <TableFromComponent
         toolbarProps={{
           headerText: "All Campaigns",
           showLoading: ctx.isTableDataLoading,
-          noRefresh: true
+          noRefresh: true,
         }}
       >
         <DevTableHead columns={columns}></DevTableHead>
-        {ctx.dashboardData?.campaigns &&
-          ctx.dashboardData?.campaigns.length === 0 && <NoRowOverlay />}
+        {ctx.allCampaigns &&
+          ctx.allCampaigns.length === 0 && <NoRowOverlay />}
         <DevTableBody>
-          {ctx.dashboardData?.campaigns?.map(
-            (item: typeof ctx.dashboardData.campaigns, index: number) => {
+          {ctx.allCampaigns?.map(
+            (item: typeof ctx.allCampaigns, index: number) => {
               return (
                 <DevTableRow
                   key={index}
                   selected={item._id === id}
                   onClick={() => handlePreview(item)}
                 >
-                  <CampaignItem item={item} />
+                  <CampaignItem item={item} showStatus />
                 </DevTableRow>
               );
             }

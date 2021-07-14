@@ -25,6 +25,7 @@ const HeaderWrapper = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   p {
     font-weight: 600;
+    font-size: 0.9em;
   }
 `;
 const Icon = styled.div`

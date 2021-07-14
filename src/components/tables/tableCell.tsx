@@ -1,7 +1,7 @@
 import React from "react";
-import { TableCell, Button, Tooltip, TooltipProps, Typography } from "@material-ui/core";
+import { TableCell, Tooltip } from "@material-ui/core";
 import { IDevTableProps } from "../../../typings/table";
-import { withStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import { withStyles, Theme } from "@material-ui/core/styles";
 import styled from "styled-components";
 
 const LightTooltip = withStyles((theme: Theme) => ({
@@ -26,7 +26,7 @@ const Value = styled.p`
 
 export const DevTableCell: React.FC<IDevTableProps> = ({ children }) => {
   return (
-    <LightTooltip arrow title={children as string}>
+    <LightTooltip arrow title={children as string || ""}>
       <TableCell>
         <Value>
           {children}

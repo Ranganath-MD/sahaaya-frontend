@@ -18,13 +18,24 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
   const [openRejectDialog, setOpenRejectDialog] = useState<boolean>(false);
   const [isStatusChanging, setStatusChanging] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [dashboardData, setDashboardData] = React.useState<null | HTMLElement>(null);
+  const [dashboardData, setDashboardData] = React.useState<any>(null);
+  const [searchText, setSearchText] = useState<string>("");
+  const [allCampaigns, setAllCampaigns] = useState([]);
 
   const profile = useContext(ProfileContext);
   const statusChangedBy = {
     name: profile.user.username,
     email: profile.user.email,
     userId: profile.user.id,
+  };
+
+  const handleSearch = (e: any) => {
+    setSearchText(e.target.value);
+    const text = e.target.value.toLowerCase();
+    const result = dashboardData?.campaigns.filter((campaign: any) =>
+      campaign.campaignName.toLowerCase().indexOf(text) >= 0
+    );
+    setAllCampaigns(result);
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,8 +50,9 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
     try {
       const result = await apiService.get("/admin/dashboard");
       setDashboardData(result.data);
+      setAllCampaigns(result.data.campaigns);
       setLoading(false);
-    }catch {
+    } catch {
       setLoading(false);
     }
   };
@@ -143,7 +155,10 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
         campaignId,
         setCampaignId,
         fetchDashboardData,
-        dashboardData
+        dashboardData,
+        searchText,
+        handleSearch,
+        allCampaigns,
       }}
     >
       {children}
