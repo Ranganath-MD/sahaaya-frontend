@@ -1,21 +1,8 @@
 import React, { useContext, useState } from "react";
 import { DevCard, DevCardHeader } from "components";
 import { AdminDashboardContext } from "context";
-import {
-  VictoryBar,
-  VictoryChart,
-  VictoryAxis,
-  VictoryTheme,
-} from "victory";
-
-
-const campaign_data = [
-  { index: 1, status: "IN_DRAFT", campaigns: 10 },
-  { index: 2, status: "IN_REVIEW", campaigns: 12 },
-  { index: 3, status: "APPROVED", campaigns: 2 },
-  { index: 4, status: "REJECTED", campaigns: 0 },
-  { index: 5, status: "COMPLETED", campaigns: 1 },
-];
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from "victory";
+import { Loading } from "./loading";
 
 const renderBarcolor = (status: string) => {
   switch (status) {
@@ -71,40 +58,47 @@ export const CampaignsPerStatus: React.FC = () => {
           },
         ]}
       />
-      {openBar && (
-        <VictoryChart
-          // adding the material theme provided with Victory
-          theme={VictoryTheme.material}
-          domainPadding={30}
-          height={300}
-        >
-          <VictoryAxis
-            tickValues={[1, 2, 3, 4, 5]}
-            tickFormat={[
-              "IN_DRAFT",
-              "IN_REVIEW",
-              "APPROVED",
-              "REJECTED",
-              "COMPLETED",
-            ]}
-            label="Status of the campaigns"
-            style={style.axis}
-          />
-          <VictoryAxis
-            dependentAxis
-            label="Number of campaigns"
-            style={style.axis}
-            tickFormat={(x) => `${x}`}
-          />
-          <VictoryBar
-            data={campaign_data}
-            x="index"
-            y="campaigns"
-            style={style.bar}
-            labels={({ datum }) => datum.campaigns}
-            barWidth={40}
-          />
-        </VictoryChart>
+      {ctx.isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          {openBar && (
+            <VictoryChart
+              // adding the material theme provided with Victory
+              theme={VictoryTheme.material}
+              domainPadding={30}
+              height={300}
+              animate
+            >
+              <VictoryAxis
+                tickValues={[1, 2, 3, 4, 5]}
+                tickFormat={[
+                  "IN_DRAFT",
+                  "IN_REVIEW",
+                  "APPROVED",
+                  "REJECTED",
+                  "COMPLETED",
+                ]}
+                label="Status of the campaigns"
+                style={style.axis}
+              />
+              <VictoryAxis
+                dependentAxis
+                label="Number of campaigns"
+                style={style.axis}
+                tickFormat={(x) => `${x}`}
+              />
+              <VictoryBar
+                data={ctx.campaignsByStatus}
+                x="index"
+                y="campaigns"
+                style={style.bar}
+                labels={({ datum }) => datum.campaigns}
+                barWidth={40}
+              />
+            </VictoryChart>
+          )}
+        </>
       )}
     </DevCard>
   );

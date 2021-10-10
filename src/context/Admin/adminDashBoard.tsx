@@ -21,7 +21,10 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
   const [dashboardData, setDashboardData] = React.useState<any>(null);
   const [searchText, setSearchText] = useState<string>("");
   const [allCampaigns, setAllCampaigns] = useState([]);
-
+  const [ campaignsByStatus, setCampaignsByStatus] = useState<any>([]);
+  const [ campaignsByCategory, setCampaignsByCategory] = useState<any>([]);
+  const [ donationsByyear, setDonationsByYear ] = useState([]);
+  const [ isLoading, setIsLoading ] = useState(false);
   const profile = useContext(ProfileContext);
   const statusChangedBy = {
     name: profile.user.username,
@@ -54,6 +57,50 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
       setLoading(false);
     } catch {
       setLoading(false);
+    }
+  };
+
+  const formatCampaignsByStatus = ({ IN_DRAFT, IN_REVIEW, APPROVED, REJECTED, COMPLETED  }: any) => {
+    const campaign_data: any = [
+      { index: 1, status: "IN_DRAFT", campaigns: IN_DRAFT },
+      { index: 2, status: "IN_REVIEW", campaigns: IN_REVIEW },
+      { index: 3, status: "APPROVED", campaigns: APPROVED },
+      { index: 4, status: "REJECTED", campaigns: REJECTED },
+      { index: 5, status: "COMPLETED", campaigns: COMPLETED },
+    ];
+
+    setCampaignsByStatus(campaign_data);
+  };
+
+  const formatCampaignsByCategory = ({ farmers, talents, movies, startups }: any) => {
+    const data = [
+      { category: "Farmers", count: farmers },
+      { category: "Talents", count: talents },
+      { category: "Movies", count: movies },
+      { category: "Start-ups", count: startups },
+    ];
+    setCampaignsByCategory(data);
+  };
+  const formatDoationsByYear = (data: any) => {
+    const values = data.map((item: any) => {
+      return {
+        x: item.index,
+        y: item.donation
+      };
+    });
+    setDonationsByYear(values);
+  };
+
+  const getAnalyticsData = async () => {
+    setIsLoading(true);
+    try {
+      const analytics = await apiService.get("/admin/analytics");
+      formatCampaignsByStatus(analytics.data?.campaignsByStatus);
+      formatCampaignsByCategory(analytics.data?.campaignsBycategory);
+      formatDoationsByYear(analytics.data?.donation);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
     }
   };
 
@@ -159,6 +206,11 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
         searchText,
         handleSearch,
         allCampaigns,
+        getAnalyticsData,
+        campaignsByStatus,
+        campaignsByCategory,
+        donationsByyear,
+        isLoading
       }}
     >
       {children}
