@@ -49,7 +49,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
   const openProfile = () => {
     setAnchorEl(null);
-    navigate("/user/profile");
+    const type = localStorage.getItem("type");
+    navigate(type === "Admin" ? "/profile" : "/user/profile");
   };
 
   const setToken = (user: any) => {

@@ -1,0 +1,95 @@
+.container {
+  margin-top: 0;
+}
+
+.avatar {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.12) !important;
+  input {
+    margin: 0 !important;
+  }
+  .email {
+    margin: 0px;
+  }
+}
+.edit-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+.edit-btn {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+.card_header_text {
+  margin: 5px 0px;
+  font-size: 15px;
+  color: #2A415D;
+  font-weight: 600;
+  padding: 5px 0;
+  margin: 0 0 10px;
+  border-bottom: 1px solid #b3b3b3;
+}
+
+.counts {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  justify-content: space-between;
+  margin: 10px 0px;
+  div {
+      margin: 0px 5px;
+      padding: 3px 5px;
+      border-radius: 3px;
+      width: 50%;
+      text-align: center;
+      h1 {
+        font-size: 2rem;
+        margin: 10px;
+      }
+      &:first-child {
+        background-color: #ffcf055e;
+      }
+      &:nth-child(2){
+          background-color: #4dab9a80;
+      }
+  }
+  
+}
+.details {
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.12) !important;
+  &:hover {
+    .edit {
+      div {
+        display: block;
+      }
+    }
+  }
+  .edit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      display: none;
+    }
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .done-button {
+    margin-top: 20px;
+  }
+}
+
+.about {
+  font-size: 18px;
+}
