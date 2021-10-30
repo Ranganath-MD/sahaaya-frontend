@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { useDebounce } from "react-use";
 import { apiService, socket } from "utils";
+import { ICampaignPayload } from "../../../typings/campaign";
 import { CampaignContext } from "./campaignContext";
 
 // import { apiService } from "utils";

@@ -23,6 +23,7 @@ interface Props {
   required?: boolean;
   content?: any;
   readOnly?: boolean;
+  className?: string;
 }
 
 export const RichText: React.FC<Props> = (props: any) => {
@@ -68,7 +69,7 @@ export const RichText: React.FC<Props> = (props: any) => {
         wrapperClassName="normal"
         readOnly={props.readOnly}
         toolbarHidden={props.readOnly}
-        // editorClassName="editor-content"
+        editorClassName={props.className}
         toolbarClassName="toolbar"
         onEditorStateChange={setEditorState}
         placeholder="Write breifly about your campaign/cause here...."

@@ -1,0 +1,32 @@
+.view_image {
+  width: 100%;
+  height: 300px;
+  object-fit: revert;
+}
+
+.view_container {
+  padding-top: 2rem;
+}
+
+.rich-text {
+  .normal {
+    width: 97%;
+    border: none;
+    font-family: 'Arvo';
+    font-size: 1.2rem;
+    overflow: hidden;
+  }
+}
+.rich-text-close {
+  .normal {
+    width: 97%;
+    border: none;
+    font-family: 'Arvo';
+    font-size: 1.2rem;
+    overflow: hidden;
+  }
+  .rdw-editor-main {
+    height: 300px;
+    overflow: hidden;
+  }
+}

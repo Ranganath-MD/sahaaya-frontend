@@ -1,5 +1,6 @@
 export * from "./admin";
 export * from "./browseCampaigns";
+export * from "./browseCampaigns/CampaignView";
 export * from "./campaigner/campaign";
 export * from "./campaigner/campaign/campaignForm";
 export * from "./campaigner/dashboard";

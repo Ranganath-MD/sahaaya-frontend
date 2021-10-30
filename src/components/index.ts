@@ -21,3 +21,4 @@ export * from "./avatar";
 export * from "./adminLayout";
 export * from "./tables";
 export * from "./expandableCard";
+export * from "./campaign/Card";

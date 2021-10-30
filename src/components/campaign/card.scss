@@ -1,0 +1,43 @@
+.card_image {
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
+}
+.card {
+  cursor: pointer;
+}
+.camp_text {
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  margin: 0 0 10px;
+}
+.camp_desc {
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  font-size: 12px;
+  margin-bottom: 10px;
+  line-height: 1.2rem;
+}
+
+.linear-progress {
+  background-color: #bdffe1 !important;
+  div {
+    background-color: #0db469 !important;
+  }
+}
+
+.donation {
+  font-size: 12px;
+  padding-top: 5px;
+  b {
+    color: #0db469;
+  }
+}

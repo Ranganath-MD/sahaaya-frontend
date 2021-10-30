@@ -2,6 +2,7 @@ import axios from "axios";
 import { formatISO } from "date-fns";
 import React, { createContext, useContext, useState } from "react";
 import { socket } from "utils";
+import { ICampaignPayload } from "../../../typings/campaign";
 import { CampaignContext } from "./campaignContext";
 
 export const BeneficiaryContext: React.Context<any> = createContext<any>({});

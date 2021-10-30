@@ -12,12 +12,39 @@ export const BaseContext: React.Context<any> = createContext<any>({});
 
 export const BaseProvider: React.FC = ({ children }) => {
   const [ categories, setCategories ] = useState<ICategory | null>(null);
+  const [ campaignData, setCampaignData ] = useState(null);
+  const [ campaignById, setCampaign ] = useState(null);
   const [ loading, setLoading ] = useState<boolean>(false);
+
   const fetchCategories = async () => {
     setLoading(true);
     try {
       const result = await apiService.get("categories");
       setCategories(result.data);
+      setLoading(false);
+    }catch(err){
+      setLoading(false);
+    }
+  };
+  const fetchCampaigns = async () => {
+    setLoading(true);
+    try {
+      const result = await apiService.get(
+        "campaign/approved-campaigns"
+      );
+      setCampaignData(result.data);
+      setLoading(false);
+    }catch(err){
+      setLoading(false);
+    }
+  };
+  const fetchCampaignById = async (id: string) => {
+    setLoading(true);
+    try {
+      const result = await apiService.get(
+        `campaign/${id}`
+      );
+      setCampaign(result.data);
       setLoading(false);
     }catch(err){
       setLoading(false);
@@ -56,13 +83,21 @@ export const BaseProvider: React.FC = ({ children }) => {
   useEffect(() => {
     fetchCategories();
   }, []);
+
   return (
-    <BaseContext.Provider value={{
-      categories, setCategories,
-      loading,
-      renderCategoryIcons,
-      renderBackground
-    }}>
+    <BaseContext.Provider
+      value={{
+        categories,
+        setCategories,
+        loading,
+        renderCategoryIcons,
+        renderBackground,
+        fetchCampaigns,
+        campaignData,
+        campaignById,
+        fetchCampaignById,
+      }}
+    >
       {children}
     </BaseContext.Provider>
   );

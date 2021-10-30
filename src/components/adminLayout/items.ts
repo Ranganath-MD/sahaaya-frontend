@@ -35,14 +35,6 @@ export const sidebaritems: ISideBarItemProps[] = [
     leftIcon: FcManager,
     route: "/profile",
     level: 1,
-    collapsibleItem: [
-      {
-        name: "Change Password",
-        leftIcon: FcKey,
-        route: "/profile/change-password",
-        level: 2
-      },
-    ]
   },
   {
     name: "Settings",

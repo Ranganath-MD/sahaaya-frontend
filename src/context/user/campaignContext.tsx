@@ -2,6 +2,7 @@ import { navigate } from "@reach/router";
 import { addDays, formatISO, format } from "date-fns";
 import React, { createContext, useState } from "react";
 import { apiService, socket } from "utils";
+import { ICampaignPayload } from "../../../typings/campaign";
 
 export const CampaignContext = createContext<any>({});
 

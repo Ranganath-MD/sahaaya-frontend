@@ -287,5 +287,3 @@ export const AdminProfile: React.FC<RouteComponentProps> =
       </>
     );
   };
-
-export * from "./changePassword";

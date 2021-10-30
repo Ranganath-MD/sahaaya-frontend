@@ -1,6 +1,7 @@
 import { ProfileContext } from "context/user/profileContext";
 import React, { createContext, useContext, useState } from "react";
 import { apiService, socket } from "utils";
+import { ICampaignPayload } from "../../../typings/campaign";
 
 export const AdminDashboardContext: React.Context<any> = createContext({});
 
