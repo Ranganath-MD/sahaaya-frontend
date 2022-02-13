@@ -1,4 +1,4 @@
-import { FcSelfServiceKiosk, FcManager, FcLineChart, FcOrgUnit, FcKey, FcSettings } from "react-icons/fc";
+import { FcSelfServiceKiosk, FcManager, FcLineChart, FcOrgUnit, FcSettings } from "react-icons/fc";
 
 export interface ItemProps {
   name: string;

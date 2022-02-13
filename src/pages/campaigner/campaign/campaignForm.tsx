@@ -38,6 +38,7 @@ export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
   };
 
   useEffect(() => {
+    localStorage.setItem("campaignId", params.id);
     getCampaign();
   }, []);
 

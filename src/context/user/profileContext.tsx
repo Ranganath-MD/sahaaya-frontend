@@ -78,7 +78,8 @@ export const ProfileProvider: React.FC = ({ children }) => {
         setUser,
         handleUsername,
         updateUserdetails,
-        handleAvatar
+        handleAvatar,
+        progress,
       }}
     >
       {children}

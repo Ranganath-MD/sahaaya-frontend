@@ -4,7 +4,10 @@ import {
   MenuItem,
   Popover,
 } from "@material-ui/core";
-import { navigate, RouteComponentProps } from "@reach/router";
+import {
+  navigate,
+  RouteComponentProps,
+} from "@reach/router";
 import React, { useContext, useEffect } from "react";
 import "./index.scss";
 import { DevButton, Seo, DeleteModal } from "components";
@@ -23,7 +26,10 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { apiService } from "utils";
 import { PreviewCampaign } from "../campaign/previewModal";
-import { VscDebugStepOver, VscPreview } from "react-icons/vsc";
+import {
+  VscDebugStepOver,
+  VscPreview,
+} from "react-icons/vsc";
 
 const Campaign = ({ item }: any) => {
   const ctx = useContext(DashBoardContext);
@@ -31,7 +37,8 @@ const Campaign = ({ item }: any) => {
   const ctx_b = useContext(BeneficiaryContext);
   const context_d = useContext(AttachmentContext);
   const bank = useContext(BankContext);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] =
+    React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -67,20 +74,20 @@ const Campaign = ({ item }: any) => {
   return (
     <div
       className={
-        item.status === "IN_DRAFT" ? "wrapper_draft" : "wrapper_review"
+        item.status === "IN_DRAFT"
+          ? "wrapper_draft"
+          : "wrapper_review"
       }
     >
       <div className="header-title">
         <p className="title">{item.campaignName}</p>
-        {
-          item.status === "IN_DRAFT" && item.status === "IN_REVIEW" && (
-            <BiDotsVerticalRounded
-              size={16}
-              className="dots"
-              onClick={handleClick}
-            />
-          )
-        }
+        {item.status === "IN_DRAFT" && (
+          <BiDotsVerticalRounded
+            size={16}
+            className="dots"
+            onClick={handleClick}
+          />
+        )}
         <Popover
           anchorEl={anchorEl}
           keepMounted
@@ -100,12 +107,18 @@ const Campaign = ({ item }: any) => {
             <>
               <MenuItem onClick={handleContinue}>
                 <VscDebugStepOver className="menu-icon" />{" "}
-                <span className="card-menuitem">Continue</span>
+                <span className="card-menuitem">
+                  Continue
+                </span>
               </MenuItem>
 
-              <MenuItem onClick={() => handleDelete(item._id)}>
+              <MenuItem
+                onClick={() => handleDelete(item._id)}
+              >
                 <RiDeleteBin6Line className="menu-icon" />{" "}
-                <span className="card-menuitem">Delete</span>
+                <span className="card-menuitem">
+                  Delete
+                </span>
               </MenuItem>
             </>
           ) : item.status === "IN_REVIEW" ? (
@@ -115,7 +128,10 @@ const Campaign = ({ item }: any) => {
               }}
             >
               {ctx.loadingPreview ? (
-                <CircularProgress size={15} className="spinner"/>
+                <CircularProgress
+                  size={15}
+                  className="spinner"
+                />
               ) : (
                 <VscPreview className="menu-icon" />
               )}{" "}
@@ -126,13 +142,19 @@ const Campaign = ({ item }: any) => {
       </div>
       <div className="created">
         Created{" "}
-        {formatDistance(new Date(item.createdDate), new Date(), {
-          addSuffix: true,
-        })}
+        {formatDistance(
+          new Date(item.createdDate),
+          new Date(),
+          {
+            addSuffix: true,
+          }
+        )}
       </div>
       <span
         className={
-          item.status === "IN_DRAFT" ? "status_draft" : "status_review"
+          item.status === "IN_DRAFT"
+            ? "status_draft"
+            : "status_review"
         }
       >
         {item.status}
@@ -142,7 +164,9 @@ const Campaign = ({ item }: any) => {
   );
 };
 
-export const CampaignerDashboard: React.FC<RouteComponentProps> = () => {
+export const CampaignerDashboard: React.FC<
+  RouteComponentProps
+> = () => {
   const auth = useContext(AuthContext);
   const data = useContext(DashBoardContext);
 
@@ -153,20 +177,24 @@ export const CampaignerDashboard: React.FC<RouteComponentProps> = () => {
   return (
     <>
       <Seo title="Campaigner Dashboard" />
-      {data.isLoading && <Spinner />}
       <PreviewCampaign />
       <Container>
         <Container>
           <div className="heading">
             <h1 className="welcome-msg">
-              Welcome, {auth.currentUser ? auth.currentUser?.username : "..."}
+              Welcome,{" "}
+              {auth.currentUser
+                ? auth.currentUser?.username
+                : "..."}
             </h1>
             {data.campaigns && data.campaigns.length !== 0 && (
               <div className="buttons">
                 <DevButton
                   background="#2A415D"
                   color="white"
-                  onClick={() => navigate("./create-campaign")}
+                  onClick={() =>
+                    navigate("./create-campaign")
+                  }
                 >
                   Create Campaign
                 </DevButton>
@@ -174,19 +202,30 @@ export const CampaignerDashboard: React.FC<RouteComponentProps> = () => {
               </div>
             )}
           </div>
-          <div className="list">
-            {data.campaigns && data.campaigns.length !== 0
-              ? data.campaigns.map((item: any) => {
-                return <Campaign item={item} key={item._id} />;
-              })
-              : null}
-          </div>
-          {data.campaigns.length === 0 && <DashboardCard />}
+          {data.isLoading ? (
+            <Spinner />
+          ) : (
+            <div className="list">
+              {data.campaigns &&
+              data.campaigns.length !== 0 ? (
+                  data.campaigns.map((item: any) => {
+                    return (
+                      <Campaign item={item} key={item._id} />
+                    );
+                  })
+                ) : (
+                  <DashboardCard />
+                )}
+            </div>
+          )}
+
           <DeleteModal
             open={data.openDelete}
             onClose={() => data.setOpenDelete(false)}
             onCancel={() => data.setOpenDelete(false)}
-            onDelete={() => data.deleteCampaign(data.campaignId)}
+            onDelete={() =>
+              data.deleteCampaign(data.campaignId)
+            }
             isDeleteLoading={data.loadingDelete}
           />
         </Container>

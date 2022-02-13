@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import { RouteComponentProps, useLocation } from "@reach/router";
 import { AdminLayout, Seo } from "components";
-import { AdminDashboardContext, ProfileContext } from "context";
+import { ProfileContext } from "context";
 
 export const Settings: React.FC<RouteComponentProps> = () => {
-  const ctx = useContext(AdminDashboardContext);
   const profile = useContext(ProfileContext);
   const location = useLocation();
   return (

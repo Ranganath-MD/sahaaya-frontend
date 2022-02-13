@@ -17,7 +17,6 @@ import {
 import {
   AdminDashboardContext,
   ProfileContext,
-  AuthContext,
 } from "context";
 import { Container, Grid } from "@material-ui/core";
 import { MdEdit } from "react-icons/md";
@@ -33,7 +32,6 @@ export const AdminProfile: React.FC<RouteComponentProps> =
   () => {
     const [editMode, setEditMode] =
       useState<boolean>(false);
-    const authctx = useContext(AuthContext);
     const ctx = useContext(AdminDashboardContext);
     const profile = useContext(ProfileContext);
     const location = useLocation();
