@@ -14,7 +14,6 @@ export const Header: React.FC = () => {
   const LinksBasedOnRoles = () => {
     let Links = [
       { name: "Browse Campaign", path: "browse-campaign" },
-      { name: "How it Works", path: "how-sahaaya-works" },
     ];
     if (context.isAuthenticated && context.isAdmin()) {
       Links = [

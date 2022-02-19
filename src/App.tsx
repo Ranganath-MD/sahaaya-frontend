@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "context";
-import { Layout, PrivateRoute, AdminPrivateRoute } from "components";
-import { Router } from "@reach/router";
+import {
+  Layout,
+  PrivateRoute,
+  AdminPrivateRoute,
+} from "components";
+import { Router, useLocation } from "@reach/router";
 import {
   NotFound,
   Home,
@@ -21,6 +25,7 @@ import {
 import { Login, Register } from "pages/userAuth";
 
 const App: React.FC = () => {
+
   return (
     <Provider>
       <Layout>

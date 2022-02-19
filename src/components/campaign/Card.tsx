@@ -35,7 +35,7 @@ export const CampaignCard: React.FC<ICampaignCard> = ({
         </span>
         <LinearProgress
           value={
-            (1000000 / campaign.target) * 100
+            (campaign.donation / campaign.target) * 100
           }
           className="linear-progress"
           variant="determinate"

@@ -96,6 +96,7 @@ export const BaseProvider: React.FC = ({ children }) => {
         campaignData,
         campaignById,
         fetchCampaignById,
+        setCampaign,
       }}
     >
       {children}
