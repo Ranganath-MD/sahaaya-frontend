@@ -1,10 +1,26 @@
-import { RouteComponentProps, useLocation } from "@reach/router";
+import {
+  RouteComponentProps,
+  useLocation,
+} from "@reach/router";
 import React, { useContext, useEffect } from "react";
-import { AdminLayout, Seo, DevCard, DevCardHeader } from "components";
-import { AdminDashboardContext, ProfileContext } from "context";
+import {
+  AdminLayout,
+  Seo,
+  DevCard,
+  DevCardHeader,
+  ReadOnlyMaskInput,
+} from "components";
+import {
+  AdminDashboardContext,
+  ProfileContext,
+} from "context";
 import styled from "styled-components";
 import "./dashboard.scss";
-import { FcMindMap, FcDonate, FcPortraitMode } from "react-icons/fc";
+import {
+  FcMindMap,
+  FcDonate,
+  FcPortraitMode,
+} from "react-icons/fc";
 import { CampaignList } from "./allCampaigns";
 import { Campaigners } from "./campaigners";
 import { Grid } from "@material-ui/core";
@@ -17,7 +33,8 @@ const DataCard = styled.div<{ borderColor?: string }>`
   position: relative;
   overflow: hidden;
   background: ghostwhite;
-  border-left: 5px solid ${(props: any) => props.borderColor};
+  border-left: 5px solid
+    ${(props: any) => props.borderColor};
   h1 {
     font-size: 2.5rem;
     margin: 20px 0px;
@@ -31,7 +48,9 @@ const DataCard = styled.div<{ borderColor?: string }>`
   }
 `;
 
-export const AdminDashboard: React.FC<RouteComponentProps> = () => {
+export const AdminDashboard: React.FC<
+  RouteComponentProps
+> = () => {
   const ctx = useContext(AdminDashboardContext);
   const profile = useContext(ProfileContext);
   const location = useLocation();
@@ -58,7 +77,16 @@ export const AdminDashboard: React.FC<RouteComponentProps> = () => {
           <DataCard borderColor="#ff9800">
             <FcDonate className="icon" />
             <p>Total Donation</p>
-            <h1>0</h1>
+            <h1>
+              <ReadOnlyMaskInput
+                displayType={"text"}
+                value={ctx.dashboardData?.total_donation}
+                thousandSeparator={true}
+                prefix={"₹"}
+                wrapperStyle={{ padding: 0, margin: 0 }}
+                thousandsGroupStyle="lakh"
+              />
+            </h1>
           </DataCard>
           <DataCard borderColor="#0db469c2">
             <FcPortraitMode className="icon" />
@@ -72,13 +100,19 @@ export const AdminDashboard: React.FC<RouteComponentProps> = () => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} md={4}>
             <DevCard>
-              <DevCardHeader headerText="Categories" showMenu={false}/>
+              <DevCardHeader
+                headerText="Categories"
+                showMenu={false}
+              />
               <Categories />
             </DevCard>
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <DevCard>
-              <DevCardHeader headerText="Fundrisers" showMenu={false}/>
+              <DevCardHeader
+                headerText="Fundrisers"
+                showMenu={false}
+              />
               <Campaigners />
             </DevCard>
           </Grid>

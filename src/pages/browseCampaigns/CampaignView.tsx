@@ -99,7 +99,7 @@ export const CampaignView: React.FC<
     const { amount, id: order_id, currency } = result.data;
 
     const options = {
-      key: process.env.RAZORPAY_ID,
+      key: "rzp_test_b5WTh8A33TQ0dO",
       amount: amount.toString(),
       currency: currency,
       name,
