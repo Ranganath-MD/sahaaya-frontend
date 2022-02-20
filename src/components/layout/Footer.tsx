@@ -1,15 +1,26 @@
 import React from "react";
-import GmailIcon from "../../assets/gmail.svg";
 import LinkedinIcon from "../../assets/linkedin.svg";
+import GithubIcon from "../../assets/github.svg";
 
 export const Footer: React.FC = () => {
-
   return (
     <div className="footer-container">
-      <span>© {new Date().getFullYear()} <b>Sahaaya, Inc.</b> All rights reserved</span>
+      <span>
+        <b>Sahaaya</b>© {new Date().getFullYear()}{" "}
+      </span>
       <div>
-        <img src={GmailIcon} alt="gmail-icon" />
-        <img src={LinkedinIcon} alt="linkedin-icon"/>
+        <a
+          href="https://www.linkedin.com/in/ranganathmd/"
+          target="_blank"
+        >
+          <img src={LinkedinIcon} alt="linkedin" />
+        </a>
+        <a
+          href="https://github.com/Ranganath-MD"
+          target="_blank"
+        >
+          <img src={GithubIcon} alt="github-icon" />
+        </a>
       </div>
     </div>
   );
