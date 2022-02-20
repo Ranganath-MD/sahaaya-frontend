@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Provider } from "context";
 import {
   Layout,
   PrivateRoute,
   AdminPrivateRoute,
 } from "components";
-import { Router, useLocation } from "@reach/router";
+import { Router } from "@reach/router";
 import {
   NotFound,
   Home,
