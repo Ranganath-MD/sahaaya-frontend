@@ -205,14 +205,19 @@ export const CampaignerDashboard: React.FC<
           {data.isLoading ? (
             <Spinner />
           ) : (
-            <div className="list">
+            <div>
               {data.campaigns &&
               data.campaigns.length !== 0 ? (
-                  data.campaigns.map((item: any) => {
-                    return (
-                      <Campaign item={item} key={item._id} />
-                    );
-                  })
+                  <div className="list">
+                    {data.campaigns.map((item: any) => {
+                      return (
+                        <Campaign
+                          item={item}
+                          key={item._id}
+                        />
+                      );
+                    })}
+                  </div>
                 ) : (
                   <DashboardCard />
                 )}
