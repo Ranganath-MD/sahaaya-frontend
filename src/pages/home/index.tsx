@@ -1,5 +1,9 @@
 import React, { useState, useContext } from "react";
-import { RouteComponentProps, Redirect } from "@reach/router";
+import {
+  RouteComponentProps,
+  Redirect,
+  Link,
+} from "@reach/router";
 import "./home.scss";
 import { Container } from "@material-ui/core";
 import { CategoryCard, DevButton, Seo } from "components";
@@ -17,7 +21,7 @@ import { AuthContext, BaseContext } from "context";
 
 export const Home: React.FC<RouteComponentProps> = () => {
   const size = useWindowsize();
-  const [ step, setStep ] = useState<number>(1);
+  const [step, setStep] = useState<number>(1);
   const ctx = useContext(BaseContext);
   const auth = useContext(AuthContext);
 
@@ -36,69 +40,80 @@ export const Home: React.FC<RouteComponentProps> = () => {
     }
   };
 
-  if(auth.isLoggedIn() && !auth.isAdmin()) return <Redirect to="dashboard" noThrow/>;
-  if(auth.isLoggedIn() && auth.isAdmin()) return <Redirect to="admin/dashboard" noThrow/>;
+  if (auth.isLoggedIn() && !auth.isAdmin())
+    return <Redirect to="dashboard" noThrow />;
+  if (auth.isLoggedIn() && auth.isAdmin())
+    return <Redirect to="admin/dashboard" noThrow />;
 
   return (
     <div>
-      <Seo title="Sahaaya"/>
+      <Seo title="Sahaaya" />
       <Container>
-        <section id="section-one" className="hero-section" >
+        <section id="section-one" className="hero-section">
           <div className="hero-text">
             <h1>{site.heroText}</h1>
             <p>{site.hero_desc}</p>
-            <DevButton
-              primary
-              isShadow
-            >
-              Start Campaign
-            </DevButton>
+            <Link to="/register">
+              <DevButton primary isShadow>
+                Start Campaign
+              </DevButton>
+            </Link>
           </div>
           <div className="hero-img">
-            <img src={Hero} width="100%"/>
+            <img src={Hero} width="100%" />
           </div>
         </section>
         <section id="section-two">
           <h1>Who uses Sahaaya</h1>
           <div className="section-flex">
-            {
-              ctx.categories !== null && ctx.categories.map((c: any) =>  (
+            {ctx.categories !== null &&
+              ctx.categories.map((c: any) => (
                 <CategoryCard
                   key={c.key}
-                  iconComponent={ctx.renderCategoryIcons(c.key)}
+                  iconComponent={ctx.renderCategoryIcons(
+                    c.key
+                  )}
                   title={c.title}
                   description={c.description}
                   // backgroundSrc={ctx.renderBackground(c.key)}
                 />
-              ))
-            }
+              ))}
           </div>
         </section>
         <section id="section-three">
           <div className="wrapper">
-            <p>Follow these simple steps and start raising fund.</p>
-            {
-              size.width >= 600 ?
-                <Steps
-                  renderImage={renderImage}
-                  step={step}
-                  setStep={setStep}
-                /> :
-                <MobileSteps
-                  renderImage={renderImage}
-                  step={step}
-                  setStep={setStep}
-                />
-            }
+            <p>
+              Follow these simple steps and start raising
+              fund.
+            </p>
+            {size.width >= 600 ? (
+              <Steps
+                renderImage={renderImage}
+                step={step}
+                setStep={setStep}
+              />
+            ) : (
+              <MobileSteps
+                renderImage={renderImage}
+                step={step}
+                setStep={setStep}
+              />
+            )}
           </div>
         </section>
         <section id="section-four">
           <div>
             <p>Start your Campaign, Raise the fund</p>
-            <DevButton color="#2a415d" background="yellow" isShadow>Register Now</DevButton>
+            <DevButton
+              color="#2a415d"
+              background="yellow"
+              isShadow
+            >
+              Register Now
+            </DevButton>
           </div>
           <div className="hero-img">
-            <img src={Illustration} width="100%"/>
+            <img src={Illustration} width="100%" />
           </div>
         </section>
       </Container>
