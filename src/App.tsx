@@ -1,11 +1,7 @@
 import React from "react";
 import { Provider } from "context";
-import {
-  Layout,
-  PrivateRoute,
-  AdminPrivateRoute,
-} from "components";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Layout, PrivateRoute, AdminPrivateRoute } from "components";
+import { Route, Routes } from "react-router-dom";
 import {
   NotFound,
   Home,
@@ -25,38 +21,93 @@ import {
 import { Login, Register } from "pages/userAuth";
 
 const App: React.FC = () => {
-
   return (
-    // <Provider>
+    <Provider>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/browse-campaign" element={<BrowseFundriser />} />
-          <Route path="/browse-campaign/:id" element={<CampaignView />} />
-          <Route path="/how-sahaaya-works" element={<HowItWorks />} />
+          <Route path="/browse-campaign" element={<BrowseFundriser />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <AdminPrivateRoute
-            index
+          <Route path="/how-sahaaya-works" element={<HowItWorks />} />
+          <Route path="/browse-campaign/:id" element={<CampaignView />} />
+
+          <Route
             path="/admin/dashboard"
-            element={<AdminDashboard />}
+            element={
+              <AdminPrivateRoute>
+                <AdminDashboard />
+              </AdminPrivateRoute>
+            }
           />
-          <AdminPrivateRoute index path="profile" element={<AdminProfile />} />
-          <AdminPrivateRoute index path="analytics" element={<Analytics />} />
-          <AdminPrivateRoute
-            index
-            path="campaign-requests"
-            element={<CampaignRequests />}
+          <Route
+            path="/analytics"
+            element={
+              <AdminPrivateRoute>
+                <Analytics />
+              </AdminPrivateRoute>
+            }
           />
-          <AdminPrivateRoute index path="settings" element={<Settings />} />
-          <PrivateRoute index path="dashboard" element={<CampaignerDashboard />} />
-          <PrivateRoute index path="create-campaign" element={<CreateCampaign />} />
-          <PrivateRoute index path="campaign/:id" element={<CreateCampaignForm />} />
-          <PrivateRoute index path="/user/profile" element={<UserProfile />} />
-          <NotFound index path="/:statuscode" default /> */}
+          <Route
+            path="/campaign-requests"
+            element={
+              <AdminPrivateRoute>
+                <CampaignRequests />
+              </AdminPrivateRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <AdminPrivateRoute>
+                <Settings />
+              </AdminPrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <AdminPrivateRoute>
+                <AdminProfile />
+              </AdminPrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <CampaignerDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard/create-campaign"
+            element={
+              <PrivateRoute>
+                <CreateCampaign />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="campaign/:id"
+            element={
+              <PrivateRoute>
+                <CreateCampaignForm />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/user/profile"
+            element={
+              <PrivateRoute>
+                <UserProfile />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
-    // </Provider>
+    </Provider>
   );
 };
 

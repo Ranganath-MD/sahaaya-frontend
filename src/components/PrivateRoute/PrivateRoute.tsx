@@ -1,18 +1,15 @@
 import React, { useContext } from "react";
-import { IndexRouteProps, Navigate, RouteProps } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../context";
 
-interface IPrivateRouteProps extends IndexRouteProps {
-  component?: React.FC<RouteProps>;
+interface IPrivateRouteProps {
+  children?: React.ReactNode;
 }
 export const PrivateRoute: React.FC<IPrivateRouteProps> = ({
-  component: Component,
-  ...rest
+  children
 }: any) => {
   const context = useContext(AuthContext);
-  return context.isLoggedIn() && !context.isAdmin() ? (
-    <Component {...rest} />
-  ) : (
+  return context.isLoggedIn() && !context.isAdmin() ? children : (
     <Navigate to="/" />
   );
 };

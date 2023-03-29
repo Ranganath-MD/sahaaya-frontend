@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useMemo } from "react";
-import { NumericFormat, PatternFormat, NumericFormatProps } from "react-number-format";
+import { NumericFormat, NumericFormatProps } from "react-number-format";
 import "./index.scss";
 import styled from "styled-components";
 
@@ -46,7 +46,7 @@ export const MaskedInput: React.FC<Props> = ({ error = false, ...props }) => {
 export const ReadOnlyMaskInput = ({ wrapperStyle, ...props }: any) => {
   return (
     <p style={wrapperStyle}>
-      <PatternFormat {...props} allowNegative={false} />
+      <NumericFormat {...props} allowNegative={false} />
     </p>
   );
 };

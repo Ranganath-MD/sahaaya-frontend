@@ -6,7 +6,8 @@ class Service {
   service: any;
   constructor () {
     const service = axios.create({
-      baseURL: process.env.NODE_ENV === "production"  ? config.prod : config.local,
+      baseURL:
+        process.env.NODE_ENV === "production" ? config.prod : config.local,
       // baseURL: "https://dev-sahaaya.herokuapp.com",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -26,7 +27,7 @@ class Service {
       apiService.service.defaults.headers["Authorization"] = null;
       redirect("/");
     }
-  }
+  };
 
   handleError = (error: any) => {
     switch (error.response.status) {
@@ -70,11 +71,11 @@ class Service {
     return this.service({
       method: "DELETE",
       url: path,
-      data: body
+      data: body,
     });
   }
 
-  upload (path: string, body: any, handleProgress?: any, ) {
+  upload (path: string, body: any, handleProgress?: any) {
     return this.service({
       method: "POST",
       url: path,
@@ -84,10 +85,9 @@ class Service {
       },
       onUploadProgress: (data: any) => {
         handleProgress(data);
-      }
+      },
     });
   }
-
 }
 
 export const apiService = new Service();

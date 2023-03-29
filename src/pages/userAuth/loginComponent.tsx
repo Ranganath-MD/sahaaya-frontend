@@ -12,7 +12,7 @@ interface IProps {
  email?: string;
 }
 
-export const Login: React.FC<IProps> = (props) => {
+export const Login: React.FC<IProps> = () => {
   const context = useContext(AuthContext);
   const { control, handleSubmit, formState: { errors }, reset } = useForm();
   const location = useLocation();
@@ -54,15 +54,12 @@ export const Login: React.FC<IProps> = (props) => {
                 <img src={Logo} alt="logo-in-login-page" />
               </div>
               <h1>Login</h1>
-              <form
-                noValidate
-                onSubmit={handleSubmit(onSubmit)}
-              >
+              <form noValidate onSubmit={handleSubmit(onSubmit)}>
                 <Controller
                   name="email"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }: any) => {
+                  render={({ field: { onChange, value } }: any) => {
                     return (
                       <FormInput
                         name="email"
@@ -81,8 +78,7 @@ export const Login: React.FC<IProps> = (props) => {
                   rules={{
                     required: "This field is required",
                     pattern: {
-                      value:
-                        /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                       message: "Invalid email address",
                     },
                   }}
@@ -91,17 +87,13 @@ export const Login: React.FC<IProps> = (props) => {
                   name="password"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }: any) => {
+                  render={({ field: { onChange, value } }: any) => {
                     return (
                       <FormInput
                         name="password"
                         value={value}
                         error={!!errors?.password}
-                        type={
-                          context.showPassword
-                            ? "text"
-                            : "password"
-                        }
+                        type={context.showPassword ? "text" : "password"}
                         errorMsg={errors.password?.message as string}
                         placeholder="Password"
                         icon={
@@ -109,18 +101,14 @@ export const Login: React.FC<IProps> = (props) => {
                             <VscEye
                               size="1.3em"
                               onClick={() =>
-                                context.setShowPassword(
-                                  !context.showPassword
-                                )
+                                context.setShowPassword(!context.showPassword)
                               }
                             />
                           ) : (
                             <VscEyeClosed
                               size="1.3em"
                               onClick={() =>
-                                context.setShowPassword(
-                                  !context.showPassword
-                                )
+                                context.setShowPassword(!context.showPassword)
                               }
                             />
                           )
@@ -137,9 +125,7 @@ export const Login: React.FC<IProps> = (props) => {
                 <div className="reg-button">
                   <DevButton
                     primary
-                    isloading={
-                      context.isLoading ? true : false
-                    }
+                    isloading={context.isLoading ? true : false}
                     loadingText={"Logging In..."}
                     submit
                     fullWidth

@@ -1,9 +1,10 @@
 import React from "react";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
+
 export const  ElevationScroll = (props: Props) => {
   const { children, window } = props;
-  const location = useLocation();
+  // const location = useLocation();
 
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -12,10 +13,8 @@ export const  ElevationScroll = (props: Props) => {
   });
 
   const elevation = () => {
-    if(trigger && location.pathname === "/") {
+    if(trigger) {
       return 4;
-    }else if(location.pathname !== "/") {
-      return 2;
     }else {
       return 0;
     }

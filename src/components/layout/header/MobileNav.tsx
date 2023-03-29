@@ -11,12 +11,6 @@ export const MobileNav: React.FC<IHeaderProps> = ({ links }) => {
   const context = useContext(LayoutContext);
   const auth = useContext(AuthContext);
 
-  const isActive = ({ isCurrent }: { isCurrent: boolean}) => {
-    return isCurrent
-      ? { className: "active-link" }
-      : { className: "inactive-link" };
-  };
-
   const renderDrawer = () => {
     return (
       <Drawer
@@ -27,20 +21,20 @@ export const MobileNav: React.FC<IHeaderProps> = ({ links }) => {
         <div className="drawer">
           {
             auth.isAuthenticated ? <img src={Logo} width="30px" height="auto" /> :
-              <Link to={"/"}>
+              <NavLink to={"/"}>
                 <img src={Logo} width="30px" height="auto" />
-              </Link>
+              </NavLink>
           }
           <div className="drawer-items">
             {links().map((link: any, i: number) => {
               return (
-                <Link
+                <NavLink
                   to={link.path}
                   key={i}
                   onClick={context.handleDrawer}
                 >
                   {link.name}
-                </Link>
+                </NavLink>
               );
             })}
           </div>

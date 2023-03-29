@@ -58,7 +58,7 @@ export const Register: React.FC = () => {
                   name="username"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }: any) => {
+                  render={({ field: { onChange, value } }: any) => {
                     return (
                       <FormInput
                         name="username"
@@ -83,7 +83,7 @@ export const Register: React.FC = () => {
                   name="email"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }: any) => {
+                  render={({ field: { onChange, value } }: any) => {
                     return (
                       <FormInput
                         name="email"
@@ -113,7 +113,7 @@ export const Register: React.FC = () => {
                   name="password"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }: any) => {
+                  render={({ field: { onChange, value } }: any) => {
                     return (
                       <FormInput
                         name="password"
@@ -146,7 +146,7 @@ export const Register: React.FC = () => {
                   name="confirmPassword"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }: any) => {
+                  render={({ field: { onChange, value } }: any) => {
                     return (
                       <FormInput
                         name="confirmPassword"

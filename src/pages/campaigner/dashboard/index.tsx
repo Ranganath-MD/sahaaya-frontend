@@ -43,7 +43,7 @@ const Campaign = ({ item }: any) => {
   };
   const handleContinue = () => {
     handleClose();
-    navigate(`campaign/${item._id}`, { replace: true });
+    navigate(`/campaign/${item._id}`, { replace: true });
   };
   const handleDelete = (id: string) => {
     ctx.setCampaignId(id);

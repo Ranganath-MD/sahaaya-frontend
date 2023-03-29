@@ -51,30 +51,30 @@ export const BaseProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const renderCategoryIcons = (key: string) => {
     switch (key) {
-      case "c1":
-        return <GiFarmTractor size={30} />;
-      case "c2":
-        return <HiOutlineLightBulb size={30} />;
-      case "c3":
-        return <RiMovie2Line size={30} />;
-      case "c4":
-        return <GiHourglass size={30} />;
-      default:
-        return null;
+    case "c1":
+      return <GiFarmTractor size={30} />;
+    case "c2":
+      return <HiOutlineLightBulb size={30} />;
+    case "c3":
+      return <RiMovie2Line size={30} />;
+    case "c4":
+      return <GiHourglass size={30} />;
+    default:
+      return null;
     }
   };
   const renderBackground = (key: string) => {
     switch (key) {
-      case "c1":
-        return farmer;
-      case "c2":
-        return talents;
-      case "c3":
-        return movies;
-      case "c4":
-        return startup;
-      default:
-        return null;
+    case "c1":
+      return farmer;
+    case "c2":
+      return talents;
+    case "c3":
+      return movies;
+    case "c4":
+      return startup;
+    default:
+      return null;
     }
   };
 
