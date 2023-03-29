@@ -148,8 +148,8 @@ export const Login: React.FC<IProps> = () => {
         {renderMessageBox()}
         <div className="demo-creds">
           <p>Admin credentials:</p>
-          <p>email: admin@sahaaya.com</p>
-          <p>password: ssa@2022</p>
+          <p>email: ranganath.sahaayaadmin@gmail.com</p>
+          <p>password: ssa@2021</p>
         </div>
       </Container>
     </>

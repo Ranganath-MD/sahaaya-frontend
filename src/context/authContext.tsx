@@ -1,14 +1,19 @@
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { apiService, socket } from "utils";
 import { ProfileContext } from "./user/profileContext";
 
 export const AuthContext: React.Context<any> = createContext<any>({});
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem("token"));
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    !!localStorage.getItem("token")
+  );
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showMessageBox, setShowMessageBox] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
@@ -18,19 +23,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const navigate = useNavigate();
 
   const getProfile = async () => {
-    const user = await apiService.get("/users/profile");
-    setCurrentUser(user.data);
-    profile.setData(user.data);
+    try {
+      const user = await apiService.get("/users/profile");
+      setCurrentUser(user.data);
+      profile.setData(user.data);
+    } catch {
+      redirect("/");
+    }
   };
+
   useEffect(() => {
-    if(isAuthenticated){
+    if (isAuthenticated) {
       getProfile();
     }
   }, []);
 
   const register = async (formData: IFormInput, reset: any) => {
     setIsLoading(true);
-    try{
+    try {
       const result = await apiService.post("/users/register", formData);
       if (result.status !== undefined && result.status === 409) {
         setShowMessageBox(true);
@@ -40,11 +50,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (result.data) {
         setIsLoading(false);
         navigate("/login", {
-          state: { email: result.data.email }
+          state: { email: result.data.email },
         });
         reset();
       }
-    } catch(e){
+    } catch (e) {
       setIsLoading(false);
     }
   };
@@ -75,13 +85,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const handleLogin = (data: any) => {
-    if(data.type === "Admin") {
+    if (data.type === "Admin") {
       navigate("/admin/dashboard", {
-        replace: true
+        replace: true,
       });
-    }else {
+    } else {
       navigate("/dashboard", {
-        replace: true
+        replace: true,
       });
     }
     return null;
@@ -93,7 +103,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (formData: IFormInput, reset: any) => {
     setIsLoading(true);
-    try{
+    try {
       const result = await apiService.post("/users/login", formData);
       if (result.status !== undefined && result.status === 401) {
         setShowMessageBox(true);
@@ -102,7 +112,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       if (result.data) {
         setIsLoading(false);
-        apiService.service.defaults.headers["Authorization"] = result.data.token;
+        apiService.service.defaults.headers["Authorization"] =
+          result.data.token;
         setToken(result.data);
         handleLogin(result.data);
         handleIsAuthenticated(true);
@@ -110,14 +121,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setCurrentUser(result.data);
         reset();
       }
-    } catch(e){
+    } catch (e) {
       setIsLoading(false);
     }
   };
 
   const logout = async () => {
     setIsLoading(true);
-    try{
+    try {
       const result = await apiService.delete("/users/logout");
       if (result.status !== undefined && result.status === 401) {
         setShowMessageBox(true);
@@ -130,7 +141,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         apiService.service.defaults.headers["Authorization"] = null;
         handleLogout();
       }
-    }catch(err){
+    } catch (err) {
       setIsLoading(false);
     }
     setAnchorEl(null);
@@ -139,19 +150,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   return (
     <AuthContext.Provider
       value={{
-        showPassword, setShowPassword,
-        register,isLoading,
-        showConfirmPassword, setShowConfirmPassword,
-        showMessageBox, setShowMessageBox,
+        showPassword,
+        setShowPassword,
+        register,
+        isLoading,
+        showConfirmPassword,
+        setShowConfirmPassword,
+        showMessageBox,
+        setShowMessageBox,
         message,
         login,
-        isAuthenticated, setIsAuthenticated,
+        isAuthenticated,
+        setIsAuthenticated,
         isAdmin,
         isLoggedIn,
         getProfile,
-        anchorEl, setAnchorEl,
+        anchorEl,
+        setAnchorEl,
         currentUser,
-        logout, openProfile
+        logout,
+        openProfile,
       }}
     >
       {children}
