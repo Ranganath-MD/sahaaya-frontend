@@ -51,7 +51,9 @@ export const Uplaod: React.FC<IUploadFileProps> = ({
   const { getRootProps, getInputProps, fileRejections } = useDropzone({
     onDrop: handleDrop,
     maxFiles: 1,
-    accept: "image/jpeg, image/jpg, image/png, image/svg",
+    accept: {
+      "image/*": [".jpeg", ".jpg", ".png", ".svg"],
+    },
   });
 
   return (

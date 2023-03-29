@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useMemo } from "react";
-import NumberFormat, { NumberFormatProps } from "react-number-format";
+import { NumericFormat, PatternFormat, NumericFormatProps } from "react-number-format";
 import "./index.scss";
 import styled from "styled-components";
 
@@ -12,10 +12,14 @@ const Label = styled.div<{ required?: boolean }>`
     color: #b30c0c;
   }
 `;
-interface Props extends NumberFormatProps {
+interface Props extends NumericFormatProps {
   error?: boolean;
+  label?: string;
+  required?: boolean;
   errormsg?: string;
+  format?: string;
 }
+
 const Message = styled.div<{ error?: boolean }>`
   height: 5px;
   font-size: 10px;
@@ -29,7 +33,7 @@ export const MaskedInput: React.FC<Props> = ({ error = false, ...props }) => {
       {props.label ? (
         <Label required={props.required as boolean}>{props.label}</Label>
       ) : null}
-      <NumberFormat
+      <NumericFormat
         {...props}
         className={(error as boolean) ? "error" : "normal"}
         allowNegative={false}
@@ -42,10 +46,7 @@ export const MaskedInput: React.FC<Props> = ({ error = false, ...props }) => {
 export const ReadOnlyMaskInput = ({ wrapperStyle, ...props }: any) => {
   return (
     <p style={wrapperStyle}>
-      <NumberFormat
-        {...props}
-        allowNegative={false}
-      />
+      <PatternFormat {...props} allowNegative={false} />
     </p>
   );
 };
@@ -66,7 +67,6 @@ export const CurrencyInput = ({
         thousandsGroupStyle="lakh"
         label={label}
         displayType={displayType}
-        allowEmptyFormatting
         inputMode="numeric"
         onBlur={handleBlur}
         required

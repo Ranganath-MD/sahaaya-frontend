@@ -10,11 +10,13 @@ import startup from "../assets/ill/startup.svg";
 
 export const BaseContext: React.Context<any> = createContext<any>({});
 
-export const BaseProvider: React.FC = ({ children }) => {
-  const [ categories, setCategories ] = useState<ICategory | null>(null);
-  const [ campaignData, setCampaignData ] = useState(null);
-  const [ campaignById, setCampaign ] = useState(null);
-  const [ loading, setLoading ] = useState<boolean>(false);
+export const BaseProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [categories, setCategories] = useState<ICategory | null>(null);
+  const [campaignData, setCampaignData] = useState(null);
+  const [campaignById, setCampaign] = useState(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const fetchCategories = async () => {
     setLoading(true);
@@ -22,61 +24,57 @@ export const BaseProvider: React.FC = ({ children }) => {
       const result = await apiService.get("categories");
       setCategories(result.data);
       setLoading(false);
-    }catch(err){
+    } catch (err) {
       setLoading(false);
     }
   };
   const fetchCampaigns = async () => {
     setLoading(true);
     try {
-      const result = await apiService.get(
-        "campaign/approved-campaigns"
-      );
+      const result = await apiService.get("campaign/approved-campaigns");
       setCampaignData(result.data);
       setLoading(false);
-    }catch(err){
+    } catch (err) {
       setLoading(false);
     }
   };
   const fetchCampaignById = async (id: string) => {
     setLoading(true);
     try {
-      const result = await apiService.get(
-        `campaign/${id}`
-      );
+      const result = await apiService.get(`campaign/${id}`);
       setCampaign(result.data);
       setLoading(false);
-    }catch(err){
+    } catch (err) {
       setLoading(false);
     }
   };
 
   const renderCategoryIcons = (key: string) => {
     switch (key) {
-    case "c1":
-      return <GiFarmTractor size={30}/>;
-    case "c2":
-      return <HiOutlineLightBulb size={30}/>;
-    case "c3":
-      return <RiMovie2Line size={30}/>;
-    case "c4":
-      return <GiHourglass size={30}/>;
-    default:
-      return null;
+      case "c1":
+        return <GiFarmTractor size={30} />;
+      case "c2":
+        return <HiOutlineLightBulb size={30} />;
+      case "c3":
+        return <RiMovie2Line size={30} />;
+      case "c4":
+        return <GiHourglass size={30} />;
+      default:
+        return null;
     }
   };
   const renderBackground = (key: string) => {
     switch (key) {
-    case "c1":
-      return farmer;
-    case "c2":
-      return talents;
-    case "c3":
-      return movies;
-    case "c4":
-      return startup;
-    default:
-      return null;
+      case "c1":
+        return farmer;
+      case "c2":
+        return talents;
+      case "c3":
+        return movies;
+      case "c4":
+        return startup;
+      default:
+        return null;
     }
   };
 

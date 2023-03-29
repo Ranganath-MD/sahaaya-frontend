@@ -7,7 +7,9 @@ import { CampaignContext } from "./campaignContext";
 
 export const BeneficiaryContext: React.Context<any> = createContext<any>({});
 
-export const BeneficiaryProvider: React.FC = ({ children }) => {
+export const BeneficiaryProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const ctx = useContext(CampaignContext);
   const [firstName, setFirstName] = useState<string>("");
   const [firstNameError, setFirstNameError] = useState<string>("");

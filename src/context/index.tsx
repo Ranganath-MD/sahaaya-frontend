@@ -1,7 +1,7 @@
 import React from "react";
 import { LayoutProvider } from "./layoutContext";
 import { AuthProvider } from "./authContext";
-import { RouteComponentProps, LocationProvider } from "@reach/router";
+// import { RouteComponentProps } from "react-router-dom";
 import { CampaignProvider } from "./user/campaignContext";
 import { BaseProvider } from "./baseContext";
 import { BeneficiaryProvider } from "./user/beneficiaryContext";
@@ -11,7 +11,9 @@ import { DashboardProvider } from "./user/dashboardContext";
 import { ProfileProvider } from "./user/profileContext";
 import { AdminDashboardProvider } from "./Admin/adminDashBoard";
 
-export const UserProvider: React.FC<RouteComponentProps> = ({ children }) => {
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return (
     <DashboardProvider>
       <CampaignProvider>
@@ -25,25 +27,25 @@ export const UserProvider: React.FC<RouteComponentProps> = ({ children }) => {
   );
 };
 
-export const AdminProvider: React.FC<RouteComponentProps> = ({ children }) => {
+export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return <AdminDashboardProvider>{children}</AdminDashboardProvider>;
 };
 
-export const Provider: React.FC<RouteComponentProps> = ({ children }) => {
+export const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <LocationProvider>
-      <LayoutProvider>
-        <BaseProvider>
-          <ProfileProvider>
-            <AuthProvider>
-              <AdminProvider>
-                <UserProvider>{children}</UserProvider>
-              </AdminProvider>
-            </AuthProvider>
-          </ProfileProvider>
-        </BaseProvider>
-      </LayoutProvider>
-    </LocationProvider>
+    // <LocationProvider>
+    <LayoutProvider>
+      <BaseProvider>
+        <ProfileProvider>
+          <AuthProvider>
+            <AdminProvider>
+              <UserProvider>{children}</UserProvider>
+            </AdminProvider>
+          </AuthProvider>
+        </ProfileProvider>
+      </BaseProvider>
+    </LayoutProvider>
+    // </LocationProvider>
   );
 };
 

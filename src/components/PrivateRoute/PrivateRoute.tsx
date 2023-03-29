@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { Redirect, RouteComponentProps } from "@reach/router";
+import { IndexRouteProps, Navigate, RouteProps } from "react-router-dom";
 import { AuthContext } from "../../context";
 
-interface IPrivateRouteProps extends RouteComponentProps {
-  component?: React.FC<RouteComponentProps>;
+interface IPrivateRouteProps extends IndexRouteProps {
+  component?: React.FC<RouteProps>;
 }
 export const PrivateRoute: React.FC<IPrivateRouteProps> = ({
   component: Component,
@@ -13,6 +13,6 @@ export const PrivateRoute: React.FC<IPrivateRouteProps> = ({
   return context.isLoggedIn() && !context.isAdmin() ? (
     <Component {...rest} />
   ) : (
-    <Redirect to="/" noThrow />
+    <Navigate to="/" />
   );
 };

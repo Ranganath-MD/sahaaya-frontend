@@ -1,11 +1,11 @@
-import { navigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { apiService, socket } from "utils";
 import { ProfileContext } from "./user/profileContext";
 
 export const AuthContext: React.Context<any> = createContext<any>({});
 
-export const AuthProvider: React.FC = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem("token"));
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
@@ -15,6 +15,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [currentUser, setCurrentUser] = useState<any>(null);
   const profile = useContext(ProfileContext);
+  const navigate = useNavigate();
 
   const getProfile = async () => {
     const user = await apiService.get("/users/profile");

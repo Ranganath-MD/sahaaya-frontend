@@ -7,7 +7,7 @@ const Card = styled.div`
   position: relative;
   overflow: hidden;
 `;
-export const DevCard: React.FC = ({ children }) => {
+export const DevCard: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <Card>
       {children}

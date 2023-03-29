@@ -3,7 +3,9 @@ import { apiService } from "utils";
 
 export const DashBoardContext: React.Context<any> = createContext<any>({});
 
-export const DashboardProvider: React.FC = ({ children }) => {
+export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [campaigns, setCampaigns] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
@@ -29,7 +31,7 @@ export const DashboardProvider: React.FC = ({ children }) => {
       setCampaigns(result.data.campaigns);
       setLoadingDelete(false);
       setOpenDelete(false);
-    }catch {
+    } catch {
       setLoadingDelete(false);
     }
   };
@@ -44,8 +46,10 @@ export const DashboardProvider: React.FC = ({ children }) => {
         setOpenDelete,
         loadingDelete,
         deleteCampaign,
-        campaignId, setCampaignId,
-        loadingPreview, setPreviewLoading
+        campaignId,
+        setCampaignId,
+        loadingPreview,
+        setPreviewLoading,
       }}
     >
       {children}

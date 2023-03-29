@@ -35,6 +35,7 @@ interface IDevTableProps extends DevTable {
     onChangePage: () => void;
     onChangeRowsPerPage: () => void;
   };
+  children: React.ReactNode;
 }
 
 interface DevTableHeadProps extends DevTable {
@@ -42,4 +43,5 @@ interface DevTableHeadProps extends DevTable {
 }
 interface DevTableBodyProps extends DevTable {
   rows?: any;
+  children?: React.ReactNode;
 }

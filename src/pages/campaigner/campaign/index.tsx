@@ -1,5 +1,4 @@
 import { Container } from "@material-ui/core";
-import { RouteComponentProps } from "@reach/router";
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { CategoryCard } from "components";
@@ -14,7 +13,7 @@ const SubHeading = styled.p`
   text-align: center;
   color: #767676;
 `;
-export const CreateCampaign: React.FC<RouteComponentProps> = () => {
+export const CreateCampaign: React.FC = () => {
   const ctx = useContext(BaseContext);
   const campaign_ctx = useContext(CampaignContext);
   const beneficiary_ctx = useContext(BeneficiaryContext);
@@ -26,6 +25,7 @@ export const CreateCampaign: React.FC<RouteComponentProps> = () => {
     bank.clear();
     campaign_ctx.handleCreateCampaign(c);
   };
+
   return (
     <Container>
       {campaign_ctx.isLoading && <Spinner />}

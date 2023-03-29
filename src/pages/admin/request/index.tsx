@@ -1,11 +1,11 @@
 import React, { useContext, useMemo } from "react";
-import { RouteComponentProps, useLocation } from "@reach/router";
+import { useLocation } from "react-router-dom";
 import { AdminLayout, Seo, StatusChangeModal } from "components";
 import { AdminDashboardContext, ProfileContext } from "context";
 import { CampaignsTable } from "./table";
 import { RequestShow } from "./requestShow";
 
-export const CampaignRequests: React.FC<RouteComponentProps> = () => {
+export const CampaignRequests: React.FC = () => {
   const ctx = useContext(AdminDashboardContext);
   const profile = useContext(ProfileContext);
   const location = useLocation();

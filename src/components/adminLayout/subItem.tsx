@@ -7,7 +7,7 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import "./index.scss";
-// import { navigate } from "@reach/router";
+// import { useNavigate } from "react-router-dom";
 
 const Image = ({ Component }: any) => {
   return <Component />;

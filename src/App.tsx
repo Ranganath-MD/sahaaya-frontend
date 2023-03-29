@@ -5,7 +5,7 @@ import {
   PrivateRoute,
   AdminPrivateRoute,
 } from "components";
-import { Router } from "@reach/router";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 import {
   NotFound,
   Home,
@@ -27,55 +27,36 @@ import { Login, Register } from "pages/userAuth";
 const App: React.FC = () => {
 
   return (
-    <Provider>
+    // <Provider>
       <Layout>
-        <Router>
-          <Home path="/" />
-          <BrowseFundriser path="browse-campaign" />
-          <CampaignView path="/browse-campaign/:id" />
-          <HowItWorks path="how-sahaaya-works" />
-          <Register path="register" />
-          <Login path="login" />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/browse-campaign" element={<BrowseFundriser />} />
+          <Route path="/browse-campaign/:id" element={<CampaignView />} />
+          <Route path="/how-sahaaya-works" element={<HowItWorks />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <AdminPrivateRoute
-            path="admin/dashboard"
-            component={AdminDashboard}
+            index
+            path="/admin/dashboard"
+            element={<AdminDashboard />}
           />
+          <AdminPrivateRoute index path="profile" element={<AdminProfile />} />
+          <AdminPrivateRoute index path="analytics" element={<Analytics />} />
           <AdminPrivateRoute
-            path="profile"
-            component={AdminProfile}
-          />
-          <AdminPrivateRoute
-            path="analytics"
-            component={Analytics}
-          />
-          <AdminPrivateRoute
+            index
             path="campaign-requests"
-            component={CampaignRequests}
+            element={<CampaignRequests />}
           />
-          <AdminPrivateRoute
-            path="settings"
-            component={Settings}
-          />
-          <PrivateRoute
-            path="dashboard"
-            component={CampaignerDashboard}
-          />
-          <PrivateRoute
-            path="create-campaign"
-            component={CreateCampaign}
-          />
-          <PrivateRoute
-            path="campaign/:id"
-            component={CreateCampaignForm}
-          />
-          <PrivateRoute
-            path="/user/profile"
-            component={UserProfile}
-          />
-          <NotFound path="/:statuscode" default />
-        </Router>
+          <AdminPrivateRoute index path="settings" element={<Settings />} />
+          <PrivateRoute index path="dashboard" element={<CampaignerDashboard />} />
+          <PrivateRoute index path="create-campaign" element={<CreateCampaign />} />
+          <PrivateRoute index path="campaign/:id" element={<CreateCampaignForm />} />
+          <PrivateRoute index path="/user/profile" element={<UserProfile />} />
+          <NotFound index path="/:statuscode" default /> */}
+        </Routes>
       </Layout>
-    </Provider>
+    // </Provider>
   );
 };
 

@@ -17,12 +17,12 @@ export const AnimateText = () => {
     <span className="animate-container">
       We are here to help
       <TextTransition
-        text={`${TEXTS[index % TEXTS.length]}`}
         springConfig={presets.gentle}
         inline
         className="text-animate"
-        noOverflow
-      />s
+      >
+        {TEXTS[index % TEXTS.length]}s
+      </TextTransition>
     </span>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { navigate, RouteComponentProps } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import CampaignImage from "assets/user/crowdfunding.svg";
 import DonationImage from "assets/user/donate.svg";
 import { DevDashboardCard } from "components";
@@ -21,8 +21,9 @@ const fundCardData = [
   }
 ];
 
-export const DashboardCard: React.FC<RouteComponentProps> = () => {
+export const DashboardCard: React.FC = () => {
   // const ctx = useContext(CampaignContext);
+  const navigate = useNavigate();
 
   const onClickCard = (id: number) => {
     if(id === 1) {

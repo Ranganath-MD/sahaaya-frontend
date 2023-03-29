@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import { RouteComponentProps } from "@reach/router";
 import { AdminDashboardContext } from "context";
 import { CampaignItem } from "./item";
 import { Column } from "../../../../typings/table";
@@ -23,7 +22,7 @@ const Pagination = styled.div`
   align-items: center;
 `;
 
-export const CampaignsTable: React.FC<RouteComponentProps> = () => {
+export const CampaignsTable: React.FC = () => {
   const ctx = useContext(AdminDashboardContext);
   const [id, setId] = useState("");
 

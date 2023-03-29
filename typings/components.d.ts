@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 interface IButtonProps {
   // eslint-disable-next-line no-unused-vars
+  children?: React.ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   color?: string;
   primary?: boolean;
@@ -92,6 +93,7 @@ interface ITextFields {
 interface ICustomAccordian {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onChange?: ((event: React.ChangeEvent<{}>, expanded: boolean) => void) | undefined;
+  children: React.ReactNode;
   expanded?: boolean;
   headerText?: string;
   secondaryText?: string;

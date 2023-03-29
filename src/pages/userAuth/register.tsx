@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Seo, DevButton, FormInput, MessageBox } from "components";
 import { Grid, Button, Divider, Container } from "@material-ui/core";
-import { Link, RouteComponentProps } from "@reach/router";
+import { Link } from "react-router-dom";
 import { AuthContext } from "context";
 import "./index.scss";
 import { BiUserCircle } from "react-icons/bi";
@@ -10,9 +10,15 @@ import { VscEyeClosed, VscEye, VscMail } from "react-icons/vsc";
 import { FcGoogle } from "react-icons/fc";
 import { AnimateText } from "./animateText";
 
-export const Register: React.FC<RouteComponentProps> = () => {
+export const Register: React.FC = () => {
   const context = useContext(AuthContext);
-  const { control, handleSubmit, errors, getValues, reset } = useForm<IFormInput>();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+    reset,
+  } = useForm<IFormInput>();
 
   const onSubmit = (data: IFormInput) => {
     const formData = {
@@ -52,7 +58,7 @@ export const Register: React.FC<RouteComponentProps> = () => {
                   name="username"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }) => {
+                  render={({ onChange, value }: any) => {
                     return (
                       <FormInput
                         name="username"
@@ -77,7 +83,7 @@ export const Register: React.FC<RouteComponentProps> = () => {
                   name="email"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }) => {
+                  render={({ onChange, value }: any) => {
                     return (
                       <FormInput
                         name="email"
@@ -107,7 +113,7 @@ export const Register: React.FC<RouteComponentProps> = () => {
                   name="password"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }) => {
+                  render={({ onChange, value }: any) => {
                     return (
                       <FormInput
                         name="password"
@@ -140,7 +146,7 @@ export const Register: React.FC<RouteComponentProps> = () => {
                   name="confirmPassword"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }) => {
+                  render={({ onChange, value }: any) => {
                     return (
                       <FormInput
                         name="confirmPassword"

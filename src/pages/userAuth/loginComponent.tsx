@@ -1,31 +1,31 @@
 import React, { useContext, useEffect } from "react";
 import { Seo, DevButton, FormInput, MessageBox } from "components";
 import { Grid, Container } from "@material-ui/core";
-import { Link, RouteComponentProps } from "@reach/router";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "context";
 import "./index.scss";
 import { useForm, Controller } from "react-hook-form";
 import { VscEyeClosed, VscEye, VscMail } from "react-icons/vsc";
 import Logo from "assets/logo.svg";
 
-interface IProps extends RouteComponentProps<{ location: { state: { email: React.SetStateAction<string> | undefined } } }> {
+interface IProps {
  email?: string;
 }
 
-
 export const Login: React.FC<IProps> = (props) => {
   const context = useContext(AuthContext);
-  const { control, handleSubmit, errors, reset } = useForm();
+  const { control, handleSubmit, formState: { errors }, reset } = useForm();
+  const location = useLocation();
 
   useEffect(() => {
-    if (props.location?.state !== null && props.location?.state.email !== undefined){
-      reset({ email: props.location?.state.email });
+    if (location?.state !== null && location?.state.email !== undefined){
+      reset({ email: location?.state.email });
     }else {
       reset();
     }
   }, []);
 
-  const onSubmit = (data: IFormInput) => {
+  const onSubmit = (data: any) => {
     const formData = {
       email: data.email,
       password: data.password
@@ -62,7 +62,7 @@ export const Login: React.FC<IProps> = (props) => {
                   name="email"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }) => {
+                  render={({ onChange, value }: any) => {
                     return (
                       <FormInput
                         name="email"
@@ -71,7 +71,7 @@ export const Login: React.FC<IProps> = (props) => {
                         error={!!errors?.email}
                         type="email"
                         placeholder="Email"
-                        errorMsg={errors.email?.message}
+                        errorMsg={errors.email?.message as string}
                         icon={<VscMail size="1.3em" />}
                         width="95%"
                         onChange={(e) => onChange(e)}
@@ -91,7 +91,7 @@ export const Login: React.FC<IProps> = (props) => {
                   name="password"
                   control={control}
                   defaultValue=""
-                  render={({ onChange, value }) => {
+                  render={({ onChange, value }: any) => {
                     return (
                       <FormInput
                         name="password"
@@ -102,7 +102,7 @@ export const Login: React.FC<IProps> = (props) => {
                             ? "text"
                             : "password"
                         }
-                        errorMsg={errors.password?.message}
+                        errorMsg={errors.password?.message as string}
                         placeholder="Password"
                         icon={
                           context.showPassword ? (

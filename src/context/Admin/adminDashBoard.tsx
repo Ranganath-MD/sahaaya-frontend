@@ -5,7 +5,9 @@ import { ICampaignPayload } from "../../../typings/campaign";
 
 export const AdminDashboardContext: React.Context<any> = createContext({});
 
-export const AdminDashboardProvider: React.FC = ({ children }) => {
+export const AdminDashboardProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   const [openSideBar, setOpenSideBar] = useState<boolean>(true);
   const [campaignsForReview, setCampaignsForReview] = useState([]);
   const [isTableDataLoading, setLoading] = useState<boolean>(false);
@@ -22,10 +24,10 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
   const [dashboardData, setDashboardData] = React.useState<any>(null);
   const [searchText, setSearchText] = useState<string>("");
   const [allCampaigns, setAllCampaigns] = useState([]);
-  const [ campaignsByStatus, setCampaignsByStatus] = useState<any>([]);
-  const [ campaignsByCategory, setCampaignsByCategory] = useState<any>([]);
-  const [ donationsByyear, setDonationsByYear ] = useState([]);
-  const [ isLoading, setIsLoading ] = useState(false);
+  const [campaignsByStatus, setCampaignsByStatus] = useState<any>([]);
+  const [campaignsByCategory, setCampaignsByCategory] = useState<any>([]);
+  const [donationsByyear, setDonationsByYear] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const profile = useContext(ProfileContext);
   const statusChangedBy = {
     name: profile.user.username,
@@ -36,8 +38,8 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
   const handleSearch = (e: any) => {
     setSearchText(e.target.value);
     const text = e.target.value.toLowerCase();
-    const result = dashboardData?.campaigns.filter((campaign: any) =>
-      campaign.campaignName.toLowerCase().indexOf(text) >= 0
+    const result = dashboardData?.campaigns.filter(
+      (campaign: any) => campaign.campaignName.toLowerCase().indexOf(text) >= 0
     );
     setAllCampaigns(result);
   };
@@ -61,7 +63,13 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
     }
   };
 
-  const formatCampaignsByStatus = ({ IN_DRAFT, IN_REVIEW, APPROVED, REJECTED, COMPLETED  }: any) => {
+  const formatCampaignsByStatus = ({
+    IN_DRAFT,
+    IN_REVIEW,
+    APPROVED,
+    REJECTED,
+    COMPLETED,
+  }: any) => {
     const campaign_data: any = [
       { index: 1, status: "IN_DRAFT", campaigns: IN_DRAFT },
       { index: 2, status: "IN_REVIEW", campaigns: IN_REVIEW },
@@ -73,7 +81,12 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
     setCampaignsByStatus(campaign_data);
   };
 
-  const formatCampaignsByCategory = ({ farmers, talents, movies, startups }: any) => {
+  const formatCampaignsByCategory = ({
+    farmers,
+    talents,
+    movies,
+    startups,
+  }: any) => {
     const data = [
       { category: "Farmers", count: farmers },
       { category: "Talents", count: talents },
@@ -86,7 +99,7 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
     const values = data.map((item: any) => {
       return {
         x: item.index,
-        y: item.donation
+        y: item.donation,
       };
     });
     setDonationsByYear(values);
@@ -211,7 +224,7 @@ export const AdminDashboardProvider: React.FC = ({ children }) => {
         campaignsByStatus,
         campaignsByCategory,
         donationsByyear,
-        isLoading
+        isLoading,
       }}
     >
       {children}

@@ -1,5 +1,5 @@
 import { Dialog, DialogContent } from "@material-ui/core";
-import { navigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import { DevButton } from "components";
 import { CampaignContext } from "context";
 import React, { useContext } from "react";
@@ -29,12 +29,14 @@ const MessageWrapper = styled.div`
 
 export const SuccessMessage: React.FC = () => {
   const ctx = useContext(CampaignContext);
+  const navigate = useNavigate();
 
   const handleNavigate = () => {
     navigate("/dashboard", {
       replace: true
     });
   };
+
   return (
     <Dialog open={ctx.openSuccess}>
       <DialogContent>

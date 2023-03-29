@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { ListItem, ListItemText, Tooltip } from "@material-ui/core";
 import { ISideBarItemProps } from "./items";
 import "./index.scss";
-import { navigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import { SubItem } from "./subItem";
 
 interface IListItemProps {
@@ -18,6 +18,7 @@ export const SideBarItem: React.FC<IListItemProps> = ({
   openSidebar,
   pathName,
 }) => {
+  const navigate = useNavigate();
 
   const handleClick = (item: any) => {
     navigate(item.route);

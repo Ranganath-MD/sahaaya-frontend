@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { DevButton } from "../../button";
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 import { AuthContext, ProfileContext } from "../../../context";
 import { VscAccount } from "react-icons/vsc";
 

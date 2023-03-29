@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { RouteComponentProps, useLocation } from "@reach/router";
+import { useLocation } from "react-router-dom";
 import { AdminLayout, Seo } from "components";
 import { AdminDashboardContext, ProfileContext } from "context";
 import { Grid } from "@material-ui/core";
@@ -7,7 +7,7 @@ import { CampaignsPerStatus  } from "./campaignsPerStatus";
 import { CampaignsByCategory } from "./campaignsByCategory";
 import { DonationsByyear } from "./donationsByyear";
 
-export const Analytics: React.FC<RouteComponentProps> = () => {
+export const Analytics: React.FC = () => {
   const ctx = useContext(AdminDashboardContext);
   const profile = useContext(ProfileContext);
   const location = useLocation();

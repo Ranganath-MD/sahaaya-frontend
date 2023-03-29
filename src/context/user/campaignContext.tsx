@@ -1,4 +1,4 @@
-import { navigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import { addDays, formatISO, format } from "date-fns";
 import React, { createContext, useState } from "react";
 import { apiService, socket } from "utils";
@@ -6,7 +6,7 @@ import { ICampaignPayload } from "../../../typings/campaign";
 
 export const CampaignContext = createContext<any>({});
 
-export const CampaignProvider: React.FC = ({ children }) => {
+export const CampaignProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [campaign, setCampaign] = useState(null);
   const [campaignId, setCampaignId] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -25,6 +25,7 @@ export const CampaignProvider: React.FC = ({ children }) => {
   const [previewOpen, setPreviewOpen] = useState<boolean>(false);
   const [openSuccess, setOpenSuccess] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const createCampaign = async (payload: any) => {
     const result = await apiService.post("/campaign", payload);

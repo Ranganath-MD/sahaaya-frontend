@@ -1,8 +1,7 @@
 import React from "react";
 import { Seo } from "components";
-import { RouteComponentProps } from "@reach/router";
 
-export const HowItWorks: React.FC<RouteComponentProps> = () => {
+export const HowItWorks: React.FC = () => {
   return (
     <>
       <Seo title="How Sahaaya Works"/>

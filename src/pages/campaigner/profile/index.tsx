@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { RouteComponentProps } from "@reach/router";
 import {
   Seo,
   UserAvatar,
@@ -20,7 +19,7 @@ const Label = styled.span`
   color: #697384;
   font-size: 12px;
 `;
-export const UserProfile: React.FC<RouteComponentProps> = () => {
+export const UserProfile: React.FC = () => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const ctx = useContext(AuthContext);
   const profile = useContext(ProfileContext);

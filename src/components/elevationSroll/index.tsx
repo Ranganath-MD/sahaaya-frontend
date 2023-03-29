@@ -1,6 +1,6 @@
 import React from "react";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import { useLocation } from "@reach/router";
+import { useLocation } from "react-router-dom";
 export const  ElevationScroll = (props: Props) => {
   const { children, window } = props;
   const location = useLocation();

@@ -8,8 +8,10 @@ interface InitState {
 
 export const LayoutContext: React.Context<any> = createContext<InitState>({});
 
-export const LayoutProvider: React.FC = ({ children }) => {
-  const [ openDrawer, setOpenDrawer ] = useState(false);
+export const LayoutProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const handleDrawer = (e: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -22,9 +24,12 @@ export const LayoutProvider: React.FC = ({ children }) => {
     setOpenDrawer(!openDrawer);
   };
   return (
-    <LayoutContext.Provider value={{
-      openDrawer, handleDrawer
-    }}>
+    <LayoutContext.Provider
+      value={{
+        openDrawer,
+        handleDrawer,
+      }}
+    >
       {children}
     </LayoutContext.Provider>
   );

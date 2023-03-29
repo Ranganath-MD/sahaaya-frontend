@@ -1,5 +1,5 @@
 import { Breadcrumbs, Chip, Container, Grid } from "@material-ui/core";
-import { RouteComponentProps, useParams } from "@reach/router";
+import { useParams } from "react-router-dom";
 import React, { useContext, useEffect, useMemo } from "react";
 import { DevButton, EditableTextArea, Seo } from "components";
 import { BankContext, BeneficiaryContext, CampaignContext, AttachmentContext } from "context";
@@ -16,7 +16,7 @@ import { PreviewCampaign } from "./previewModal";
 import { SuccessMessage } from "./successMessage";
 import { Spinner } from "components/progressbar/global";
 
-export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
+export const CreateCampaignForm: React.FC = () => {
   const ctx = useContext(CampaignContext);
   const ctx_b = useContext(BeneficiaryContext);
   const docs = useContext(AttachmentContext);
@@ -38,12 +38,13 @@ export const CreateCampaignForm: React.FC<RouteComponentProps> = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem("campaignId", params.id);
+    localStorage.setItem("campaignId", params.id as string);
     getCampaign();
   }, []);
 
   const preview = useMemo(() => <PreviewCampaign/>, [ctx.previewOpen]);
   const success = useMemo(() => <SuccessMessage/>, [ctx.openSuccess]);
+
   return (
     <>
       <Seo title={ctx.campaignName} />

@@ -3,7 +3,9 @@ import { apiService, socket } from "utils";
 
 export const ProfileContext: React.Context<any> = createContext<any>({});
 
-export const ProfileProvider: React.FC = ({ children }) => {
+export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState({
     id: "",
     username: "",
@@ -14,7 +16,7 @@ export const ProfileProvider: React.FC = ({ children }) => {
     city: "",
     state: "",
     campaigns: [],
-    avatar: null
+    avatar: null,
   });
   const [progress, setProgress] = useState(0);
   const handleProgress = (data: any) => {
@@ -32,13 +34,10 @@ export const ProfileProvider: React.FC = ({ children }) => {
       city: data?.city,
       state: data?.state,
       campaigns: data?.campaigns,
-      avatar: data?.avatar
+      avatar: data?.avatar,
     });
   };
-  const updateUserdetails = (
-    key: string,
-    value: any
-  ) => {
+  const updateUserdetails = (key: string, value: any) => {
     if (!user?.id) return null;
     const payload: any = {
       id: user?.id,
@@ -63,9 +62,9 @@ export const ProfileProvider: React.FC = ({ children }) => {
     setUser({ ...user, avatar: result.data?.file });
   };
   const handleUsername = () => {
-    if(user.username === "") {
+    if (user.username === "") {
       return null;
-    }else {
+    } else {
       updateUserdetails("username", user.username);
     }
   };

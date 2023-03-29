@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { navigate } from "@reach/router";
+import { redirect } from "react-router-dom";
 import axios from "axios";
 import { config } from "../config";
 class Service {
@@ -24,14 +24,14 @@ class Service {
     if (data.status === 403) {
       localStorage.clear();
       apiService.service.defaults.headers["Authorization"] = null;
-      navigate("/");
+      redirect("/");
     }
   }
 
   handleError = (error: any) => {
     switch (error.response.status) {
     case 400:
-      navigate("/400", { state: { status: "400", errMsg: "BAD REQUEST" } });
+      redirect("/400");
       break;
     case 401:
       return error.response.data;
@@ -39,19 +39,12 @@ class Service {
       this.handleAuthorization(error.response);
       break;
     case 404:
-      navigate("/404", {
-        state: {
-          status: "404",
-          errMsg: "The page you are looking for is not exists",
-        },
-      });
+      redirect("/404");
       break;
     case 409:
       return error.response.data;
     default:
-      navigate("/500", {
-        state: { status: "500", errMsg: "Internal Server Error" },
-      });
+      redirect("/500");
       break;
     }
     return Promise.reject(error);

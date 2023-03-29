@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { Toolbar } from "@material-ui/core";
-import { Link, LinkGetProps } from "@reach/router";
+import { Link } from "react-router-dom";
 import Logo from "../../../assets/logo-sahaaya.svg";
 import { RightMenu } from "./Menu";
 import { AuthContext } from "../../../context";
 
 export const NavBar: React.FC<IHeaderProps> = ({ links }) => {
   const auth = useContext(AuthContext);
-  const isActive = ({ isCurrent }: LinkGetProps) => {
+  const isActive = ({ isCurrent }: any) => {
     return isCurrent
       ? { className: "active-link" }
       : { className: "inactive-link" };
@@ -26,7 +26,7 @@ export const NavBar: React.FC<IHeaderProps> = ({ links }) => {
         {links().map((link: any, i: number) => {
           return (
             <div key={i} className="nav-item">
-              <Link to={link.path} getProps={isActive}>
+              <Link to={link.path} >
                 {link.name}
               </Link>
             </div>

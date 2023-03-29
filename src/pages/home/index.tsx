@@ -1,25 +1,25 @@
 import React, { useState, useContext } from "react";
 import {
-  RouteComponentProps,
-  Redirect,
+  Navigate,
   Link,
-} from "@reach/router";
+} from "react-router-dom";
 import "./home.scss";
 import { Container } from "@material-ui/core";
 import { CategoryCard, DevButton, Seo } from "components";
-import Hero from "assets/Taieri.svg";
-import Illustration from "assets/ill/ill2.svg";
 import site from "utils/siteOptions.json";
 import { Steps } from "./steps";
 import { useWindowsize } from "hooks";
 import { MobileSteps } from "./mobilesteps";
-import Dummy1 from "assets/dummy/dummy1.png";
-import Dummy2 from "assets/dummy/dummy2.png";
-import Dummy3 from "assets/dummy/dummy3.png";
-import Dummy4 from "assets/dummy/dummy4.png";
-import { AuthContext, BaseContext } from "context";
 
-export const Home: React.FC<RouteComponentProps> = () => {
+import { AuthContext, BaseContext } from "context";
+import Illustration from "../../assets/ill/ill2.svg";
+import Hero from "../../assets/Taieri.svg";
+import Dummy1 from "../../assets/dummy/dummy1.png";
+import Dummy2 from "../../assets/dummy/dummy2.png";
+import Dummy3 from "../../assets/dummy/dummy3.png";
+import Dummy4 from "../../assets/dummy/dummy4.png";
+
+export const Home: React.FC = () => {
   const size = useWindowsize();
   const [step, setStep] = useState<number>(1);
   const ctx = useContext(BaseContext);
@@ -41,9 +41,9 @@ export const Home: React.FC<RouteComponentProps> = () => {
   };
 
   if (auth.isLoggedIn() && !auth.isAdmin())
-    return <Redirect to="dashboard" noThrow />;
+    return <Navigate to="/dashboard" replace />;
   if (auth.isLoggedIn() && auth.isAdmin())
-    return <Redirect to="admin/dashboard" noThrow />;
+    return <Navigate to="/admin/dashboard" replace />;
 
   return (
     <div>

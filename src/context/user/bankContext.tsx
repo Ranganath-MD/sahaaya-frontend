@@ -1,4 +1,3 @@
-// import { navigate } from "@reach/router";
 import React, { createContext, useContext, useState } from "react";
 import { useDebounce } from "react-use";
 import { apiService, socket } from "utils";
@@ -9,7 +8,7 @@ import { CampaignContext } from "./campaignContext";
 
 export const BankContext: React.Context<any> = createContext<any>({});
 
-export const BankProvider: React.FC = ({ children }) => {
+export const BankProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const ctx = useContext(CampaignContext);
 
   const [bankName, setBankName] = useState<string>("");

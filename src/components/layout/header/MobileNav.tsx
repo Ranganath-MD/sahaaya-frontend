@@ -3,7 +3,7 @@ import { VscListSelection } from "react-icons/vsc";
 import { AuthContext, LayoutContext } from "../../../context";
 import "../layout.scss";
 import { Toolbar, IconButton, Drawer } from "@material-ui/core";
-import { Link, LinkGetProps } from "@reach/router";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../../../assets/logo-sahaaya.svg";
 import { RightMenu } from "./Menu";
 
@@ -11,7 +11,7 @@ export const MobileNav: React.FC<IHeaderProps> = ({ links }) => {
   const context = useContext(LayoutContext);
   const auth = useContext(AuthContext);
 
-  const isActive = ({ isCurrent }: LinkGetProps) => {
+  const isActive = ({ isCurrent }: { isCurrent: boolean}) => {
     return isCurrent
       ? { className: "active-link" }
       : { className: "inactive-link" };
@@ -37,7 +37,6 @@ export const MobileNav: React.FC<IHeaderProps> = ({ links }) => {
                 <Link
                   to={link.path}
                   key={i}
-                  getProps={isActive}
                   onClick={context.handleDrawer}
                 >
                   {link.name}

@@ -5,11 +5,7 @@ import {
   LinearProgress,
   Snackbar,
 } from "@material-ui/core";
-import {
-  RouteComponentProps,
-  useParams,
-  useLocation,
-} from "@reach/router";
+import { useParams, useLocation } from "react-router-dom";
 import { BaseContext } from "context";
 import {
   CurrencyInput,
@@ -19,11 +15,7 @@ import {
   ReadOnlyMaskInput,
   RichText,
 } from "components";
-import React, {
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./browse.scss";
 import { format } from "date-fns";
 import styled from "styled-components";
@@ -56,13 +48,10 @@ const loadScript = (src: any) => {
   });
 };
 
-export const CampaignView: React.FC<
-  RouteComponentProps
-> = () => {
+export const CampaignView: React.FC = () => {
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
-  const [showDonateForm, setShowDonateForm] =
-    useState(false);
+  const [showDonateForm, setShowDonateForm] = useState(false);
   const [name, setName] = useState("");
   const [input_amount, setAmount] = useState(0);
   const params = useParams();
@@ -81,17 +70,15 @@ export const CampaignView: React.FC<
   useEffect(() => {
     ctx.fetchCampaignById(params.id);
 
-    loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
+    loadScript("https://checkout.razorpay.com/v1/checkout.js");
   }, []);
 
   const displayRazorpay = async () => {
     const rupees = input_amount * 100;
-    const result = await apiService.post(
-      "campaign/payment/orders",
-      { name, amount: rupees }
-    );
+    const result = await apiService.post("campaign/payment/orders", {
+      name,
+      amount: rupees,
+    });
 
     if (!result) {
       return;
@@ -130,9 +117,7 @@ export const CampaignView: React.FC<
       },
     };
 
-    const paymentObject = new (window as any).Razorpay(
-      options
-    );
+    const paymentObject = new (window as any).Razorpay(options);
     paymentObject.open();
   };
 
@@ -161,20 +146,10 @@ export const CampaignView: React.FC<
           <p>
             Started On{" "}
             {ctx.campaignById?.fromdate &&
-              format(
-                new Date(ctx.campaignById?.fromdate),
-                "dd/MM/yyyy"
-              )}
+              format(new Date(ctx.campaignById?.fromdate), "dd/MM/yyyy")}
           </p>
-          <div
-            className={
-              show ? "rich-text" : "rich-text-close"
-            }
-          >
-            <RichText
-              content={ctx.campaignById?.longDescription}
-              readOnly
-            />
+          <div className={show ? "rich-text" : "rich-text-close"}>
+            <RichText content={ctx.campaignById?.longDescription} readOnly />
             <DevButton onClick={() => setShow(!show)}>
               {show ? "Show less" : "Show more"}
             </DevButton>
@@ -208,29 +183,22 @@ export const CampaignView: React.FC<
           </div>
           <div>
             <HeaderText>Bank Details</HeaderText>
-            <Message>
-              You can donate directly to bank account
-            </Message>
+            <Message>You can donate directly to bank account</Message>
             <div className="section">
               <div>
                 <Label>Bank Name</Label>
                 <p>
-                  {ctx.campaignById?.bank &&
-                    ctx.campaignById?.bank.bankName}
+                  {ctx.campaignById?.bank && ctx.campaignById?.bank.bankName}
                 </p>
               </div>
               <div>
                 <Label>Branch</Label>
-                <p>
-                  {ctx.campaignById?.bank &&
-                    ctx.campaignById?.bank.branch}
-                </p>
+                <p>{ctx.campaignById?.bank && ctx.campaignById?.bank.branch}</p>
               </div>
               <div>
                 <Label>IFSC</Label>
                 <p>
-                  {ctx.campaignById?.bank &&
-                    ctx.campaignById?.bank.ifsccode}
+                  {ctx.campaignById?.bank && ctx.campaignById?.bank.ifsccode}
                 </p>
               </div>
               <div>
@@ -257,9 +225,7 @@ export const CampaignView: React.FC<
             </h2>
             <LinearProgress
               value={
-                (ctx.campaignById?.donation /
-                  ctx.campaignById?.target) *
-                100
+                (ctx.campaignById?.donation / ctx.campaignById?.target) * 100
               }
               className="linear-progress"
               variant="determinate"
@@ -282,18 +248,14 @@ export const CampaignView: React.FC<
                 <p>
                   {ctx.campaignById?.beneficiary.dob &&
                     format(
-                      new Date(
-                        ctx.campaignById?.beneficiary.dob
-                      ),
+                      new Date(ctx.campaignById?.beneficiary.dob),
                       "dd/MM/yyyy"
                     )}
                 </p>
               </div>
               <div>
                 <Label>Address</Label>
-                <p>
-                  {ctx.campaignById?.beneficiary.address}
-                </p>
+                <p>{ctx.campaignById?.beneficiary.address}</p>
               </div>
             </div>
             {showDonateForm && (
@@ -309,9 +271,7 @@ export const CampaignView: React.FC<
                 <CurrencyInput
                   label="Amount"
                   value={input_amount}
-                  onValueChange={(input: any) =>
-                    setAmount(input.floatValue)
-                  }
+                  onValueChange={(input: any) => setAmount(input.floatValue)}
                 />
               </div>
             )}
